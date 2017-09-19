@@ -1,0 +1,36 @@
+.ksVueFpWrapper {
+  .ksVueFpSection {
+     height: 100%;
+     width: 100%;
+     position: absolute;
+     top: 0;
+     left: 0;
+     background-size: cover;
+  }
+  .ksVueFpSectionContent {
+     width: 100%;
+     position: relative;
+     z-index: 1;
+  }
+  .ksVueFpNav {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    width: 48px;
+    transform: translateY(-50%);
+    list-style: none;
+    span {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+      background-color: white;
+      display: block;
+      margin: 15px auto;
+      cursor: pointer;
+      &.active {
+        height: 14px;
+        width: 14px;
+      }
+    }
+  }
+}

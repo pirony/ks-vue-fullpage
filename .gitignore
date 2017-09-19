@@ -1,0 +1,10 @@
+.DS_Store
+node_modules/
+npm-debug.log
+test/coverage
+<<<<<<< HEAD
+dist
+=======
+>>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
+yarn-error.log
+reports

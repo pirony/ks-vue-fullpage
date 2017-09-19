@@ -1,10 +1,7 @@
 {
   "name": "ks-vue-fullpage",
-<<<<<<< HEAD
   "version": "0.1.6",
-=======
   "version": "0.1.4",
->>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
   "description": "A Vue.js Plugin",
   "author": "pirony <romainpouchol@gmail.com>",
   "main": "dist/ks-vue-fullpage.common.js",
@@ -40,12 +37,9 @@
       "eslint --fix"
     ],
     "*.{vue,css}": [
-<<<<<<< HEAD
       "stylefmt",
       "stylelint"
-=======
       "stylefmt"
->>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
     ]
   },
   "pre-commit": "lint:staged",
@@ -68,11 +62,8 @@
     "eslint": "^3.19.0",
     "eslint-config-vue": "^2.0.0",
     "eslint-plugin-vue": "^2.0.0",
-<<<<<<< HEAD
     "extract-text-webpack-plugin": "^2.1.0",
-=======
     "extract-text-webpack-plugin": "^2.1.2",
->>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
     "html-webpack-plugin": "^2.28.0",
     "karma": "^1.7.0",
     "karma-chai-dom": "^1.1.0",
@@ -86,19 +77,13 @@
     "lint-staged": "^3.4.0",
     "mocha": "^3.3.0",
     "mocha-css": "^1.0.1",
-<<<<<<< HEAD
     "node-sass": "^4.5.3",
-=======
->>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
     "null-loader": "^0.1.1",
     "postcss": "^6.0.0",
     "postcss-cssnext": "^2.10.0",
     "pre-commit": "^1.2.0",
     "rimraf": "^2.6.0",
-<<<<<<< HEAD
     "sass-loader": "^6.0.6",
-=======
->>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
     "sinon": "2.2.0",
     "sinon-chai": "^2.10.0",
     "style-loader": "^0.17.0",
@@ -137,7 +122,6 @@
       "style-loader/addStyles.js"
     ]
   },
-<<<<<<< HEAD
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pirony/ks-vue-fullpage.git"
@@ -146,8 +130,6 @@
     "url": "https://github.com/pirony/ks-vue-fullpage/issues"
   },
   "homepage": "https://github.com/pirony/ks-vue-fullpage#readme",
-=======
->>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
   "license": {
     "type": "MIT",
     "url": "http://www.opensource.org/licenses/mit-license.php"

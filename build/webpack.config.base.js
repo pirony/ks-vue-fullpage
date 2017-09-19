@@ -28,7 +28,6 @@ module.exports = {
     filename: `${filename}.common.js`
   },
   entry: './src/index.js',
-  entry: ['./src/index.js', './src/scss/ks-vue-fullpage.scss'],
   resolve: {
     extensions: ['.js', '.vue', '.jsx', 'css'],
     alias: {

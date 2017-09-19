@@ -27,11 +27,8 @@ module.exports = {
     path: resolve(__dirname, '../dist'),
     filename: `${filename}.common.js`
   },
-<<<<<<< HEAD
   entry: './src/index.js',
-=======
   entry: ['./src/index.js', './src/scss/ks-vue-fullpage.scss'],
->>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
   resolve: {
     extensions: ['.js', '.vue', '.jsx', 'css'],
     alias: {
@@ -58,7 +55,6 @@ module.exports = {
         }
       },
       {
-<<<<<<< HEAD
         test: /\.scss$/,
         exclude: /node_modules/,
         include: [
@@ -70,8 +66,6 @@ module.exports = {
         }),
       },
       {
-=======
->>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
         test: require.resolve('velocity-animate'),
         use: [{
           loader: 'expose-loader',

@@ -165,6 +165,7 @@ For example, if you want to create a custom navigation:
 ## Remaining tasks
 
 - [x] Add parallax effect on both axis
+- [ ]  Make it Nuxt compatible
 - [ ] Create demos (in progress)
 - [ ] Add delay option, to enable content animations before sliding
 - [ ] Add better responsive features

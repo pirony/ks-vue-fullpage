@@ -43,7 +43,7 @@ export default {
     }
   },
   ksVueFpSection: {
-    props: ['section', 'background', 'options', 'index'],
+    props: ['section', 'backgroundImage', 'backgroundColor', 'options', 'index'],
     functional: true,
     render (h, ctx) {
       return h(

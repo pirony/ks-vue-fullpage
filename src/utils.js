@@ -50,7 +50,8 @@ export default {
         'section',
         {
           style: {
-            background: ctx.props.background || null
+            backgroundImage: ctx.props.backgroundImage || null,
+            backgroundColor: ctx.props.backgroundColor || null
           },
           class: ctx.data.staticClass + ' ksVueFpSection',
           key: ctx.data.key,

@@ -62,7 +62,8 @@ and add $ksvuefp to every components, available at vm.$ksvuefp
           :options="options"
           :section="s"
           :key="index"
-          :background="'url('+ s.img_url +')'" >
+          :backgroundImage="'url('+ s.img_url +')'"
+          :backgroundColor="'#123456'" >
 
           <h2> {{any_data}} </h2>
 
@@ -127,7 +128,8 @@ Name | Data type | Default value | Description
 options  | object | - | the same custom options as our wrapper (cf example above)
 section | object, string | - | the single section datas issued by v-for (cf example above)
 key | int | - | must be the section's index from v-for loop (cf example above)
-background | string | - | must be a valid css background rule. You can use whatever you want: images, gradients or colors.
+backgroundImage | string | - | must be a valid css background rule.
+backgroundColor | string | - | must be a valid css background rule.
 
 
 ### Available Events

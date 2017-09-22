@@ -131,7 +131,7 @@ vm.$ksvuefp returns the following datas object
             easing: 'Linear',
             // Animation type, default to 'slideY'. Should be one of 'slideY', 'slideX', or 'fade'
             animationType: 'slideX',
-            // Wait for content animation to finish. default to 0
+            // Content animation delay. Wait for content animation to finish. default to 0
             animationDelay: 500,
             // Hides dot nav, default to false.
             hideNav: false,

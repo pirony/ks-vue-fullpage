@@ -32,6 +32,27 @@ The plugin only works with 2nd version of Vue.js. Also, you'll need to include V
     import KsVueFullpage from 'ks-vue-fullpage'
     Vue.use(KsVueFullpage)
 ```
+#### With Nuxt
+
+Create a ksvuefp.js files in yur plugins folder, and add it to yout nuxt.config.js files with ssr: false option
+
+ksvuefp.js
+```js
+    import KsVueFullpage from 'ks-vue-fullpage'
+    Vue.use(KsVueFullpage)
+```
+
+nuxt.config.js
+```js
+{
+  ...
+  plugins: [{
+    src: '~/plugins/ksvuefp',
+    ssr: false
+  }]
+  ...
+}
+```
 
 Don't forget to import the scss file ./src/scss/ks-vue-fullpage.scss in your sass flow
 
@@ -48,6 +69,19 @@ Ks-vue-fullpage registers 2 new components:
 + "ks-vuefp-section", which is the single section wrapper you'll use with v-for
 
 and add $ksvuefp to every components, available at vm.$ksvuefp
+
+vm.$ksvuefp returns the following datas object
+```js
+{
+  fpLoaded: false, // true when the plugin and his components are totally loaded
+  currentIndex: 0, // the index currently shown
+  slidingActive: false, // true if sections transition is occuring
+  sliderDirection: 'down', // one of 'up' or 'down'
+  wWidth: '', // Integer. current screen width
+  wHeight: '' // Integer. current screen height
+}
+```
+
 
 ### Example code
 
@@ -169,9 +203,9 @@ For example, if you want to create a custom navigation:
 ## Remaining tasks
 
 - [x] Add parallax effect on both axis
-- [ ]  Make it Nuxt compatible
+- [x]  Make it Nuxt compatible
 - [ ] Create demos (in progress)
-- [ ] Add delay option, to enable content animations before sliding
+- [x] Add delay option, to enable content animations before sliding
 - [ ] Add better responsive features
 
 ---

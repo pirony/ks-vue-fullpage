@@ -12,7 +12,7 @@ No jQuery needed, pure Vanilla js.
 + w/without subtle parallax animations (on both axis)
 + multiple events triggered by the plugin on every components, listenable using vm.$ksvuefp
 
-Inspired by the awesome jQuery plugin [ "FullPage.js" ](https://github.com/alvarotrigo/fullPage.js), created by @alvarotrigo
+Inspired by the awesome jQuery plugin [ "FullPage.js" ](https://github.com/alvarotrigo/fullPage.js), created by [ @Alvarotrigo ](https://github.com/alvarotrigo)
 
 ---
 ## Getting Started

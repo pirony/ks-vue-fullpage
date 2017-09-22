@@ -1,5 +1,5 @@
 import utils from './utils.js'
-import { KsVueFullpageSlideY, KsVueFullpageSlideX, KsVueFullpageFade } from './ks-vue-fullpage-animations'
+import { KsVueFullpageSlideY, KsVueFullpageSlideX, KsVueFullpageFade, KsVueFullpagePrismX } from './ks-vue-fullpage-animations'
 
 export default {
   props: {
@@ -148,6 +148,9 @@ export default {
           break
         case 'fade':
           return KsVueFullpageFade
+          break
+        case 'prismX':
+          return KsVueFullpagePrismX
           break
       }
       return

@@ -97,6 +97,8 @@ and add $ksvuefp to every components, available at vm.$ksvuefp
             easing: 'Linear',
             // Animation type, default to 'slideY'. Should be one of 'slideY', 'slideX', or 'fade'
             animationType: 'slideX',
+            // Wait for content animation to finish. default to 0
+            animationDelay: 500,
             // Hides dot nav, default to false.
             hideNav: false,
             // Enable parallax effect on section's background, default to false

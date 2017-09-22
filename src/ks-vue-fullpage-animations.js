@@ -11,7 +11,7 @@ const getAnimParams = (ctx, el, done) => {
     easing: ctx.props.options.easing || 'linear',
     duration: ctx.props.options.duration || 1000,
     complete () {
-      Velocity.hook(el, 'translateX', '0%')
+      // Velocity.hook(el, 'translateX', '0%')
       // Velocity.hook(el, 'backgroundPosition', '0 50%')
       done()
     }
@@ -275,4 +275,18 @@ export const KsVueFullpageFade = {
     return h('transition-group', ctx.data, ctx.children)
   }
 
+}
+
+// TODO: add prismX and prismY transitions
+
+// component datas for prismX option
+export const KsVueFullpagePrismX = {
+  render: function (h) {
+    return h(
+      'transition-group',
+      // { attrs: { name: 'prismX' }, props: { tag: 'div' }},
+      null,
+      this.$slots.default
+    )
+  }
 }

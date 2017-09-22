@@ -1,0 +1,7 @@
+/*!
+ * ks-vue-fullpage v0.1.6
+ * (c) 2017 pirony
+ * Released under the MIT License.
+ */
+
+.ksVueFpWrapper .ksVueFpSection{height:100%;width:100%;position:absolute;top:0;left:0;background-size:cover}.ksVueFpWrapper .ksVueFpSectionContent{width:100%;position:relative;z-index:1}.ksVueFpWrapper .ksVueFpNav{position:fixed;top:50%;right:0;width:48px;transform:translateY(-50%);list-style:none}.ksVueFpWrapper .ksVueFpNav span{height:8px;width:8px;border-radius:50%;background-color:#fff;display:block;margin:15px auto;cursor:pointer}.ksVueFpWrapper .ksVueFpNav span.active{height:14px;width:14px}

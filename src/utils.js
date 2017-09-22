@@ -115,12 +115,12 @@ export default {
             break
         }
         break
-      case 'panup':
-      case 'panleft':
+      case 'swipeup':
+      case 'swipeleft':
         return 'down'
         break
-      case 'pandown':
-      case 'panright':
+      case 'swipedown':
+      case 'swiperight':
         return 'up'
         break
       case 'navclick':

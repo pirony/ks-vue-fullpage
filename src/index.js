@@ -33,7 +33,7 @@ function plugin (Vue) {
         vm.$nextTick(() => {
           setTimeout(() => {
             vm.currentIndex = nextIndex
-          }, delay)
+          }, delay || 0)
         })
       })
 

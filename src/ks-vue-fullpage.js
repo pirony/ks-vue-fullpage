@@ -123,9 +123,9 @@ export default {
       if (!isTouch) return
 
       var mc = new Hammer(this.$el)
-      mc.get('pan').set({ direction: Hammer.DIRECTION_ALL })
+      mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL })
 
-      mc.on('panup pandown panright panleft', function (e) {
+      mc.on('swipeup swipedown swiperight swipeleft', function (e) {
         vm.changeIndex(e)
       })
     })

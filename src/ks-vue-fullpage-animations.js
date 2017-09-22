@@ -12,7 +12,7 @@ const getAnimParams = (ctx, el, done) => {
     duration: ctx.props.options.duration || 1000,
     complete () {
       Velocity.hook(el, 'translateX', '0%')
-      Velocity.hook(el, 'backgroundPosition', '0 50%')
+      // Velocity.hook(el, 'backgroundPosition', '0 50%')
       done()
     }
   }

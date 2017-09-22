@@ -10,6 +10,10 @@ export default {
     sections: {
       type: Array,
       default: {}
+    },
+    animDelay: {
+      type: Number,
+      default: 0
     }
   },
   render (h) {
@@ -192,7 +196,7 @@ export default {
          * @param {String} Direction
          *
         */
-        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction)
+        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, this.options.animDelay)
 
         /**
          * Emit change-done event on bus vm when animation is finished
@@ -200,7 +204,7 @@ export default {
         */
         setTimeout(() => {
           vm.$ksvuefp.$emit('ksvuefp-change-done')
-        }, vm.options.duration + 100 || 1100)
+        }, vm.options.duration? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100)
       })
     }
   }

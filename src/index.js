@@ -27,11 +27,13 @@ function plugin (Vue) {
         utils.setWindowDim(vm)
       })
 
-      vm.$on('ksvuefp-change-begin', (nextIndex, oldIndex, direction) => {
+      vm.$on('ksvuefp-change-begin', (nextIndex, oldIndex, direction, delay) => {
         vm.slidingActive = true
         vm.sliderDirection = direction
         vm.$nextTick(() => {
-          vm.currentIndex = nextIndex
+          setTimeout(() => {
+            vm.currentIndex = nextIndex
+          }, delay)
         })
       })
 

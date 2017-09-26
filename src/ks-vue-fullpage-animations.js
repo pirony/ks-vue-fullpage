@@ -27,7 +27,7 @@ export const KsVueFullpageSlideX = {
     if (!ctx.parent.$ksvuefp.fpLoaded) return h('transition-group', ctx.data, ctx.children)  // don't animate until the plugin is fully loaded
 
     ctx.data.on = {
-      enter: function (el, done) {
+      enter (el, done) {
         const animObj = {} // empty object where we'll push animations
 
         if (ctx.props.options.parallax) { // if parallax is activated
@@ -72,7 +72,7 @@ export const KsVueFullpageSlideX = {
           animParams
         )
       },
-      leave: function (el, done) {
+      leave (el, done) {
         const animObj = {} // empty object where we'll push animations
         if (ctx.props.options.parallax) { // if parallax is activated
           /**
@@ -115,6 +115,9 @@ export const KsVueFullpageSlideX = {
           animObj,
           animParams
         )
+      },
+      afterLeave (el) {
+        Velocity.hook(el, 'backgroundPosition', '50% 50%')
       }
     }
 
@@ -218,6 +221,9 @@ export const KsVueFullpageSlideY = {
           animObj,
           animParams
         )
+      },
+      afterLeave (el) {
+        Velocity.hook(el, 'backgroundPosition', '50% 50%')
       }
     }
     return h('transition-group', ctx.data, ctx.children)
@@ -231,7 +237,6 @@ export const KsVueFullpageFade = {
   render: function (h, ctx) {
     ctx.data.on = {
       enter: function (el, done) {
-        Velocity.hook(el, 'backgroundPosition', '50% 50% ')
         Velocity.hook(el, 'translateX', '0%') // Positionate the full section before triggering the animation
         Velocity.hook(el, 'translateY', '0%') // Positionate the full section before triggering the animation
         Velocity.hook(el, 'opacity', 0)

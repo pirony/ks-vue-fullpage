@@ -1,6 +1,6 @@
 # ks-vue-fullpage
 
-[![npm](https://img.shields.io/npm/v/ks-vue-fullpage.svg)](https://www.npmjs.com/package/ks-vue-fullpage) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
+[![ks-vue-fullpage](https://img.shields.io/npm/v/ks-vue-fullpage.svg)](https://www.npmjs.com/package/ks-vue-fullpage) [![vue2](https://img.shields.io/badge/vue-2.x-brightgreen.svg)](https://vuejs.org/)
 
 >A simple, flexible and easy to use Vue plugin to create fullscreen scrolling websites (also known as single page websites or onepage sites).
 No jQuery needed, pure Vanilla js.
@@ -89,6 +89,7 @@ vm.$ksvuefp returns the following datas object
       <ks-vuefp :options="options" :sections="sections"> // Where options is an object of options, and sections an array containing our sections datas
 
         <ks-vuefp-section
+          tag="section"
           class="whatever"
           v-for="(s,index) in sections"
           v-show="$ksvuefp.currentIndex == index"
@@ -128,6 +129,9 @@ vm.$ksvuefp returns the following datas object
             // Animation easing, default to 'Linear'. You can use all css3 animations types, including bezier
             // curves. ex: [0.2, 0.5, 0.2, 0.5]
             easing: 'Linear',
+            // Add a div between background and content, and set its background property.
+            // Must be a valid css background rule. Leave empty for no overlay. Default: null
+            overlay: 'rgba(0,0,0,0.2)',
             // Animation type, default to 'slideY'. Should be one of 'slideY', 'slideX', or 'fade'
             animationType: 'slideX',
             // Content animation delay. Wait for content animation to finish. default to 0
@@ -160,6 +164,7 @@ sections | array | - | sections list (cf example above)
 
 Name | Data type | Default value | Description
 ----- | ------------- | --- | ---
+tag | string | div |
 options  | object | - | the same custom options as our wrapper (cf example above)
 section | object, string | - | the single section datas issued by v-for (cf example above)
 key | int | - | must be the section's index from v-for loop (cf example above)

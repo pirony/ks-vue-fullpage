@@ -47,7 +47,7 @@ export default {
     functional: true,
     render (h, ctx) {
       return h(
-        'section',
+        ctx.data.attrs.tag || 'section',
         {
           style: {
             backgroundImage: ctx.props.backgroundImage || null,
@@ -66,6 +66,22 @@ export default {
           directives: ctx.data.directives
         },
         [
+          ctx.props.options.overlay? h(
+            'span',
+            {
+              class: 'ksVueFpOverlay',
+              style: {
+                position: 'absolute',
+                zIndex: 0,
+                height: '100%',
+                width: '100%',
+                top: '0',
+                left: '0',
+                background: ctx.props.options.overlay
+              }
+            },
+            null
+          ) : null,
           h(
             'div',
             {

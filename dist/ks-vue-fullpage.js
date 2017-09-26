@@ -128,7 +128,7 @@ exports.default = {
     props: ['section', 'backgroundImage', 'backgroundColor', 'options', 'index'],
     functional: true,
     render: function render(h, ctx) {
-      return h('section', {
+      return h(ctx.data.attrs.tag || 'section', {
         style: {
           backgroundImage: ctx.props.backgroundImage || null,
           backgroundColor: ctx.props.backgroundColor || null
@@ -144,7 +144,12 @@ exports.default = {
           index: ctx.data.key
         },
         directives: ctx.data.directives
-      }, [h('div', {
+      }, [ctx.props.options.overlay ? h('span', {
+        class: 'ksVueFpOverlay',
+        style: {
+          background: ctx.props.options.overlay
+        }
+      }, null) : null, h('div', {
         class: 'ksVueFpSectionContent',
         style: {
           position: 'relative',
@@ -186,11 +191,11 @@ exports.default = {
             break;
           case "ArrowLeft":
             if (animType !== 'slideX') return 'none';
-            return 'down';
+            return 'up';
             break;
           case "ArrowRight":
             if (animType !== 'slideX') return 'none';
-            return 'up';
+            return 'down';
             break;
           default:
             return 'none'; // Quit when this doesn't handle the key event.
@@ -504,6 +509,8 @@ var _utils2 = _interopRequireDefault(_utils);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var KsVueFpSection = _utils2.default.ksVueFpSection;
+
+// import './scss/ks-vue-fullpage.scss'
 
 function plugin(Vue) {
   var ksvuefpBus = new Vue({

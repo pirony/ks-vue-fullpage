@@ -3,6 +3,8 @@ import utils from './utils.js'
 
 const KsVueFpSection = utils.ksVueFpSection
 
+// import './scss/ks-vue-fullpage.scss'
+
 function plugin (Vue) {
   const ksvuefpBus = new Vue({
     data: {

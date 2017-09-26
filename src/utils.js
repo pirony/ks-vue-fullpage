@@ -71,12 +71,6 @@ export default {
             {
               class: 'ksVueFpOverlay',
               style: {
-                position: 'absolute',
-                zIndex: 0,
-                height: '100%',
-                width: '100%',
-                top: '0',
-                left: '0',
                 background: ctx.props.options.overlay
               }
             },

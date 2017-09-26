@@ -1,6 +1,6 @@
 {
   "name": "ks-vue-fullpage",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A simple, flexible and easy to use Vue plugin to create fullscreen scrolling websites (also known as single page websites or onepage sites). No jQuery needed, pure Vanilla js.",
   "author": "pirony <romainpouchol@gmail.com>",
   "main": "dist/ks-vue-fullpage.common.js",
@@ -61,7 +61,6 @@
     "eslint": "^3.19.0",
     "eslint-config-vue": "^2.0.0",
     "eslint-plugin-vue": "^2.0.0",
-    "extract-text-webpack-plugin": "^2.1.0",
     "extract-text-webpack-plugin": "^2.1.2",
     "html-webpack-plugin": "^2.28.0",
     "karma": "^1.7.0",

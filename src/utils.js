@@ -114,11 +114,11 @@ export default {
             break
           case "ArrowLeft":
             if (animType !== 'slideX') return 'none'
-            return 'down'
+            return 'up'
             break
           case "ArrowRight":
             if (animType !== 'slideX') return 'none'
-            return 'up'
+            return 'down'
             break
           default:
             return 'none' // Quit when this doesn't handle the key event.

@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v0.3.0
+ * ks-vue-fullpage v0.3.1
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -697,6 +697,9 @@ var KsVueFullpageSlideX = exports.KsVueFullpageSlideX = {
          * @param {function} animParams - Velocity's animation options
         */
         Velocity(el, animObj, animParams);
+      },
+      afterLeave: function afterLeave(el) {
+        Velocity.hook(el, 'backgroundPosition', '50% 50%');
       }
     };
 
@@ -791,6 +794,9 @@ var KsVueFullpageSlideX = exports.KsVueFullpageSlideX = {
          * @param {function} animParams - Velocity's animation options
         */
         Velocity(el, animObj, animParams);
+      },
+      afterLeave: function afterLeave(el) {
+        Velocity.hook(el, 'backgroundPosition', '50% 50%');
       }
     };
     return h('transition-group', ctx.data, ctx.children);
@@ -803,7 +809,6 @@ var KsVueFullpageSlideX = exports.KsVueFullpageSlideX = {
   render: function render(h, ctx) {
     ctx.data.on = {
       enter: function enter(el, done) {
-        Velocity.hook(el, 'backgroundPosition', '50% 50% ');
         Velocity.hook(el, 'translateX', '0%'); // Positionate the full section before triggering the animation
         Velocity.hook(el, 'translateY', '0%'); // Positionate the full section before triggering the animation
         Velocity.hook(el, 'opacity', 0);

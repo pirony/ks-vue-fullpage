@@ -94,7 +94,7 @@ export default {
 
     return res
   },
-  getDirection(e) {
+  getDirection(e, animType) {
     switch (e.type) {
       case 'mousewheel':
       case 'wheel':
@@ -103,24 +103,41 @@ export default {
         return 'down'
         break
       case 'keyup':
-        var code = e.keyCode
-        if (e.charCode && code === 0) code = e.charCode
-        switch (code) {
-          case 38:
-            // Key up.
-            return 'up'
-            break
-          case 40:
+        switch (e.key) {
+          case "ArrowDown":
+            if (animType !== 'slideY') return 'none'
             return 'down'
             break
+          case "ArrowUp":
+            if (animType !== 'slideY') return 'none'
+            return 'up'
+            break
+          case "ArrowLeft":
+            if (animType !== 'slideX') return 'none'
+            return 'down'
+            break
+          case "ArrowRight":
+            if (animType !== 'slideX') return 'none'
+            return 'up'
+            break
+          default:
+            return 'none' // Quit when this doesn't handle the key event.
         }
         break
       case 'swipeup':
+        if (animType == 'slideX') return 'none'
+        return 'down'
+        break
       case 'swipeleft':
+        if (animType !== 'slideX') return 'none'
         return 'down'
         break
       case 'swipedown':
+        if (animType == 'slideX') return 'none'
+        return 'up'
+        break
       case 'swiperight':
+        if (animType !== 'slideX') return 'none'
         return 'up'
         break
       case 'navclick':
@@ -131,6 +148,7 @@ export default {
         }
         break
       default:
+        return 'none'
 
     }
   },

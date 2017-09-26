@@ -46,6 +46,8 @@ export const KsVueFullpageSlideX = {
 
         const start = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '-100%' : '100%' // Define the full section's translate animation starting offset
         Velocity.hook(el, 'translateX', start) // Positionate the full section before triggering the animation
+        Velocity.hook(el, 'translateY', '0%') // Positionate the full section before triggering the animation
+        Velocity.hook(el, 'opacity', 1)
 
         animObj['translateX'] = '0%'
         animObj['translateZ'] = 0 // Force 3d rendering
@@ -88,6 +90,8 @@ export const KsVueFullpageSlideX = {
 
         const end = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '100%' : '-100%' // Define the full section's translate animation starting offset
         Velocity.hook(el, 'translateX', '0%')// Positionate the full section before triggering the animation
+        Velocity.hook(el, 'translateY', '0%')// Positionate the full section before triggering the animation
+        Velocity.hook(el, 'opacity', 1)
 
         animObj['translateX'] = end // Push translate animation to our object animObj
         animObj['translateZ'] = 0 // Force 3d rendering
@@ -145,6 +149,8 @@ export const KsVueFullpageSlideY = {
 
         const start = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '-100%' : '100%'
         Velocity.hook(el, 'translateY', start)
+        Velocity.hook(el, 'translateX', '0%')
+        Velocity.hook(el, 'opacity', 1)
 
         animObj['translateY'] = '0%'
         animObj['translateZ'] = 0 // Force 3d rendering
@@ -188,6 +194,8 @@ export const KsVueFullpageSlideY = {
 
         const end = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '100%' : '-100%'
         Velocity.hook(el, 'translateY', '0%')
+        Velocity.hook(el, 'translateX', '0%')
+        Velocity.hook(el, 'opacity', 1)
 
         animObj['translateY'] = end
         animObj['translateZ'] = 0 // Force 3d rendering
@@ -218,11 +226,14 @@ export const KsVueFullpageSlideY = {
 
 // component datas for fade option
 export const KsVueFullpageFade = {
-  props: ['currentIndex'],
+  props: ['options', 'slidingActive', 'sliderDirection'],
   functional: true,
   render: function (h, ctx) {
     ctx.data.on = {
       enter: function (el, done) {
+        Velocity.hook(el, 'backgroundPosition', '50% 50% ')
+        Velocity.hook(el, 'translateX', '0%') // Positionate the full section before triggering the animation
+        Velocity.hook(el, 'translateY', '0%') // Positionate the full section before triggering the animation
         Velocity.hook(el, 'opacity', 0)
 
         /**

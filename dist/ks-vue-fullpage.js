@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v0.2.1
+ * ks-vue-fullpage v0.2.2
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -166,7 +166,7 @@ exports.default = {
 
     return res;
   },
-  getDirection: function getDirection(e) {
+  getDirection: function getDirection(e, animType) {
     switch (e.type) {
       case 'mousewheel':
       case 'wheel':
@@ -175,24 +175,41 @@ exports.default = {
         return 'down';
         break;
       case 'keyup':
-        var code = e.keyCode;
-        if (e.charCode && code === 0) code = e.charCode;
-        switch (code) {
-          case 38:
-            // Key up.
-            return 'up';
-            break;
-          case 40:
+        switch (e.key) {
+          case "ArrowDown":
+            if (animType !== 'slideY') return 'none';
             return 'down';
             break;
+          case "ArrowUp":
+            if (animType !== 'slideY') return 'none';
+            return 'up';
+            break;
+          case "ArrowLeft":
+            if (animType !== 'slideX') return 'none';
+            return 'down';
+            break;
+          case "ArrowRight":
+            if (animType !== 'slideX') return 'none';
+            return 'up';
+            break;
+          default:
+            return 'none'; // Quit when this doesn't handle the key event.
         }
         break;
-      case 'panup':
-      case 'panleft':
+      case 'swipeup':
+        if (animType == 'slideX') return 'none';
         return 'down';
         break;
-      case 'pandown':
-      case 'panright':
+      case 'swipeleft':
+        if (animType !== 'slideX') return 'none';
+        return 'down';
+        break;
+      case 'swipedown':
+        if (animType == 'slideX') return 'none';
+        return 'up';
+        break;
+      case 'swiperight':
+        if (animType !== 'slideX') return 'none';
         return 'up';
         break;
       case 'navclick':
@@ -203,6 +220,7 @@ exports.default = {
         }
         break;
       default:
+        return 'none';
 
     }
   },
@@ -271,9 +289,9 @@ exports.default = {
   },
   render: function render(h) {
     return h('div', {
-      class: 'ksVueFpWrapper',
+      class: ['ksVueFpWrapper', this.$ksvuefp.wWidth < this.options.normalScrollWidth ? 'ksVueFpDisabled' : null],
       style: {
-        height: window.innerHeight + 'px',
+        height: this.$ksvuefp.wHeight + 'px',
         position: 'relative',
         overflow: 'hidden'
       }
@@ -364,9 +382,9 @@ exports.default = {
       if (!isTouch) return;
 
       var mc = new Hammer(_this.$el);
-      mc.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+      mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
-      mc.on('panup pandown panright panleft', function (e) {
+      mc.on('swipeup swipedown swiperight swipeleft', function (e) {
         vm.changeIndex(e);
       });
     });
@@ -418,7 +436,9 @@ exports.default = {
        * @return up or down
        *
       */
-      var Direction = _utils2.default.getDirection(e);
+      var Direction = _utils2.default.getDirection(e, vm.options.animationType);
+
+      if (Direction === 'none' || Direction === undefined) return;
 
       var nextIndex = void 0;
 
@@ -515,7 +535,7 @@ function plugin(Vue) {
         vm.$nextTick(function () {
           setTimeout(function () {
             vm.currentIndex = nextIndex;
-          }, delay);
+          }, delay || 0);
         });
       });
 
@@ -615,6 +635,8 @@ var KsVueFullpageSlideX = exports.KsVueFullpageSlideX = {
 
         var start = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '-100%' : '100%'; // Define the full section's translate animation starting offset
         Velocity.hook(el, 'translateX', start); // Positionate the full section before triggering the animation
+        Velocity.hook(el, 'translateY', '0%'); // Positionate the full section before triggering the animation
+        Velocity.hook(el, 'opacity', 1);
 
         animObj['translateX'] = '0%';
         animObj['translateZ'] = 0; // Force 3d rendering
@@ -654,6 +676,8 @@ var KsVueFullpageSlideX = exports.KsVueFullpageSlideX = {
 
         var end = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '100%' : '-100%'; // Define the full section's translate animation starting offset
         Velocity.hook(el, 'translateX', '0%'); // Positionate the full section before triggering the animation
+        Velocity.hook(el, 'translateY', '0%'); // Positionate the full section before triggering the animation
+        Velocity.hook(el, 'opacity', 1);
 
         animObj['translateX'] = end; // Push translate animation to our object animObj
         animObj['translateZ'] = 0; // Force 3d rendering
@@ -706,6 +730,8 @@ var KsVueFullpageSlideX = exports.KsVueFullpageSlideX = {
 
         var start = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '-100%' : '100%';
         Velocity.hook(el, 'translateY', start);
+        Velocity.hook(el, 'translateX', '0%');
+        Velocity.hook(el, 'opacity', 1);
 
         animObj['translateY'] = '0%';
         animObj['translateZ'] = 0; // Force 3d rendering
@@ -745,6 +771,8 @@ var KsVueFullpageSlideX = exports.KsVueFullpageSlideX = {
 
         var end = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '100%' : '-100%';
         Velocity.hook(el, 'translateY', '0%');
+        Velocity.hook(el, 'translateX', '0%');
+        Velocity.hook(el, 'opacity', 1);
 
         animObj['translateY'] = end;
         animObj['translateZ'] = 0; // Force 3d rendering
@@ -770,11 +798,14 @@ var KsVueFullpageSlideX = exports.KsVueFullpageSlideX = {
 
   // component datas for fade option
 };var KsVueFullpageFade = exports.KsVueFullpageFade = {
-  props: ['currentIndex'],
+  props: ['options', 'slidingActive', 'sliderDirection'],
   functional: true,
   render: function render(h, ctx) {
     ctx.data.on = {
       enter: function enter(el, done) {
+        Velocity.hook(el, 'backgroundPosition', '50% 50% ');
+        Velocity.hook(el, 'translateX', '0%'); // Positionate the full section before triggering the animation
+        Velocity.hook(el, 'translateY', '0%'); // Positionate the full section before triggering the animation
         Velocity.hook(el, 'opacity', 0);
 
         /**

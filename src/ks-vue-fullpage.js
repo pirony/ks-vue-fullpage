@@ -20,9 +20,9 @@ export default {
     return h(
       'div',
       {
-        class: 'ksVueFpWrapper',
+        class: ['ksVueFpWrapper', this.$ksvuefp.wWidth < this.options.normalScrollWidth ? 'ksVueFpDisabled' : null],
         style: {
-          height: window.innerHeight + 'px',
+          height: this.$ksvuefp.wHeight + 'px',
           position: 'relative',
           overflow: 'hidden'
         }
@@ -173,7 +173,9 @@ export default {
        * @return up or down
        *
       */
-      const Direction = utils.getDirection(e)
+      const Direction = utils.getDirection(e, vm.options.animationType)
+
+      if (Direction === 'none' || Direction === undefined) return
 
       let nextIndex
 

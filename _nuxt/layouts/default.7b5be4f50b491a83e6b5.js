@@ -1,0 +1,2 @@
+webpackJsonp([1],{ABKq:function(e,n,t){"use strict";var r=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[t("nuxt")],1)},u=[],l={render:r,staticRenderFns:u};n.a=l},Ma2J:function(e,n,t){"use strict";Object.defineProperty(n,"__esModule",{value:!0});var r=t("ABKq"),u=t("VU/8"),l=u(null,r.a,null,null,null);n.default=l.exports}});
+//# sourceMappingURL=default.7b5be4f50b491a83e6b5.js.map

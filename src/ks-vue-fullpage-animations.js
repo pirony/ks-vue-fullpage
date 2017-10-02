@@ -19,12 +19,12 @@ const getAnimParams = (ctx, el, done) => {
 }
 
 // component datas for slideX option
-export const KsVueFullpageSlideX = {
+export const slideX = {
 
   props: ['options', 'slidingActive', 'sliderDirection'],
   functional: true,
   render: function (h, ctx) {
-    if (!ctx.parent.$ksvuefp.fpLoaded) return h('transition-group', ctx.data, ctx.children)  // don't animate until the plugin is fully loaded
+    if (!ctx.parent.$ksvuefp.fpLoaded) return h('transition', ctx.data, ctx.children)  // don't animate until the plugin is fully loaded
 
     ctx.data.on = {
       enter (el, done) {
@@ -121,17 +121,16 @@ export const KsVueFullpageSlideX = {
       }
     }
 
-    return h('transition-group', ctx.data, ctx.children)
+    return h('transition', ctx.data, ctx.children)
   }
 }
 
 // component datas for slideY option
-export const KsVueFullpageSlideY = {
-  props: ['options', 'slidingActive', 'sliderDirection'],
+export const slideY = {
+  props: ['options'],
   functional: true,
   render: function (h, ctx) {
-    if (!ctx.parent.$ksvuefp.fpLoaded) return h('transition-group', ctx.data, ctx.children)  // If the plugin is not fully loaded, don't animate and return h() directly
-
+    if (!ctx.parent.$ksvuefp.fpLoaded) return h('transition', ctx.data, ctx.children)  // If the plugin is not fully loaded, don't animate and return h() directly
     ctx.data.on = {
       enter: function (el, done) {
         const animObj = {}
@@ -226,12 +225,12 @@ export const KsVueFullpageSlideY = {
         Velocity.hook(el, 'backgroundPosition', '50% 50%')
       }
     }
-    return h('transition-group', ctx.data, ctx.children)
+    return h('transition', ctx.data, ctx.children)
   }
 }
 
 // component datas for fade option
-export const KsVueFullpageFade = {
+export const fade = {
   props: ['options', 'slidingActive', 'sliderDirection'],
   functional: true,
   render: function (h, ctx) {
@@ -288,7 +287,7 @@ export const KsVueFullpageFade = {
       }
     }
 
-    return h('transition-group', ctx.data, ctx.children)
+    return h('transition', ctx.data, ctx.children)
   }
 
 }

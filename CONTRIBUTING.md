@@ -2,11 +2,7 @@
 
 Contributions are **welcome** and will be fully **credited**.
 
-<<<<<<< HEAD
-We accept contributions via Pull Requests on [Github](https://github.com/pirony/ks-vue-fullpage).
-=======
-We accept contributions via Pull Requests on [Github](https://github.com//ks-vue-fullpage).
->>>>>>> 59718f8c5aba772c27f0529054c41ec4b6729c8f
+We accept contributions via Pull Requests on [Github](https://github.com/{{ githubAccount }}/{{ name }}).
 
 
 ## Pull Requests

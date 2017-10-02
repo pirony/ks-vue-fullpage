@@ -52,31 +52,6 @@ module.exports = {
           loaders: vueLoaders,
           postcss: [require('postcss-cssnext')()]
         }
-      },
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        include: [
-          resolve(__dirname, './src/scss')
-        ],
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader", // Will inject the style tag if plugin fails
-          loader: "css-loader!sass-loader",
-        }),
-      },
-      {
-        test: require.resolve('velocity-animate'),
-        use: [{
-          loader: 'expose-loader',
-          options: 'Velocity'
-        }]
-      },
-      {
-        test: require.resolve('hammerjs'),
-        use: [{
-          loader: 'expose-loader',
-          options: 'Hammer'
-        }]
       }
     ]
   },

@@ -1,6 +1,19 @@
-import utils from './utils.js'
-import { KsVueFullpageSlideY, KsVueFullpageSlideX, KsVueFullpageFade, KsVueFullpagePrismX } from './ks-vue-fullpage-animations'
-
+<template>
+  <div :class="['ksvuefp', $ksvuefp.wWidth < options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" :style="{ height: $ksvuefp.wHeight + 'px' }">
+    <div class="ksvuefp-sections">
+      <slot></slot>
+    </div>
+    <transition :name="options.preloader.transitionName || 'fade-out'">
+      <ksvuefp-preloader v-if="options.preloader && !$ksvuefp.fpLoaded" :backgroundColor="options.preloader.backgroundColor || ''" :preloaderColor="options.preloader.preloaderColor || ''" :preloaderText="options.preloader.preloaderText || ''"/>
+    </transition>
+    <fp-nav v-if="!options.hideNav" :sections="sections"/>
+  </div>
+</template>
+<script>
+import utils from '../utils.js'
+import { slideY, slideX, fade } from '../ks-vue-fullpage-animations'
+import fpNav from './ksvuefp-nav.vue'
+import ksvuefpPreloader from './ksvuefp-preloader.vue'
 export default {
   props: {
     options: {
@@ -9,82 +22,36 @@ export default {
     },
     sections: {
       type: Array,
-      default: {}
-    },
-    animDelay: {
-      type: Number,
-      default: 0
+      default: []
     }
   },
-  render (h) {
-    return h(
-      'div',
-      {
-        class: ['ksVueFpWrapper', this.$ksvuefp.wWidth < this.options.normalScrollWidth ? 'ksVueFpDisabled' : null],
-        style: {
-          height: this.$ksvuefp.wHeight + 'px',
-          position: 'relative',
-          overflow: 'hidden'
-        }
-      },
-      [
-        h(
-          this.neededAnimComponent(this.options.animationType || 'slideY'),
-          {
-            class: 'ksVueFpSections',
-            props: {
-              currentIndex: this.$ksvuefp.currentIndex,
-              tag: 'div',
-              options: this.options,
-              slidingActive: this.$ksvuefp.slidingActive,
-              sliderDirection: this.$ksvuefp.sliderDirection
-            },
-            attrs: {
-              appear: false
-            }
-          },
-          this.$slots.default
-        ),
-        !this.options.hideNav ? h(
-          utils.ksVueFpNav,
-          {
-            props: {
-              sections: this.sections
-            }
-          }
-        ) : null
-      ]
-    )
-  },
-  data () {
-    return {
-      slidingActive: false,
-      sliderDirection: 'down'
-    }
-  },
-  created () {
-    const vm = this
-    /**
-     * We listen to our custom navclick event on ksvuefp bus
-     * @param Event
-    */
-    vm.$ksvuefp.$on('ksvuefp-nav-click', (e) => {
-      e.oldIndex = vm.$ksvuefp.currentIndex
-      e.type = 'navclick'
-      vm.changeIndex(e)
-    })
-    /**
-     * We listen to resize event and then emit on $ksvuefp bus
-    */
-    window.addEventListener('resize', function () {
-      vm.$nextTick(() => {
-        vm.$ksvuefp.$emit('ksvuefp-resized')
-      })
-    })
+  components: {
+    slideY,
+    slideX,
+    fade,
+    fpNav,
+    ksvuefpPreloader
   },
   mounted () {
     const vm = this
     vm.$nextTick(() => {
+      /**
+       * We listen to our custom navclick event on ksvuefp bus
+       * @param Event
+      */
+      vm.$ksvuefp.$on('ksvuefp-nav-click', (e) => {
+        e.oldIndex = vm.$ksvuefp.currentIndex
+        e.type = 'navclick'
+        vm.changeIndex(e)
+      })
+      /**
+       * We listen to resize event and then emit on $ksvuefp bus
+      */
+      window.addEventListener('resize', function () {
+        vm.$nextTick(() => {
+          vm.$ksvuefp.$emit('ksvuefp-resized')
+        })
+      })
       /**
        * We set the list of actions we want to trigger the animation with
        * @const {array}
@@ -131,30 +98,6 @@ export default {
     })
   },
   methods: {
-    /**
-     * We Change the <transition> component depending on the animation type defined
-     * @param {string} type - the animation type
-     * @return {object} needed component datas
-     *
-    */
-    neededAnimComponent (type) {
-      switch (type) {
-        case 'slideY':
-        default:
-          return KsVueFullpageSlideY
-          break
-        case 'slideX':
-          return KsVueFullpageSlideX
-          break
-        case 'fade':
-          return KsVueFullpageFade
-          break
-        case 'prismX':
-          return KsVueFullpagePrismX
-          break
-      }
-      return
-    },
     /** trigger the change index event
      * @param Event
      *
@@ -166,6 +109,7 @@ export default {
 
       const OldIndex = vm.$ksvuefp.currentIndex
       const Length = vm.sections.length
+      const Options = vm.options
 
       /**
        * We get the sliding direction using a custom func getDirection() in utils
@@ -189,9 +133,11 @@ export default {
           nextIndex = e.nextIndex
           break
         default: // else
-          nextIndex = utils.getNextIndex(OldIndex, Direction, Length)
+          nextIndex = utils.getNextIndex(OldIndex, Direction, Length, Options)
           break
       }
+
+      if (nextIndex === 'none') return
 
       this.$nextTick(() => {  // we wait for our computed datas to be ready
         /**
@@ -209,8 +155,32 @@ export default {
         */
         setTimeout(() => {
           vm.$ksvuefp.$emit('ksvuefp-change-done')
-        }, vm.options.duration? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100)
+        }, vm.options.duration ? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100)
       })
     }
   }
 }
+</script>
+<style>
+  .ksvuefp {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    &.is-ksvuefp-inactive {
+      overflow: auto;
+    }
+  }
+
+  .fade-out-enter-active,
+  .fade-out-leave-active {
+    transition: all 0.3s;
+    opacity: 1;
+    transition-delay: 0.3s;
+  }
+
+  .fade-out-enter,
+  .fade-out-leave-active {
+    opacity: 0;
+  }
+</style>

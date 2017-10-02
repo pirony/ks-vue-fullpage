@@ -56,8 +56,6 @@ nuxt.config.js
 }
 ```
 
-Don't forget to import the scss file ./src/scss/ks-vue-fullpage.scss in your sass flow
-
 #### With a script tag
 
 ```html
@@ -67,10 +65,10 @@ Don't forget to import the scss file ./src/scss/ks-vue-fullpage.scss in your sas
 
 Ks-vue-fullpage registers 2 new components:
 
-+ "ks-vuefp", which is the wrapper for our sections
-+ "ks-vuefp-section", which is the single section wrapper you'll use with v-for
++ "ksvuefp", which is the wrapper for our sections
++ "ksvuefp-section", which is the single section wrapper you'll use with v-for
 
-and add $ksvuefp to every components, available at vm.$ksvuefp
+and add $ksvuefp property to every components, available at vm.$ksvuefp
 
 vm.$ksvuefp returns the following datas object
 ```js
@@ -89,13 +87,11 @@ vm.$ksvuefp returns the following datas object
 
 ```html
     ...
-      <ks-vuefp :options="options" :sections="sections"> // Where options is an object of options, and sections an array containing our sections datas
+      <ksvuefp :options="options" :sections="sections"> // Where options is an object of options, and sections an array containing our sections datas
 
-        <ks-vuefp-section
-          tag="section"
+        <ksvuefp-section
           class="whatever"
           v-for="(s,index) in sections"
-          v-show="$ksvuefp.currentIndex == index"
           :options="options"
           :section="s"
           :key="index"
@@ -104,9 +100,9 @@ vm.$ksvuefp returns the following datas object
 
           <h2> {{any_data}} </h2>
 
-        </ks-vuefp-section>
+        </ksvuefp-section>
 
-      </ks-vuefp>
+      </ksvuefp>
     ...
     <script>
       ...
@@ -127,6 +123,8 @@ vm.$ksvuefp returns the following datas object
             }
           ],
           options: {
+            // The tag used to wrap each vsvuefp-section component. Default to 'div'
+            sectionTag: 'section',
             // Animation duration, default to 1000
             duration: 800,
             // Animation easing, default to 'Linear'. You can use all css3 animations types, including bezier
@@ -139,8 +137,21 @@ vm.$ksvuefp returns the following datas object
             animationType: 'slideX',
             // Content animation delay. Wait for content animation to finish. default to 0
             animationDelay: 500,
+            // Add a fullscreen preloading overlay with loading animation. Default to false (no preloader)
+            preloader: {
+              // Background color for the overlay. Default to '#fff'
+              backgroundColor: 'blue',
+              // Preloader icon and text color for the overlay. Default to '#333'
+              preloaderColor: 'yellow',
+              // Text that will appear under the icon animation during loading
+              preloaderText: 'Ks Vue Fullpage'
+            },
             // Hides dot nav, default to false.
             hideNav: false,
+            // Go to first section on scroll down while watching last section
+            loopBottom: true,
+            // Go to last section on scroll up while watching first section
+            loopTop: false,
             // Enable parallax effect on section's background, default to false
             parallax: true,
             // Parallax offset amount, default to 0.5. Should be between 0 and 1. 0 gives no parallax effect,
@@ -156,14 +167,14 @@ vm.$ksvuefp returns the following datas object
 
 ### Available Properties
 
-#### ks-vuefp component
+#### ksvuefp component
 
 Name | Data type | Default value | Description
 ----- | ------------- | --- | ---
 options  | object | - | custom options (cf example above)
 sections | array | - | sections list (cf example above)
 
-#### ks-vuefp-section component
+#### ksvuefp-section component
 
 Name | Data type | Default value | Description
 ----- | ------------- | --- | ---
@@ -211,7 +222,7 @@ For example, if you want to create a custom navigation:
 
 - [x] Add parallax effect on both axis
 - [x]  Make it Nuxt compatible
-- [ ] Create demos (in progress)
+- [x] Create demos (in progress)
 - [x] Add delay option, to enable content animations before sliding
 - [ ] Add better responsive features
 

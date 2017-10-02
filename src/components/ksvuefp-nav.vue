@@ -1,14 +1,20 @@
 <template lang="html">
   <ul class="ksvuefp-nav">
     <li v-for="(s, index) in sections">
-      <span @click="$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: index })" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']"></span>
+      <span @click="click(index)" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']"></span>
     </li>
   </ul>
 </template>
 
 <script>
 export default {
-  props: ['sections']
+  props: ['sections'],
+  methods: {
+    click (i) {
+      if (i === this.$ksvuefp.currentIndex) return
+      this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: i })
+    }
+  }
 }
 </script>
 
@@ -33,5 +39,6 @@ export default {
 .ksvuefp-nav__dot.active {
   height: 14px;
   width: 14px;
+  cursor: default;
 }
 </style>

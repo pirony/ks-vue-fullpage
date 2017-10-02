@@ -1,6 +1,5 @@
 import KsVueFullpage from './components/ksvuefp-wrapper.vue'
 import KsVueFpSection from './components/ksvuefp-section.vue'
-import ksTest from './components/ks-test.vue'
 import utils from './utils'
 
 
@@ -68,6 +67,5 @@ const version = '__VERSION__'
 export {
   KsVueFullpage,
   KsVueFpSection,
-  ksTest,
   version
 }

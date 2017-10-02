@@ -3,6 +3,9 @@
     <div class="ksvuefp-sections">
       <slot></slot>
     </div>
+    <transition :name="options.preloader.transitionName || 'fade-out'">
+      <ksvuefp-preloader v-if="options.preloader && !$ksvuefp.fpLoaded" :backgroundColor="options.preloader.backgroundColor || ''" :preloaderColor="options.preloader.preloaderColor || ''"/>
+    </transition>
     <fp-nav v-if="!options.hideNav" :sections="sections"/>
   </div>
 </template>
@@ -10,6 +13,7 @@
 import utils from '../utils.js'
 import { slideY, slideX, fade } from '../ks-vue-fullpage-animations'
 import fpNav from './ksvuefp-nav.vue'
+import ksvuefpPreloader from './ksvuefp-preloader.vue'
 export default {
   props: {
     options: {
@@ -25,11 +29,11 @@ export default {
     slideY,
     slideX,
     fade,
-    fpNav
+    fpNav,
+    ksvuefpPreloader
   },
   mounted () {
     const vm = this
-    console.log(this.$ksvuefp);
     vm.$nextTick(() => {
       /**
        * We listen to our custom navclick event on ksvuefp bus
@@ -163,5 +167,15 @@ export default {
     height: 100%;
     position: relative;
     overflow: hidden;
+  }
+
+  .fade-out-enter-active, .fade-out-leave-active {
+    transition: all .3s;
+    opacity: 1;
+    transition-delay: 0.3s;
+  }
+
+  .fade-out-enter, .fade-out-leave-active {
+    opacity: 0;
   }
 </style>

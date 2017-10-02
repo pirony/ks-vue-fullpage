@@ -1,7 +1,6 @@
-import KsVueFullpage from './components/ksvuefp-wrapper.vue'
-import KsVueFpSection from './components/ksvuefp-section.vue'
+import ksvuefp from './components/ksvuefp.vue'
+import ksvuefpSection from './components/ksvuefp-section.vue'
 import utils from './utils'
-
 
 function plugin (Vue) {
   Vue.prototype.$ksvuefp = new Vue({
@@ -52,8 +51,8 @@ function plugin (Vue) {
       }
     }
   })
-  Vue.component('ksvuefp-wrapper', KsVueFullpage)
-  Vue.component('ksvuefp-section', KsVueFpSection)
+  Vue.component('ksvuefp', ksvuefp)
+  Vue.component('ksvuefp-section', ksvuefpSection)
 }
 
 // Install by default if using the script tag
@@ -65,7 +64,7 @@ export default plugin
 const version = '__VERSION__'
 // Export all components too
 export {
-  KsVueFullpage,
-  KsVueFpSection,
+  ksvuefp,
+  ksvuefpSection,
   version
 }

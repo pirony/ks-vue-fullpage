@@ -65,10 +65,10 @@ nuxt.config.js
 
 Ks-vue-fullpage registers 2 new components:
 
-+ "ks-vuefp", which is the wrapper for our sections
-+ "ks-vuefp-section", which is the single section wrapper you'll use with v-for
++ "ksvuefp", which is the wrapper for our sections
++ "ksvuefp-section", which is the single section wrapper you'll use with v-for
 
-and add $ksvuefp to every components, available at vm.$ksvuefp
+and add $ksvuefp property to every components, available at vm.$ksvuefp
 
 vm.$ksvuefp returns the following datas object
 ```js
@@ -87,9 +87,9 @@ vm.$ksvuefp returns the following datas object
 
 ```html
     ...
-      <ks-vuefp :options="options" :sections="sections"> // Where options is an object of options, and sections an array containing our sections datas
+      <ksvuefp :options="options" :sections="sections"> // Where options is an object of options, and sections an array containing our sections datas
 
-        <ks-vuefp-section
+        <ksvuefp-section
           tag="section"
           class="whatever"
           v-for="(s,index) in sections"
@@ -102,9 +102,9 @@ vm.$ksvuefp returns the following datas object
 
           <h2> {{any_data}} </h2>
 
-        </ks-vuefp-section>
+        </ksvuefp-section>
 
-      </ks-vuefp>
+      </ksvuefp>
     ...
     <script>
       ...
@@ -154,14 +154,14 @@ vm.$ksvuefp returns the following datas object
 
 ### Available Properties
 
-#### ks-vuefp component
+#### ksvuefp component
 
 Name | Data type | Default value | Description
 ----- | ------------- | --- | ---
 options  | object | - | custom options (cf example above)
 sections | array | - | sections list (cf example above)
 
-#### ks-vuefp-section component
+#### ksvuefp-section component
 
 Name | Data type | Default value | Description
 ----- | ------------- | --- | ---
@@ -209,7 +209,7 @@ For example, if you want to create a custom navigation:
 
 - [x] Add parallax effect on both axis
 - [x]  Make it Nuxt compatible
-- [ ] Create demos (in progress)
+- [x] Create demos (in progress)
 - [x] Add delay option, to enable content animations before sliding
 - [ ] Add better responsive features
 

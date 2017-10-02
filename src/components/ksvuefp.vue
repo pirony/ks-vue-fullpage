@@ -1,10 +1,10 @@
 <template>
-  <div :class="['ksvuefp-wrapper', $ksvuefp.wWidth < options.normalScrollWidth ? 'ksVueFpDisabled' : null]" :style="{ height: $ksvuefp.wHeight + 'px' }">
+  <div :class="['ksvuefp', $ksvuefp.wWidth < options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" :style="{ height: $ksvuefp.wHeight + 'px' }">
     <div class="ksvuefp-sections">
       <slot></slot>
     </div>
     <transition :name="options.preloader.transitionName || 'fade-out'">
-      <ksvuefp-preloader v-if="options.preloader && !$ksvuefp.fpLoaded" :backgroundColor="options.preloader.backgroundColor || ''" :preloaderColor="options.preloader.preloaderColor || ''"/>
+      <ksvuefp-preloader v-if="options.preloader && !$ksvuefp.fpLoaded" :backgroundColor="options.preloader.backgroundColor || ''" :preloaderColor="options.preloader.preloaderColor || ''" :preloaderText="options.preloader.preloaderText || ''"/>
     </transition>
     <fp-nav v-if="!options.hideNav" :sections="sections"/>
   </div>
@@ -155,27 +155,32 @@ export default {
         */
         setTimeout(() => {
           vm.$ksvuefp.$emit('ksvuefp-change-done')
-        }, vm.options.duration? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100)
+        }, vm.options.duration ? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100)
       })
     }
   }
 }
 </script>
 <style>
-  .ksvuefp-wrapper{
+  .ksvuefp {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
+    &.is-ksvuefp-inactive {
+      overflow: auto;
+    }
   }
 
-  .fade-out-enter-active, .fade-out-leave-active {
-    transition: all .3s;
+  .fade-out-enter-active,
+  .fade-out-leave-active {
+    transition: all 0.3s;
     opacity: 1;
     transition-delay: 0.3s;
   }
 
-  .fade-out-enter, .fade-out-leave-active {
+  .fade-out-enter,
+  .fade-out-leave-active {
     opacity: 0;
   }
 </style>

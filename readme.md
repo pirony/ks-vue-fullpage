@@ -90,10 +90,8 @@ vm.$ksvuefp returns the following datas object
       <ksvuefp :options="options" :sections="sections"> // Where options is an object of options, and sections an array containing our sections datas
 
         <ksvuefp-section
-          tag="section"
           class="whatever"
           v-for="(s,index) in sections"
-          v-show="$ksvuefp.currentIndex == index"
           :options="options"
           :section="s"
           :key="index"
@@ -125,6 +123,8 @@ vm.$ksvuefp returns the following datas object
             }
           ],
           options: {
+            // The tag used to wrap each vsvuefp-section component. Default to 'div'
+            sectionTag: 'section',
             // Animation duration, default to 1000
             duration: 800,
             // Animation easing, default to 'Linear'. You can use all css3 animations types, including bezier
@@ -137,8 +137,21 @@ vm.$ksvuefp returns the following datas object
             animationType: 'slideX',
             // Content animation delay. Wait for content animation to finish. default to 0
             animationDelay: 500,
+            // Add a fullscreen preloading overlay with loading animation. Default to false (no preloader)
+            preloader: {
+              // Background color for the overlay. Default to '#fff'
+              backgroundColor: 'blue',
+              // Preloader icon and text color for the overlay. Default to '#333'
+              preloaderColor: 'yellow',
+              // Text that will appear under the icon animation during loading
+              preloaderText: 'Ks Vue Fullpage'
+            },
             // Hides dot nav, default to false.
             hideNav: false,
+            // Go to first section on scroll down while watching last section
+            loopBottom: true,
+            // Go to last section on scroll up while watching first section
+            loopTop: false,
             // Enable parallax effect on section's background, default to false
             parallax: true,
             // Parallax offset amount, default to 0.5. Should be between 0 and 1. 0 gives no parallax effect,

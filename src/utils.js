@@ -1,96 +1,4 @@
 export default {
-  ksVueFpNav: {
-    props: ['sections'],
-    render (h, ctx) {
-      const sections = this.sections
-      return h(
-        'ul',
-        { class: 'ksVueFpNav' },
-        sections.map((item, index) =>
-          h(
-            'item',
-            { props: { item, index }, key: index }
-          )
-        )
-      )
-    },
-    components: {
-      item: {
-        props: ['item', 'index'],
-        functional: true,
-        render (h, ctx) {
-          const clickEv = function () {
-            ctx.parent.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: ctx.props.index })
-          }
-          return h(
-            'li',
-            [h(
-              'span',
-              {
-                class: ['dot', ctx.props.index === ctx.parent.$ksvuefp.currentIndex ? 'active' : ''],
-                attrs: {
-                  href: '#',
-                  'data-index': ctx.props.index
-                },
-                on: {
-                  click: clickEv
-                }
-              }
-            )]
-          )
-        }
-      }
-    }
-  },
-  ksVueFpSection: {
-    props: ['section', 'backgroundImage', 'backgroundColor', 'options', 'index'],
-    functional: true,
-    render (h, ctx) {
-      return h(
-        ctx.data.attrs.tag || 'section',
-        {
-          style: {
-            backgroundImage: ctx.props.backgroundImage || null,
-            backgroundColor: ctx.props.backgroundColor || null
-          },
-          class: ctx.data.staticClass + ' ksVueFpSection',
-          key: ctx.data.key,
-          props: {
-            options: ctx.props.options,
-            sliderDirection: ctx.parent.$ksvuefp.sliderDirection,
-            slidingActive: ctx.parent.$ksvuefp.slidingActive,
-            tag: 'div',
-            appear: false,
-            index: ctx.data.key
-          },
-          directives: ctx.data.directives
-        },
-        [
-          ctx.props.options.overlay? h(
-            'span',
-            {
-              class: 'ksVueFpOverlay',
-              style: {
-                background: ctx.props.options.overlay
-              }
-            },
-            null
-          ) : null,
-          h(
-            'div',
-            {
-              class: 'ksVueFpSectionContent',
-              style: {
-                position: 'relative',
-                zIndex: 1
-              }
-            },
-            ctx.children
-          )
-        ]
-      )
-    }
-  },
   bgOffset(action, direction, offset) {
     let res
     switch (action) {
@@ -162,27 +70,28 @@ export default {
 
     }
   },
-  setWindowDim(vm) {
-    vm.wWidth = window.innerWidth
-    vm.wHeight = window.innerHeight
-    vm.$nextTick(() => {
-      vm.$ksvuefp.$emit('ksvuefp-change-done')
-    })
+  getWindowDim() {
+    return {
+      wHeight: window.innerHeight,
+      wWidth: window.innerWidth
+    }
   },
-  getNextIndex(i, direction, length) {
+  getNextIndex(i, direction, length, options) {
     switch (direction) {
       case 'down':
         if (i !== length - 1) {
           i++
         } else {
-          i = 0
+          if (options.loopBottom) i = 0
+          if (!options.loopBottom) i = 'none'
         }
         break
       case 'up':
         if (i !== 0) {
           i--
         } else {
-          i = length - 1
+          if (options.loopTop) i = length - 1
+          if (!options.loopTop) i = 'none'
         }
         break
       default:

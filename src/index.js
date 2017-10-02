@@ -1,12 +1,11 @@
-import KsVueFullpage from './ks-vue-fullpage'
-import utils from './utils.js'
+import KsVueFullpage from './components/ksvuefp-wrapper.vue'
+import KsVueFpSection from './components/ksvuefp-section.vue'
+import ksTest from './components/ks-test.vue'
+import utils from './utils'
 
-const KsVueFpSection = utils.ksVueFpSection
-
-// import './scss/ks-vue-fullpage.scss'
 
 function plugin (Vue) {
-  const ksvuefpBus = new Vue({
+  Vue.prototype.$ksvuefp = new Vue({
     data: {
       fpLoaded: false,
       currentIndex: 0,
@@ -16,17 +15,16 @@ function plugin (Vue) {
       wHeight: ''
     },
     created () {
-      console.log(this);
       const vm = this
 
-      utils.setWindowDim(vm)
+      vm.getWindowDim()
 
       vm.$on('ksvuefp-ready', () => {
         vm.fpLoaded = true
       })
 
       vm.$on('ksvuefp-resized', () => {
-        utils.setWindowDim(vm)
+        vm.getWindowDim()
       })
 
       vm.$on('ksvuefp-change-begin', (nextIndex, oldIndex, direction, delay) => {
@@ -42,19 +40,21 @@ function plugin (Vue) {
       vm.$on('ksvuefp-change-done', () => {
         vm.slidingActive = false
       })
-    }
-  })
-
-  Object.defineProperties(Vue.prototype, {
-    $ksvuefp: {
-      get: function () {
-        return ksvuefpBus
+    },
+    methods: {
+      getWindowDim () {
+        const vm = this
+        const Dimensions = utils.getWindowDim()
+        vm.wWidth = Dimensions.wWidth
+        vm.wHeight = Dimensions.wHeight
+        vm.$nextTick(() => {
+          vm.$ksvuefp.$emit('ksvuefp-change-done')
+        })
       }
     }
   })
-
-  Vue.component('ks-vuefp', KsVueFullpage)
-  Vue.component('ks-vuefp-section', KsVueFpSection)
+  Vue.component('ksvuefp-wrapper', KsVueFullpage)
+  Vue.component('ksvuefp-section', KsVueFpSection)
 }
 
 // Install by default if using the script tag
@@ -68,5 +68,6 @@ const version = '__VERSION__'
 export {
   KsVueFullpage,
   KsVueFpSection,
+  ksTest,
   version
 }

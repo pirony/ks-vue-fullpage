@@ -1,5 +1,5 @@
 export default {
-  bgOffset(action, direction, offset) {
+  bgOffset (action, direction, offset) {
     let res
     switch (action) {
       case 'enter':
@@ -12,72 +12,61 @@ export default {
 
     return res
   },
-  getDirection(e, animType) {
+  getDirection (e, animType) {
     switch (e.type) {
       case 'mousewheel':
       case 'wheel':
         const delta = ((e.deltaY || -e.wheelDelta || e.detail) >> 10) || 1
         if (delta < 0) return 'up'
         return 'down'
-        break
       case 'keyup':
         switch (e.key) {
-          case "ArrowDown":
+          case 'ArrowDown':
             if (animType !== 'slideY') return 'none'
             return 'down'
-            break
-          case "ArrowUp":
+          case 'ArrowUp':
             if (animType !== 'slideY') return 'none'
             return 'up'
-            break
-          case "ArrowLeft":
+          case 'ArrowLeft':
             if (animType !== 'slideX') return 'none'
             return 'up'
-            break
-          case "ArrowRight":
+          case 'ArrowRight':
             if (animType !== 'slideX') return 'none'
             return 'down'
-            break
           default:
             return 'none' // Quit when this doesn't handle the key event.
         }
-        break
       case 'swipeup':
-        if (animType == 'slideX') return 'none'
+        if (animType === 'slideX') return 'none'
         return 'down'
-        break
       case 'swipeleft':
         if (animType !== 'slideX') return 'none'
         return 'down'
-        break
       case 'swipedown':
-        if (animType == 'slideX') return 'none'
+        if (animType === 'slideX') return 'none'
         return 'up'
-        break
       case 'swiperight':
         if (animType !== 'slideX') return 'none'
         return 'up'
-        break
       case 'navclick':
         if (e.oldIndex < e.nextIndex) {
           return 'down'
         } else {
           return 'up'
         }
-        break
       default:
         return 'none'
 
     }
   },
-  getWindowDim() {
+  getWindowDim () {
     if (typeof window === 'undefined') global.window = {}
     return {
       wHeight: window.innerHeight,
       wWidth: window.innerWidth
     }
   },
-  getNextIndex(i, direction, length, options) {
+  getNextIndex (i, direction, length, options) {
     switch (direction) {
       case 'down':
         if (i !== length - 1) {

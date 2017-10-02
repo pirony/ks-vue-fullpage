@@ -5,19 +5,18 @@
     </li>
   </ul>
 </template>
-
 <script>
 export default {
   props: ['sections'],
   methods: {
     click (i) {
       if (i === this.$ksvuefp.currentIndex) return
+
       this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: i })
     }
   }
 }
 </script>
-
 <style lang="css">
 .ksvuefp-nav {
   position: fixed;
@@ -27,6 +26,7 @@ export default {
   transform: translateY(-50%);
   list-style: none;
 }
+
 .ksvuefp-nav__dot {
   height: 8px;
   width: 8px;
@@ -36,6 +36,7 @@ export default {
   margin: 15px auto;
   cursor: pointer;
 }
+
 .ksvuefp-nav__dot.active {
   height: 14px;
   width: 14px;

@@ -56,8 +56,6 @@ nuxt.config.js
 }
 ```
 
-Don't forget to import the scss file ./src/scss/ks-vue-fullpage.scss in your sass flow
-
 #### With a script tag
 
 ```html

@@ -10,7 +10,8 @@ function plugin (Vue) {
       slidingActive: false,
       sliderDirection: 'down',
       wWidth: '',
-      wHeight: ''
+      wHeight: '',
+
     },
     created () {
       const vm = this

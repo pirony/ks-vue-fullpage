@@ -11,20 +11,38 @@
 
 <script>
 import { slideY, slideX, fade } from '../ksvuefp-animations'
+import imagesLoaded from 'imagesloaded'
 export default {
   components: {
     slideY,
     slideX,
     fade,
     'tagger': {
-      functional: true,
       props: ['options'],
-      render (h, ctx) {
-        return h(ctx.parent.options.sectionTag || 'div', ctx.data, ctx.children)
+      render (h) {
+        return h(this.options.sectionTag || 'div', this.$slots.default)
+      },
+      mounted () {
+        const vm = this
+        vm.$nextTick(() => {
+          setTimeout(() => {
+            imagesLoaded(vm.$el, { background: true }, function() {
+              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.$vnode.key)
+            })
+          }, 200)
+        })
       }
     }
   },
-  props: ['section', 'backgroundImage', 'backgroundColor', 'options']
+  props: ['section', 'backgroundImage', 'backgroundColor', 'options'],
+  watch: {
+    options: {
+      handler: function (val, oldVal) {
+        console.log(val)
+      },
+      deep: true
+    }
+  }
 }
 </script>
 

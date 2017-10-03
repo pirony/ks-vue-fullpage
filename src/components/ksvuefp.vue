@@ -44,6 +44,13 @@ export default {
         e.type = 'navclick'
         vm.changeIndex(e)
       })
+
+      vm.$ksvuefp.$on('ksvuefp-section-loaded', (i) => {
+        if (i !== vm.sections.length - 1) return
+        setTimeout(() => {
+          vm.$ksvuefp.$emit('ksvuefp-ready')
+        }, 300)
+      })
       /**
        * We listen to resize event and then emit on $ksvuefp bus
       */
@@ -74,16 +81,9 @@ export default {
         vm.changeIndex(e)
       }
 
-      /**
-       * When our component is ready, emit ready event on $ksvuefp
-       *
-      */
-      setTimeout(() => {
-        vm.$ksvuefp.$emit('ksvuefp-ready')
-      }, 300)
 
       /**
-       * trigger changeIndex method on pan with HAMMER.JS if touch is detected
+       * trigger changeIndex method on swipe with HAMMER.JS if touch is detected
        *
       */
       var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))

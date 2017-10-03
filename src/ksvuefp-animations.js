@@ -231,7 +231,7 @@ export const slideY = {
 
 // component datas for fade option
 export const fade = {
-  props: ['options', 'slidingActive', 'sliderDirection'],
+  props: ['options'],
   functional: true,
   render: function (h, ctx) {
     ctx.data.on = {
@@ -293,15 +293,3 @@ export const fade = {
 }
 
 // TODO: add prismX and prismY transitions
-
-// component datas for prismX option
-export const KsVueFullpagePrismX = {
-  render: function (h) {
-    return h(
-      'transition-group',
-      // { attrs: { name: 'prismX' }, props: { tag: 'div' }},
-      null,
-      this.$slots.default
-    )
-  }
-}

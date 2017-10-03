@@ -1,6 +1,6 @@
 <template lang="html">
   <component :is="options.animationType" :options="options" :appear="false">
-    <tagger :options="options" :class="['ksvuefp-section',  $ksvuefp.wWidth < options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" :style="{ backgroundImage: backgroundImage || null, backgroundColor: backgroundColor || null }" v-show="$vnode.data.key === $ksvuefp.currentIndex || $ksvuefp.wWidth < options.normalScrollWidth">
+    <tagger :options="options" :class="['ksvuefp-section',  $ksvuefp.wWidth < options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" v-show="$vnode.data.key === $ksvuefp.currentIndex || $ksvuefp.wWidth < options.normalScrollWidth">
       <span class="ksvuefp-section__overlay" :style="{ background: options.overlay || null }" v-if="options.overlay"></span>
       <div class="ksvuefp-section__content">
         <slot></slot>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { slideY, slideX, fade } from '../ks-vue-fullpage-animations'
+import { slideY, slideX, fade } from '../ksvuefp-animations'
 export default {
   components: {
     slideY,
@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style>
 .ksvuefp-section {
   height: 100%;
   width: 100%;
@@ -38,6 +38,7 @@ export default {
   background-size: cover;
   padding: 0;
   margin: 0;
+
   &__overlay {
     display: block;
     width: 100%;
@@ -53,7 +54,7 @@ export default {
     position: relative;
     z-index: 1;
   }
-  
+
   &.is-ksvuefp-inactive {
     position: relative;
   }

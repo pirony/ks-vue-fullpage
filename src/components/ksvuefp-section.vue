@@ -1,6 +1,6 @@
 <template lang="html">
   <component :is="options.animationType" :options="options" :appear="false">
-    <tagger :options="options" :class="['ksvuefp-section',  $ksvuefp.wWidth < options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" v-show="$vnode.data.key === $ksvuefp.currentIndex || $ksvuefp.wWidth < options.normalScrollWidth">
+    <tagger :options="options" :class="['ksvuefp-section',  $ksvuefp.wWidth < options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" :style="{ backgroundImage: backgroundImage || null, backgroundColor: backgroundColor || null }" v-show="$vnode.data.key === $ksvuefp.currentIndex || $ksvuefp.wWidth < options.normalScrollWidth">
       <span class="ksvuefp-section__overlay" :style="{ background: options.overlay || null }" v-if="options.overlay"></span>
       <div class="ksvuefp-section__content">
         <slot></slot>
@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="css">
 .ksvuefp-section {
   height: 100%;
   width: 100%;
@@ -38,7 +38,6 @@ export default {
   background-size: cover;
   padding: 0;
   margin: 0;
-
   &__overlay {
     display: block;
     width: 100%;

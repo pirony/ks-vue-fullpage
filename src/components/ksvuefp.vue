@@ -170,6 +170,13 @@ export default {
     &.is-ksvuefp-inactive {
       overflow: auto;
     }
+    &-sections {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      display: block;
+      z-index: 1;
+    }
   }
 
   .fade-out-enter-active,

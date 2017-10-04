@@ -25,6 +25,7 @@ export default {
   width: 48px;
   transform: translateY(-50%);
   list-style: none;
+  z-index: 2;
 }
 
 .ksvuefp-nav__dot {

@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.0.2
+ * ks-vue-fullpage v1.0.3
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -13,6 +13,13 @@
 }
 .ksvuefp.is-ksvuefp-inactive {
   overflow: auto
+}
+.ksvuefp-sections {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: block;
+  z-index: 1
 }
 .fade-out-enter-active,
 .fade-out-leave-active {
@@ -33,6 +40,7 @@
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   list-style: none;
+  z-index: 2;
 }
 .ksvuefp-nav__dot {
   height: 8px;

@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.0.2
+ * ks-vue-fullpage v1.0.3
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -762,7 +762,7 @@ exports.default = {
             (0, _imagesloaded2.default)(vm.$el, { background: true }, function () {
               vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.$vnode.key);
             });
-          }, 0);
+          }, 200);
         });
       }
     }

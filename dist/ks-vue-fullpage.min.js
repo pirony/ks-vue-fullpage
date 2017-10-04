@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.0.5
+ * ks-vue-fullpage v1.0.6
  * (c) 2017 pirony
  * Released under the MIT License.
  */

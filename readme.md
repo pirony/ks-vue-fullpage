@@ -73,6 +73,7 @@ and add $ksvuefp property to every components, available at vm.$ksvuefp
 vm.$ksvuefp returns the following datas object
 ```js
 {
+  options: [], // Default options merged with your prop options
   fpLoaded: false, // true when the plugin and his components are totally loaded
   currentIndex: 0, // the index currently shown
   slidingActive: false, // true if sections transition is occuring
@@ -122,42 +123,52 @@ vm.$ksvuefp returns the following datas object
               img_url: './images/whatever03.jpg'
             }
           ],
+          // Those are default options!!!! Change them to adapt to your needs
           options: {
-            // The tag used to wrap each vsvuefp-section component. Default to 'div'
-            sectionTag: 'section',
-            // Animation duration, default to 1000
-            duration: 800,
-            // Animation easing, default to 'Linear'. You can use all css3 animations types, including bezier
-            // curves. ex: [0.2, 0.5, 0.2, 0.5]
-            easing: 'Linear',
-            // Add a div between background and content, and set its background property.
-            // Must be a valid css background rule. Leave empty for no overlay. Default: null
-            overlay: 'rgba(0,0,0,0.2)',
-            // Animation type, default to 'slideY'. Should be one of 'slideY', 'slideX', or 'fade'
-            animationType: 'slideX',
-            // Content animation delay. Wait for content animation to finish. default to 0
-            animationDelay: 500,
-            // Add a fullscreen preloading overlay with loading animation. Default to false (no preloader)
-            preloader: {
-              // Background color for the overlay. Default to '#fff'
-              backgroundColor: 'blue',
-              // Preloader icon and text color for the overlay. Default to '#333'
-              preloaderColor: 'yellow',
-              // Text that will appear under the icon animation during loading
-              preloaderText: 'Ks Vue Fullpage'
-            },
-            // Hides dot nav, default to false.
-            hideNav: false,
-            // Go to first section on scroll down while watching last section
-            loopBottom: true,
-            // Go to last section on scroll up while watching first section
+            /**
+             * Html params
+             * @property {String} sectionTag - The tag used to wrap each vsvuefp-section component.
+            */
+            sectionTag: 'div',
+            /**
+             * Animation params
+             * @property {String} animationType - Transition effect between 2 screens. Should be one of 'slideY', 'slideX', or 'fade'
+             * @property {Number} duration - Duration of transition between 2 screens, in ms
+             * @property {String} easing - Easing of the transition between 2 screens. Can be all easings supported by Velocity, including bezier curves. ex: [0.2, 0.5, 0.2, 0.5]
+             * @property {Number} animDelay - Content animation delay. Help you define timing between screens transition and content animations
+            */
+            animationType: 'slideY',
+            duration: 1000,
+            animDelay: 0,
+            /**
+             * Preloading params
+             * @property {Boolean} preloaderEnabled - Add a fullscreen preloading overlay with loading animation
+             * @property {String} preloaderBgColor - Background color for the preloader overlay.
+             * @property {String} preloaderColor - Preloader icon and text color
+             * @property {String} preloaderText - The text that will appear under the icon animation during loading
+             * @property {Boolean} waitForBackgrounds - Wait for sections background images to be fully loaded before triggering $ksvuefp-ready event
+            */
+            preloaderEnabled: true,
+            preloaderBgColor: '#fff',
+            preloaderColor: '#212121',
+            preloaderText: 'Loading...',
+            waitForBackgrounds: true,
+            /**
+             * Navigation params
+             * @property {Boolean} loopBottom - Go to first section on scroll down while watching last section
+             * @property {Boolean} loopTop - Go to last section on scroll up while watching first section
+            */
+            loopBottom: false,
             loopTop: false,
-            // Enable parallax effect on section's background, default to false
-            parallax: true,
-            // Parallax offset amount, default to 0.5. Should be between 0 and 1. 0 gives no parallax effect,
-            // 1 gives a "stacking effect" (the old section remains fixed during transition while the next one
-            // slides above it).
-            parallaxOffset: 0.64
+            /**
+             * Design params
+             * @property {Boolean - String} overlay - Insert a fullsize div between background and content, and set its background property. Must be a valid css background rule
+             * @property {Boolean} parallax - Enable parallax effect on section's background
+             * @property {Float} parallaxOffset - Parallax offset amount, default to 0.5. Should be between 0 and 1. 0 gives no parallax effect, 1 gives a "stacking effect" (the old section remains fixed during transition while the next one slides above it).
+            */
+            overlay: 'rgba(0, 0, 0, 0.2)',
+            parallax: false,
+            parallaxOffset: 0.5
           }
         }
       }

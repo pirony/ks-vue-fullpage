@@ -1,17 +1,38 @@
 <template lang="html">
-  <ul :class="['ksvuefp-nav', options.dotNav && options.dotNav.position ? 'is-' + options.dotNav.position : options.animationType === 'slideX' ? 'is-bottom' : 'is-right']">
-    <li class="ksvuefp-nav__item" v-for="(s, index) in sections">
-      <span @click="click(index)" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']" :style="{ backgroundColor:  options.dotNav ? options.dotNav.color || null : null }"></span>
-    </li>
-  </ul>
+  <div>
+    <dots-anim tag="ul" :class="['ksvuefp-nav', 'is-' + currentPos]" appear v-for="pos in navPosList" :key="pos" v-if="currentPos === pos" :currentPos="currentPos">
+      <li class="ksvuefp-nav__item" v-for="(s, index) in sections" :key="index" :data-index="index"  v-show="currentPos === pos">
+        <span @click="click(index)" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']" :style="{ backgroundColor:  options.dotNav ? options.dotNav.color || null : null }"></span>
+      </li>
+    </dots-anim>
+  </div>
 </template>
 <script>
+import { dotsAnim } from '../ksvuefp-animations'
 export default {
+  components: {
+    dotsAnim
+  },
   props: ['sections', 'options'],
+  data () {
+    return {
+      navPosList: ['top', 'left', 'right', 'bottom']
+    }
+  },
+  computed: {
+    currentPos () {
+      if (this.options.dotNav && this.options.dotNav.position) return this.options.dotNav.position
+      switch (this.options.animationType) {
+        case 'slideX':
+          return 'bottom'
+        default:
+          return 'right'
+      }
+    }
+  },
   methods: {
     click (i) {
       if (i === this.$ksvuefp.currentIndex) return
-
       this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: i })
     }
   }

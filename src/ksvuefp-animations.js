@@ -292,4 +292,48 @@ export const fade = {
 
 }
 
+// component datas for slideX option
+export const dotsAnim = {
+  functional: true,
+  render: function (h, ctx) {
+    ctx.props.name = 'dots-anim'
+    ctx.data.attrs['appear'] = true
+    ctx.data.on = {
+      enter (el, done) {
+        const animObj = {}
+        switch (ctx.props.currentPos) {
+          case 'top':
+            Velocity.hook(el, 'translateY', '-200px')
+            animObj['translateY'] = '0px'
+            break;
+          case 'bottom':
+            Velocity.hook(el, 'translateY', '200px')
+            animObj['translateY'] = '0px'
+            break;
+          case 'left':
+            Velocity.hook(el, 'translateX', '-200px')
+            animObj['translateX'] = '0px'
+            break;
+          case 'right':
+            Velocity.hook(el, 'translateX', '200px')
+            animObj['translateX'] = '0px'
+            break;
+        }
+        Velocity(
+          el,
+          animObj,
+          {
+            delay: el.dataset.index * 50,
+            complete: done
+          }
+        )
+      },
+      leave (el, done) {
+        done()
+      }
+    }
+    return h('transition-group', ctx.data, ctx.children)
+  }
+}
+
 // TODO: add prismX and prismY transitions

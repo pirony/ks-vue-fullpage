@@ -79,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -286,501 +286,13 @@ exports.default = {
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(14)
-}
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(6),
-  /* template */
-  __webpack_require__(21),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "C:\\Users\\romai\\ks-node\\vue-plugins\\node_modules\\ks-vue-fullpage\\src\\components\\ksvuefp-section.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ksvuefp-section.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7096caf6", Component.options)
-  } else {
-    hotAPI.reload("data-v-7096caf6", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(11)
-}
-var Component = __webpack_require__(0)(
-  /* script */
-  __webpack_require__(7),
-  /* template */
-  __webpack_require__(18),
-  /* styles */
-  injectStyle,
-  /* scopeId */
-  null,
-  /* moduleIdentifier (server only) */
-  null
-)
-Component.options.__file = "C:\\Users\\romai\\ks-node\\vue-plugins\\node_modules\\ks-vue-fullpage\\src\\components\\ksvuefp.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
-if (Component.options.functional) {console.error("[vue-loader] ksvuefp.vue: functional components are not supported with templates, they should use render functions.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-28c4a96d", Component.options)
-  } else {
-    hotAPI.reload("data-v-28c4a96d", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  props: ['sections', 'options'],
-  methods: {
-    click: function click(i) {
-      if (i === this.$ksvuefp.currentIndex) return;
-
-      this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: i });
-    }
-  }
-};
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  name: 'ksvuefpPreloader',
-  props: ['backgroundColor', 'preloaderColor', 'preloaderText']
-};
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _ksvuefpAnimations = __webpack_require__(9);
-
-var _imagesloaded = __webpack_require__(15);
-
-var _imagesloaded2 = _interopRequireDefault(_imagesloaded);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-exports.default = {
-  components: {
-    slideY: _ksvuefpAnimations.slideY,
-    slideX: _ksvuefpAnimations.slideX,
-    fade: _ksvuefpAnimations.fade,
-    'tagger': {
-      props: ['options'],
-      render: function render(h) {
-        return h(this.options.sectionTag || 'div', this.$slots.default);
-      },
-      mounted: function mounted() {
-        var vm = this;
-        vm.$nextTick(function () {
-          setTimeout(function () {
-            (0, _imagesloaded2.default)(vm.$el, { background: true }, function () {
-              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.$vnode.key);
-            });
-          }, 300);
-        });
-      }
-    }
-  },
-  props: ['section', 'backgroundImage', 'backgroundColor', 'options'],
-  watch: {
-    options: {
-      handler: function handler(val, oldVal) {
-        console.log(val);
-      },
-      deep: true
-    }
-  }
-};
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _utils = __webpack_require__(1);
-
-var _utils2 = _interopRequireDefault(_utils);
-
-var _ksvuefpNav = __webpack_require__(16);
-
-var _ksvuefpNav2 = _interopRequireDefault(_ksvuefpNav);
-
-var _ksvuefpPreloader = __webpack_require__(17);
-
-var _ksvuefpPreloader2 = _interopRequireDefault(_ksvuefpPreloader);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  props: {
-    options: {
-      type: Object,
-      default: {}
-    },
-    sections: {
-      type: Array,
-      default: []
-    }
-  },
-  components: {
-    fpNav: _ksvuefpNav2.default,
-    ksvuefpPreloader: _ksvuefpPreloader2.default
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    var vm = this;
-    vm.$nextTick(function () {
-      /**
-       * We listen to our custom navclick event on ksvuefp bus
-       * @param Event
-      */
-      vm.$ksvuefp.$on('ksvuefp-nav-click', function (e) {
-        e.oldIndex = vm.$ksvuefp.currentIndex;
-        e.type = 'navclick';
-        vm.changeIndex(e);
-      });
-
-      vm.$ksvuefp.$on('ksvuefp-section-loaded', function (i) {
-        if (i !== vm.sections.length - 1) return;
-        setTimeout(function () {
-          vm.$ksvuefp.$emit('ksvuefp-ready');
-        }, 300);
-      });
-      /**
-       * We listen to resize event and then emit on $ksvuefp bus
-      */
-      window.addEventListener('resize', function () {
-        vm.$nextTick(function () {
-          vm.$ksvuefp.$emit('ksvuefp-resized');
-        });
-      });
-      /**
-       * We set the list of actions we want to trigger the animation with
-       * @const {array}
-       *
-      */
-      var actions = ['wheel', 'mousewheel', 'keypress'];
-      /**
-       * For each action in the above array, trigger changeIndex method
-       *
-      */
-      actions.forEach(function (a) {
-        document.addEventListener(a, vm.changeIndex);
-      });
-
-      /**
-       * trigger changeIndex method when a key is pressed
-       *
-      */
-      document.onkeyup = function (e) {
-        vm.changeIndex(e);
-      };
-
-      /**
-       * trigger changeIndex method on swipe with HAMMER.JS if touch is detected
-       *
-      */
-      var isTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints > 0;
-      if (!isTouch) return;
-
-      var mc = new Hammer(_this.$el);
-      mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-
-      mc.on('swipeup swipedown swiperight swipeleft', function (e) {
-        vm.changeIndex(e);
-      });
-    });
-  },
-
-  methods: {
-    /** trigger the change index event
-     * @param Event
-     *
-    */
-    changeIndex: function changeIndex(e) {
-      var _this2 = this;
-
-      var vm = this;
-
-      if (vm.$ksvuefp.slidingActive) return; // if last transition is not yet finished, return without doing anything
-
-      var OldIndex = vm.$ksvuefp.currentIndex;
-      var Length = vm.sections.length;
-      var Options = vm.options;
-
-      /**
-       * We get the sliding direction using a custom func getDirection() in utils
-       * @const String
-       * @return up or down
-       *
-      */
-      var Direction = _utils2.default.getDirection(e, vm.options.animationType);
-
-      if (Direction === 'none' || Direction === undefined) return;
-
-      var nextIndex = void 0;
-
-      /**
-       * Get next index
-       * @return index to go to
-       *
-      */
-      switch (e.type) {
-        case 'navclick':
-          // if is the event is from a click on navigation item
-          nextIndex = e.nextIndex;
-          break;
-        default:
-          // else
-          nextIndex = _utils2.default.getNextIndex(OldIndex, Direction, Length, Options);
-          break;
-      }
-
-      if (nextIndex === 'none') return;
-
-      this.$nextTick(function () {
-        // we wait for our computed datas to be ready
-        /**
-         * Emit change event on bus vm
-         * @param {integer} nextIndex
-         * @param {integer} OldIndex
-         * @param {String} Direction
-         *
-        */
-        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, _this2.options.animDelay);
-
-        /**
-         * Emit change-done event on bus vm when animation is finished
-         *
-        */
-        setTimeout(function () {
-          vm.$ksvuefp.$emit('ksvuefp-change-done');
-        }, vm.options.duration ? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100);
-      });
-    }
-  }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.version = exports.ksvuefpSection = exports.ksvuefp = undefined;
-
-var _ksvuefp = __webpack_require__(3);
-
-var _ksvuefp2 = _interopRequireDefault(_ksvuefp);
-
-var _ksvuefpSection = __webpack_require__(2);
-
-var _ksvuefpSection2 = _interopRequireDefault(_ksvuefpSection);
-
-var _utils = __webpack_require__(1);
-
-var _utils2 = _interopRequireDefault(_utils);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function plugin(Vue) {
-  Vue.prototype.$ksvuefp = new Vue({
-    data: {
-      fpLoaded: false,
-      currentIndex: 0,
-      slidingActive: false,
-      sliderDirection: 'down',
-      wWidth: '',
-      wHeight: ''
-
-    },
-    created: function created() {
-      var vm = this;
-
-      vm.getWindowDim();
-
-      vm.$on('ksvuefp-ready', function () {
-        vm.fpLoaded = true;
-      });
-
-      vm.$on('ksvuefp-resized', function () {
-        vm.getWindowDim();
-      });
-
-      vm.$on('ksvuefp-change-begin', function (nextIndex, oldIndex, direction, delay) {
-        vm.slidingActive = true;
-        vm.sliderDirection = direction;
-        vm.$nextTick(function () {
-          setTimeout(function () {
-            vm.currentIndex = nextIndex;
-          }, delay || 0);
-        });
-      });
-
-      vm.$on('ksvuefp-change-done', function () {
-        vm.slidingActive = false;
-      });
-    },
-
-    methods: {
-      getWindowDim: function getWindowDim() {
-        var vm = this;
-        var Dimensions = _utils2.default.getWindowDim();
-        vm.wWidth = Dimensions.wWidth;
-        vm.wHeight = Dimensions.wHeight;
-        vm.$nextTick(function () {
-          vm.$ksvuefp.$emit('ksvuefp-change-done');
-        });
-      }
-    }
-  });
-  Vue.component('ksvuefp', _ksvuefp2.default);
-  Vue.component('ksvuefp-section', _ksvuefpSection2.default);
-}
-
-// Install by default if using the script tag
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin);
-}
-
-exports.default = plugin;
-
-var version = '__VERSION__';
-// Export all components too
-exports.ksvuefp = _ksvuefp2.default;
-exports.ksvuefpSection = _ksvuefpSection2.default;
-exports.version = version;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.fade = exports.slideY = exports.slideX = undefined;
+exports.dotsAnim = exports.fade = exports.slideY = exports.slideX = undefined;
 
 var _utils = __webpack_require__(1);
 
@@ -1054,9 +566,550 @@ var slideX = exports.slideX = {
     return h('transition', ctx.data, ctx.children);
   }
 
+  // component datas for slideX option
+};var dotsAnim = exports.dotsAnim = {
+  functional: true,
+  render: function render(h, ctx) {
+    ctx.props.name = 'dots-anim';
+    ctx.data.attrs['appear'] = true;
+    ctx.data.on = {
+      enter: function enter(el, done) {
+        var animObj = {};
+        switch (ctx.props.currentPos) {
+          case 'top':
+            Velocity.hook(el, 'translateY', '-200px');
+            animObj['translateY'] = '0px';
+            break;
+          case 'bottom':
+            Velocity.hook(el, 'translateY', '200px');
+            animObj['translateY'] = '0px';
+            break;
+          case 'left':
+            Velocity.hook(el, 'translateX', '-200px');
+            animObj['translateX'] = '0px';
+            break;
+          case 'right':
+            Velocity.hook(el, 'translateX', '200px');
+            animObj['translateX'] = '0px';
+            break;
+        }
+        Velocity(el, animObj, {
+          delay: el.dataset.index * 50,
+          complete: done
+        });
+      },
+      leave: function leave(el, done) {
+        done();
+      }
+    };
+    return h('transition-group', ctx.data, ctx.children);
+  }
+
   // TODO: add prismX and prismY transitions
 
 };
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(14)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(7),
+  /* template */
+  __webpack_require__(21),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\romai\\ks-node\\vue-plugins\\node_modules\\ks-vue-fullpage\\src\\components\\ksvuefp-section.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ksvuefp-section.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7096caf6", Component.options)
+  } else {
+    hotAPI.reload("data-v-7096caf6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(11)
+}
+var Component = __webpack_require__(0)(
+  /* script */
+  __webpack_require__(8),
+  /* template */
+  __webpack_require__(18),
+  /* styles */
+  injectStyle,
+  /* scopeId */
+  null,
+  /* moduleIdentifier (server only) */
+  null
+)
+Component.options.__file = "C:\\Users\\romai\\ks-node\\vue-plugins\\node_modules\\ks-vue-fullpage\\src\\components\\ksvuefp.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key.substr(0, 2) !== "__"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] ksvuefp.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-28c4a96d", Component.options)
+  } else {
+    hotAPI.reload("data-v-28c4a96d", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _ksvuefpAnimations = __webpack_require__(2);
+
+exports.default = {
+  components: {
+    dotsAnim: _ksvuefpAnimations.dotsAnim
+  },
+  props: ['sections', 'options'],
+  data: function data() {
+    return {
+      navPosList: ['top', 'left', 'right', 'bottom']
+    };
+  },
+
+  computed: {
+    currentPos: function currentPos() {
+      if (this.options.dotNav && this.options.dotNav.position) return this.options.dotNav.position;
+      switch (this.options.animationType) {
+        case 'slideX':
+          return 'bottom';
+        default:
+          return 'right';
+      }
+    }
+  },
+  methods: {
+    click: function click(i) {
+      if (i === this.$ksvuefp.currentIndex) return;
+      this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: i });
+    }
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  name: 'ksvuefpPreloader',
+  props: ['backgroundColor', 'preloaderColor', 'preloaderText']
+};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _ksvuefpAnimations = __webpack_require__(2);
+
+var _imagesloaded = __webpack_require__(15);
+
+var _imagesloaded2 = _interopRequireDefault(_imagesloaded);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+  components: {
+    slideY: _ksvuefpAnimations.slideY,
+    slideX: _ksvuefpAnimations.slideX,
+    fade: _ksvuefpAnimations.fade,
+    'tagger': {
+      props: ['options'],
+      render: function render(h) {
+        return h(this.options.sectionTag || 'div', this.$slots.default);
+      },
+      mounted: function mounted() {
+        var vm = this;
+        vm.$nextTick(function () {
+          setTimeout(function () {
+            (0, _imagesloaded2.default)(vm.$el, { background: true }, function () {
+              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.$vnode.key);
+            });
+          }, 300);
+        });
+      }
+    }
+  },
+  props: ['section', 'backgroundImage', 'backgroundColor', 'options']
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _utils = __webpack_require__(1);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+var _ksvuefpNav = __webpack_require__(16);
+
+var _ksvuefpNav2 = _interopRequireDefault(_ksvuefpNav);
+
+var _ksvuefpPreloader = __webpack_require__(17);
+
+var _ksvuefpPreloader2 = _interopRequireDefault(_ksvuefpPreloader);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  props: {
+    options: {
+      type: Object,
+      default: {}
+    },
+    sections: {
+      type: Array,
+      default: []
+    }
+  },
+  components: {
+    fpNav: _ksvuefpNav2.default,
+    ksvuefpPreloader: _ksvuefpPreloader2.default
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    var vm = this;
+    vm.$nextTick(function () {
+      /**
+       * We listen to our custom navclick event on ksvuefp bus
+       * @param Event
+      */
+      vm.$ksvuefp.$on('ksvuefp-nav-click', function (e) {
+        e.oldIndex = vm.$ksvuefp.currentIndex;
+        e.type = 'navclick';
+        vm.changeIndex(e);
+      });
+
+      vm.$ksvuefp.$on('ksvuefp-section-loaded', function (i) {
+        if (i !== vm.sections.length - 1) return;
+        setTimeout(function () {
+          vm.$ksvuefp.$emit('ksvuefp-ready');
+        }, 300);
+      });
+      /**
+       * We listen to resize event and then emit on $ksvuefp bus
+      */
+      window.addEventListener('resize', function () {
+        vm.$nextTick(function () {
+          vm.$ksvuefp.$emit('ksvuefp-resized');
+        });
+      });
+      /**
+       * We set the list of actions we want to trigger the animation with
+       * @const {array}
+       *
+      */
+      var actions = ['wheel', 'mousewheel', 'keypress'];
+      /**
+       * For each action in the above array, trigger changeIndex method
+       *
+      */
+      actions.forEach(function (a) {
+        document.addEventListener(a, vm.changeIndex);
+      });
+
+      /**
+       * trigger changeIndex method when a key is pressed
+       *
+      */
+      document.onkeyup = function (e) {
+        vm.changeIndex(e);
+      };
+
+      /**
+       * trigger changeIndex method on swipe with HAMMER.JS if touch is detected
+       *
+      */
+      var isTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints > 0;
+      if (!isTouch) return;
+
+      var mc = new Hammer(_this.$el);
+      mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
+
+      mc.on('swipeup swipedown swiperight swipeleft', function (e) {
+        vm.changeIndex(e);
+      });
+    });
+  },
+
+  methods: {
+    /** trigger the change index event
+     * @param Event
+     *
+    */
+    changeIndex: function changeIndex(e) {
+      var _this2 = this;
+
+      var vm = this;
+
+      if (vm.$ksvuefp.slidingActive) return; // if last transition is not yet finished, return without doing anything
+
+      var OldIndex = vm.$ksvuefp.currentIndex;
+      var Length = vm.sections.length;
+      var Options = vm.options;
+
+      /**
+       * We get the sliding direction using a custom func getDirection() in utils
+       * @const String
+       * @return up or down
+       *
+      */
+      var Direction = _utils2.default.getDirection(e, vm.options.animationType);
+
+      if (Direction === 'none' || Direction === undefined) return;
+
+      var nextIndex = void 0;
+
+      /**
+       * Get next index
+       * @return index to go to
+       *
+      */
+      switch (e.type) {
+        case 'navclick':
+          // if is the event is from a click on navigation item
+          nextIndex = e.nextIndex;
+          break;
+        default:
+          // else
+          nextIndex = _utils2.default.getNextIndex(OldIndex, Direction, Length, Options);
+          break;
+      }
+
+      if (nextIndex === 'none') return;
+
+      this.$nextTick(function () {
+        // we wait for our computed datas to be ready
+        /**
+         * Emit change event on bus vm
+         * @param {integer} nextIndex
+         * @param {integer} OldIndex
+         * @param {String} Direction
+         *
+        */
+        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, _this2.options.animDelay);
+
+        /**
+         * Emit change-done event on bus vm when animation is finished
+         *
+        */
+        setTimeout(function () {
+          vm.$ksvuefp.$emit('ksvuefp-change-done');
+        }, vm.options.duration ? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100);
+      });
+    }
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.version = exports.ksvuefpSection = exports.ksvuefp = undefined;
+
+var _ksvuefp = __webpack_require__(4);
+
+var _ksvuefp2 = _interopRequireDefault(_ksvuefp);
+
+var _ksvuefpSection = __webpack_require__(3);
+
+var _ksvuefpSection2 = _interopRequireDefault(_ksvuefpSection);
+
+var _utils = __webpack_require__(1);
+
+var _utils2 = _interopRequireDefault(_utils);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function plugin(Vue) {
+  Vue.prototype.$ksvuefp = new Vue({
+    data: {
+      fpLoaded: false,
+      currentIndex: 0,
+      slidingActive: false,
+      sliderDirection: 'down',
+      wWidth: '',
+      wHeight: ''
+
+    },
+    created: function created() {
+      var vm = this;
+
+      vm.getWindowDim();
+
+      vm.$on('ksvuefp-ready', function () {
+        vm.fpLoaded = true;
+      });
+
+      vm.$on('ksvuefp-resized', function () {
+        vm.getWindowDim();
+      });
+
+      vm.$on('ksvuefp-change-begin', function (nextIndex, oldIndex, direction, delay) {
+        vm.slidingActive = true;
+        vm.sliderDirection = direction;
+        vm.$nextTick(function () {
+          setTimeout(function () {
+            vm.currentIndex = nextIndex;
+          }, delay || 0);
+        });
+      });
+
+      vm.$on('ksvuefp-change-done', function () {
+        vm.slidingActive = false;
+      });
+    },
+
+    methods: {
+      getWindowDim: function getWindowDim() {
+        var vm = this;
+        var Dimensions = _utils2.default.getWindowDim();
+        vm.wWidth = Dimensions.wWidth;
+        vm.wHeight = Dimensions.wHeight;
+        vm.$nextTick(function () {
+          vm.$ksvuefp.$emit('ksvuefp-change-done');
+        });
+      }
+    }
+  });
+  Vue.component('ksvuefp', _ksvuefp2.default);
+  Vue.component('ksvuefp-section', _ksvuefpSection2.default);
+}
+
+// Install by default if using the script tag
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(plugin);
+}
+
+exports.default = plugin;
+
+var version = '__VERSION__';
+// Export all components too
+exports.ksvuefp = _ksvuefp2.default;
+exports.ksvuefpSection = _ksvuefpSection2.default;
+exports.version = version;
 
 /***/ }),
 /* 10 */
@@ -1592,7 +1645,7 @@ function injectStyle (ssrContext) {
 }
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(4),
+  __webpack_require__(5),
   /* template */
   __webpack_require__(20),
   /* styles */
@@ -1636,7 +1689,7 @@ function injectStyle (ssrContext) {
 }
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(5),
+  __webpack_require__(6),
   /* template */
   __webpack_require__(19),
   /* styles */
@@ -1746,22 +1799,40 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('ul', {
-    class: ['ksvuefp-nav', _vm.options.dotNav && _vm.options.dotNav.position ? 'is-' + _vm.options.dotNav.position : _vm.options.animationType === 'slideX' ? 'is-bottom' : 'is-right']
-  }, _vm._l((_vm.sections), function(s, index) {
-    return _c('li', {
-      staticClass: "ksvuefp-nav__item"
-    }, [_c('span', {
-      class: ['ksvuefp-nav__dot', index === _vm.$ksvuefp.currentIndex ? 'active' : ''],
-      style: ({
-        backgroundColor: _vm.options.dotNav ? _vm.options.dotNav.color || null : null
-      }),
-      on: {
-        "click": function($event) {
-          _vm.click(index)
-        }
+  return _c('div', _vm._l((_vm.navPosList), function(pos) {
+    return (_vm.currentPos === pos) ? _c('dots-anim', {
+      key: pos,
+      class: ['ksvuefp-nav', 'is-' + _vm.currentPos],
+      attrs: {
+        "tag": "ul",
+        "appear": "",
+        "currentPos": _vm.currentPos
       }
-    })])
+    }, _vm._l((_vm.sections), function(s, index) {
+      return _c('li', {
+        directives: [{
+          name: "show",
+          rawName: "v-show",
+          value: (_vm.currentPos === pos),
+          expression: "currentPos === pos"
+        }],
+        key: index,
+        staticClass: "ksvuefp-nav__item",
+        attrs: {
+          "data-index": index
+        }
+      }, [_c('span', {
+        class: ['ksvuefp-nav__dot', index === _vm.$ksvuefp.currentIndex ? 'active' : ''],
+        style: ({
+          backgroundColor: _vm.options.dotNav ? _vm.options.dotNav.color || null : null
+        }),
+        on: {
+          "click": function($event) {
+            _vm.click(index)
+          }
+        }
+      })])
+    })) : _vm._e()
   }))
 },staticRenderFns: []}
 module.exports.render._withStripped = true

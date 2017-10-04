@@ -34,15 +34,7 @@ export default {
       }
     }
   },
-  props: ['section', 'backgroundImage', 'backgroundColor', 'options'],
-  watch: {
-    options: {
-      handler: function (val, oldVal) {
-        console.log(val)
-      },
-      deep: true
-    }
-  }
+  props: ['section', 'backgroundImage', 'backgroundColor', 'options']
 }
 </script>
 

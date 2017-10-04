@@ -26,10 +26,10 @@ export default {
         const vm = this
         vm.$nextTick(() => {
           setTimeout(() => {
-            imagesLoaded(vm.$el, { background: true }, function() {
+            imagesLoaded(vm.$el, { background: true }, () => {
               vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.$vnode.key)
             })
-          }, 200)
+          }, 300)
         })
       }
     }

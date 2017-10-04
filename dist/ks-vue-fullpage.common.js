@@ -633,7 +633,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 
 exports.default = {
-  props: ['sections'],
+  props: ['sections', 'options'],
   methods: {
     click: function click(i) {
       if (i === this.$ksvuefp.currentIndex) return;
@@ -718,7 +718,7 @@ exports.default = {
             (0, _imagesloaded2.default)(vm.$el, { background: true }, function () {
               vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.$vnode.key);
             });
-          }, 200);
+          }, 300);
         });
       }
     }
@@ -1620,7 +1620,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }) : _vm._e()], 1) : _vm._e(), _vm._ssrNode(" "), (!_vm.options.hideNav) ? _c('fp-nav', {
     attrs: {
-      "sections": _vm.sections
+      "sections": _vm.sections,
+      "options": _vm.options
     }
   }) : _vm._e()], 2)
 },staticRenderFns: []}
@@ -1652,9 +1653,9 @@ module.exports.render._withStripped = true
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('ul', {
-    staticClass: "ksvuefp-nav"
+    class: ['ksvuefp-nav', _vm.options.navPosition === 'bottom' || _vm.options.animationType === 'slideX' ? 'is-bottom' : 'is-right']
   }, [_vm._ssrNode((_vm._ssrList((_vm.sections), function(s, index) {
-    return ("<li><span" + (_vm._ssrClass(null, ['ksvuefp-nav__dot', index === _vm.$ksvuefp.currentIndex ? 'active' : ''])) + "></span></li>")
+    return ("<li class=\"ksvuefp-nav__item\"><span" + (_vm._ssrClass(null, ['ksvuefp-nav__dot', index === _vm.$ksvuefp.currentIndex ? 'active' : ''])) + "></span></li>")
   })))])
 },staticRenderFns: []}
 module.exports.render._withStripped = true

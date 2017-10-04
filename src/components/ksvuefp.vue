@@ -6,7 +6,7 @@
     <transition :name="options.preloader.transitionName || 'fade-out'" v-if="options.preloader">
       <ksvuefp-preloader v-if="!$ksvuefp.fpLoaded" :backgroundColor="options.preloader.backgroundColor || ''" :preloaderColor="options.preloader.preloaderColor || ''" :preloaderText="options.preloader.preloaderText || ''"/>
     </transition>
-    <fp-nav v-if="!options.hideNav" :sections="sections"/>
+    <fp-nav v-if="!options.hideNav" :sections="sections" :options="options"/>
   </div>
 </template>
 <script>

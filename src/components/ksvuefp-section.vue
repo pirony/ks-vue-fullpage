@@ -46,7 +46,7 @@ export default {
 }
 </script>
 
-<style lang="css">
+<style>
 .ksvuefp-section {
   height: 100%;
   width: 100%;

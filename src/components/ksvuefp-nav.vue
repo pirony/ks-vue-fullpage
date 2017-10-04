@@ -1,7 +1,7 @@
 <template lang="html">
-  <ul :class="['ksvuefp-nav', options.navPosition === 'bottom' || options.animationType === 'slideX' ? 'is-bottom' : 'is-right']">
+  <ul :class="['ksvuefp-nav', options.dotNav && options.dotNav.position ? 'is-' + options.dotNav.position : options.animationType === 'slideX' ? 'is-bottom' : 'is-right']">
     <li class="ksvuefp-nav__item" v-for="(s, index) in sections">
-      <span @click="click(index)" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']"></span>
+      <span @click="click(index)" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']" :style="{ backgroundColor:  options.dotNav ? options.dotNav.color || null : null }"></span>
     </li>
   </ul>
 </template>
@@ -68,6 +68,7 @@ export default {
   display: block;
   margin: 15px auto;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .ksvuefp-nav__dot.active {

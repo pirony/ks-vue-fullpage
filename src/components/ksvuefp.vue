@@ -11,7 +11,6 @@
 </template>
 <script>
 import utils from '../utils.js'
-import { slideY, slideX, fade } from '../ksvuefp-animations'
 import fpNav from './ksvuefp-nav.vue'
 import ksvuefpPreloader from './ksvuefp-preloader.vue'
 export default {
@@ -26,9 +25,6 @@ export default {
     }
   },
   components: {
-    slideY,
-    slideX,
-    fade,
     fpNav,
     ksvuefpPreloader
   },

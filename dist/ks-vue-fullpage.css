@@ -52,18 +52,18 @@
 }
 .ksvuefp-nav.is-right {
   top: 50%;
-  right: 25px;
+  right: 20px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%)
 }
 .ksvuefp-nav.is-left {
   top: 50%;
-  left: 25px;
+  left: 20px;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%)
 }
 .ksvuefp-nav.is-top {
-  top: 25px;
+  top: 20px;
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%)
@@ -72,7 +72,7 @@
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  bottom: 25px
+  bottom: 20px
 }
 .ksvuefp-nav .ksvuefp-nav__item {
   display: block;
@@ -97,6 +97,7 @@
   display: block;
   margin: 15px auto;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 .ksvuefp-nav__dot.active {
   height: 14px;

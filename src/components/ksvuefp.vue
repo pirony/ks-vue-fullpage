@@ -3,8 +3,8 @@
     <div class="ksvuefp-sections">
       <slot></slot>
     </div>
-    <transition :name="options.preloader.transitionName || 'fade-out'">
-      <ksvuefp-preloader v-if="options.preloader && !$ksvuefp.fpLoaded" :backgroundColor="options.preloader.backgroundColor || ''" :preloaderColor="options.preloader.preloaderColor || ''" :preloaderText="options.preloader.preloaderText || ''"/>
+    <transition :name="options.preloader.transitionName || 'fade-out'" v-if="options.preloader">
+      <ksvuefp-preloader v-if="!$ksvuefp.fpLoaded" :backgroundColor="options.preloader.backgroundColor || ''" :preloaderColor="options.preloader.preloaderColor || ''" :preloaderText="options.preloader.preloaderText || ''"/>
     </transition>
     <fp-nav v-if="!options.hideNav" :sections="sections"/>
   </div>

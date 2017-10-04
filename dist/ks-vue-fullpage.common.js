@@ -1608,17 +1608,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: ({
       height: _vm.$ksvuefp.wHeight + 'px'
     })
-  }, [_vm._ssrNode("<div class=\"ksvuefp-sections\">", "</div>", [_vm._t("default")], 2), _vm._ssrNode(" "), _c('transition', {
+  }, [_vm._ssrNode("<div class=\"ksvuefp-sections\">", "</div>", [_vm._t("default")], 2), _vm._ssrNode(" "), (_vm.options.preloader) ? _c('transition', {
     attrs: {
       "name": _vm.options.preloader.transitionName || 'fade-out'
     }
-  }, [(_vm.options.preloader && !_vm.$ksvuefp.fpLoaded) ? _c('ksvuefp-preloader', {
+  }, [(!_vm.$ksvuefp.fpLoaded) ? _c('ksvuefp-preloader', {
     attrs: {
       "backgroundColor": _vm.options.preloader.backgroundColor || '',
       "preloaderColor": _vm.options.preloader.preloaderColor || '',
       "preloaderText": _vm.options.preloader.preloaderText || ''
     }
-  }) : _vm._e()], 1), _vm._ssrNode(" "), (!_vm.options.hideNav) ? _c('fp-nav', {
+  }) : _vm._e()], 1) : _vm._e(), _vm._ssrNode(" "), (!_vm.options.hideNav) ? _c('fp-nav', {
     attrs: {
       "sections": _vm.sections
     }

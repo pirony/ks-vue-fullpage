@@ -1688,17 +1688,17 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     })
   }, [_c('div', {
     staticClass: "ksvuefp-sections"
-  }, [_vm._t("default")], 2), _vm._v(" "), _c('transition', {
+  }, [_vm._t("default")], 2), _vm._v(" "), (_vm.options.preloader) ? _c('transition', {
     attrs: {
       "name": _vm.options.preloader.transitionName || 'fade-out'
     }
-  }, [(_vm.options.preloader && !_vm.$ksvuefp.fpLoaded) ? _c('ksvuefp-preloader', {
+  }, [(!_vm.$ksvuefp.fpLoaded) ? _c('ksvuefp-preloader', {
     attrs: {
       "backgroundColor": _vm.options.preloader.backgroundColor || '',
       "preloaderColor": _vm.options.preloader.preloaderColor || '',
       "preloaderText": _vm.options.preloader.preloaderText || ''
     }
-  }) : _vm._e()], 1), _vm._v(" "), (!_vm.options.hideNav) ? _c('fp-nav', {
+  }) : _vm._e()], 1) : _vm._e(), _vm._v(" "), (!_vm.options.hideNav) ? _c('fp-nav', {
     attrs: {
       "sections": _vm.sections
     }

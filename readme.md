@@ -188,8 +188,6 @@ sections | array | - | sections list (cf example above)
 
 Name | Data type | Default value | Description
 ----- | ------------- | --- | ---
-tag | string | div |
-options  | object | - | the same custom options as our wrapper (cf example above)
 section | object, string | - | the single section datas issued by v-for (cf example above)
 key | int | - | must be the section's index from v-for loop (cf example above)
 backgroundImage | string | - | must be a valid css background rule.

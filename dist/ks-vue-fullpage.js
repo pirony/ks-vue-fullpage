@@ -1800,7 +1800,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', _vm._l((_vm.navPosList), function(pos) {
-    return (_vm.currentPos === pos) ? _c('dots-anim', {
+    return (_vm.currentPos === pos && _vm.$ksvuefp.fpLoaded) ? _c('dots-anim', {
       key: pos,
       class: ['ksvuefp-nav', 'is-' + _vm.currentPos],
       attrs: {

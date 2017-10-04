@@ -93,7 +93,6 @@ vm.$ksvuefp returns the following datas object
         <ksvuefp-section
           class="whatever"
           v-for="(s,index) in sections"
-          :options="options"
           :section="s"
           :key="index"
           :backgroundImage="'url('+ s.img_url +')'"

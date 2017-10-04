@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.0.3
+ * ks-vue-fullpage v1.0.4
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -658,8 +658,8 @@ exports.default = {
   /**
    * Design params
    * @property {Boolean - String} overlay - Insert a fullsize div between background and content, and set its background property. Must be a valid css background rule
-   * @property {Boolean} parallax - the context
-   * @property {Float} parallaxOffset - the context
+   * @property {Boolean} parallax - Enable parallax effect on section's background
+   * @property {Float} parallaxOffset - Parallax offset amount, default to 0.5. Should be between 0 and 1. 0 gives no parallax effect, 1 gives a "stacking effect" (the old section remains fixed during transition while the next one slides above it).
   */
   overlay: 'rgba(0, 0, 0, 0.2)',
   parallax: false,

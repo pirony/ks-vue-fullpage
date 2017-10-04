@@ -79,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -280,7 +280,7 @@ exports.default = {
     return i;
   }
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(22)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ }),
 /* 2 */
@@ -594,7 +594,7 @@ var slideX = exports.slideX = {
             break;
         }
         Velocity(el, animObj, {
-          delay: el.dataset.index * 50,
+          delay: el.dataset.index * 30,
           complete: done
         });
       },
@@ -613,16 +613,73 @@ var slideX = exports.slideX = {
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  /**
+   * Html params
+   * @property {String} sectionTag - The tag used to wrap each vsvuefp-section component.
+  */
+  sectionTag: 'div',
+  /**
+   * Animation params
+   * @property {String} animationType - Transition effect between 2 screens. Should be one of 'slideY', 'slideX', or 'fade'
+   * @property {Number} duration - Duration of transition between 2 screens, in ms
+   * @property {String} easing - Easing of the transition between 2 screens. Can be all easings supported by Velocity, including bezier curves. ex: [0.2, 0.5, 0.2, 0.5]
+   * @property {Number} animDelay - Content animation delay. Help you define timing between screens transition and content animations
+  */
+  animationType: 'slideY',
+  duration: 1000,
+  animDelay: 0,
+  /**
+   * Preloading params
+   * @property {Boolean} preloaderEnabled - Add a fullscreen preloading overlay with loading animation
+   * @property {String} preloaderBgColor - Background color for the preloader overlay.
+   * @property {String} preloaderColor - Preloader icon and text color
+   * @property {String} preloaderText - The text that will appear under the icon animation during loading
+   * @property {Boolean} waitForBackgrounds - Wait for sections background images to be fully loaded before triggering $ksvuefp-ready event
+  */
+  preloaderEnabled: true,
+  preloaderBgColor: '#fff',
+  preloaderColor: '#212121',
+  preloaderText: 'Loading...',
+  waitForBackgrounds: true,
+  /**
+   * Navigation params
+   * @property {Boolean} loopBottom - Go to first section on scroll down while watching last section
+   * @property {Boolean} loopTop - Go to last section on scroll up while watching first section
+  */
+  loopBottom: false,
+  loopTop: false,
+  /**
+   * Design params
+   * @property {Boolean - String} overlay - Insert a fullsize div between background and content, and set its background property. Must be a valid css background rule
+   * @property {Boolean} parallax - the context
+   * @property {Float} parallaxOffset - the context
+  */
+  overlay: 'rgba(0, 0, 0, 0.2)',
+  parallax: false,
+  parallaxOffset: 0.5
+};
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(14)
+  __webpack_require__(15)
 }
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(7),
+  __webpack_require__(8),
   /* template */
-  __webpack_require__(21),
+  __webpack_require__(22),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -654,19 +711,19 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(11)
+  __webpack_require__(12)
 }
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(8),
+  __webpack_require__(9),
   /* template */
-  __webpack_require__(18),
+  __webpack_require__(19),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -698,7 +755,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -749,7 +806,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -776,7 +833,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -788,7 +845,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _ksvuefpAnimations = __webpack_require__(2);
 
-var _imagesloaded = __webpack_require__(15);
+var _imagesloaded = __webpack_require__(16);
 
 var _imagesloaded2 = _interopRequireDefault(_imagesloaded);
 
@@ -828,11 +885,17 @@ exports.default = {
       }
     }
   },
-  props: ['section', 'backgroundImage', 'backgroundColor', 'options']
+  data: function data() {
+    return {
+      options: this.$ksvuefp.options || []
+    };
+  },
+
+  props: ['section', 'backgroundImage', 'backgroundColor']
 };
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -846,11 +909,11 @@ var _utils = __webpack_require__(1);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _ksvuefpNav = __webpack_require__(16);
+var _ksvuefpNav = __webpack_require__(17);
 
 var _ksvuefpNav2 = _interopRequireDefault(_ksvuefpNav);
 
-var _ksvuefpPreloader = __webpack_require__(17);
+var _ksvuefpPreloader = __webpack_require__(18);
 
 var _ksvuefpPreloader2 = _interopRequireDefault(_ksvuefpPreloader);
 
@@ -876,6 +939,12 @@ exports.default = {
 
     var vm = this;
     vm.$nextTick(function () {
+      vm.$ksvuefp.$emit('ksvuefp-options-changed', _this.options);
+      /**
+       * Add default values to options
+       *
+      */
+      _this.options.animDelay = _this.options.animDelay || 0;
       /**
        * We listen to our custom navclick event on ksvuefp bus
        * @param Event
@@ -1004,6 +1073,15 @@ exports.default = {
         }, vm.options.duration ? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100);
       });
     }
+  },
+  watch: {
+    options: {
+      deep: true,
+      handler: function handler(val) {
+        console.log('options changed');
+        this.$ksvuefp.$emit('ksvuefp-options-changed', val);
+      }
+    }
   }
 }; //
 //
@@ -1018,7 +1096,7 @@ exports.default = {
 //
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1029,17 +1107,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.version = exports.ksvuefpSection = exports.ksvuefp = undefined;
 
-var _ksvuefp = __webpack_require__(4);
+var _ksvuefp = __webpack_require__(5);
 
 var _ksvuefp2 = _interopRequireDefault(_ksvuefp);
 
-var _ksvuefpSection = __webpack_require__(3);
+var _ksvuefpSection = __webpack_require__(4);
 
 var _ksvuefpSection2 = _interopRequireDefault(_ksvuefpSection);
 
 var _utils = __webpack_require__(1);
 
 var _utils2 = _interopRequireDefault(_utils);
+
+var _defaultOptions = __webpack_require__(3);
+
+var _defaultOptions2 = _interopRequireDefault(_defaultOptions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1051,16 +1133,18 @@ function plugin(Vue) {
       slidingActive: false,
       sliderDirection: 'down',
       wWidth: '',
-      wHeight: ''
-
+      wHeight: '',
+      options: _defaultOptions2.default
     },
     created: function created() {
       var vm = this;
-
       vm.getWindowDim();
 
       vm.$on('ksvuefp-ready', function () {
         vm.fpLoaded = true;
+      });
+      vm.$on('ksvuefp-options-changed', function (options) {
+        vm.options = Object.assign(vm.options, options);
       });
 
       vm.$on('ksvuefp-resized', function () {
@@ -1112,7 +1196,7 @@ exports.ksvuefpSection = _ksvuefpSection2.default;
 exports.version = version;
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -1234,12 +1318,6 @@ return EvEmitter;
 
 
 /***/ }),
-/* 11 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
@@ -1259,6 +1337,12 @@ return EvEmitter;
 
 /***/ }),
 /* 15 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -1275,7 +1359,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   if ( true ) {
     // AMD
     !(__WEBPACK_AMD_DEFINE_ARRAY__ = [
-      __webpack_require__(10)
+      __webpack_require__(11)
     ], __WEBPACK_AMD_DEFINE_RESULT__ = function( EvEmitter ) {
       return factory( window, EvEmitter );
     }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
@@ -1635,19 +1719,19 @@ return ImagesLoaded;
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(13)
+  __webpack_require__(14)
 }
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(5),
+  __webpack_require__(6),
   /* template */
-  __webpack_require__(20),
+  __webpack_require__(21),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -1679,19 +1763,19 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(12)
+  __webpack_require__(13)
 }
 var Component = __webpack_require__(0)(
   /* script */
-  __webpack_require__(6),
+  __webpack_require__(7),
   /* template */
-  __webpack_require__(19),
+  __webpack_require__(20),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -1723,28 +1807,28 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    class: ['ksvuefp', _vm.$ksvuefp.wWidth < _vm.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null],
+    class: ['ksvuefp', _vm.$ksvuefp.wWidth < _vm.$ksvuefp.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null],
     style: ({
       height: _vm.$ksvuefp.wHeight + 'px'
     })
   }, [_c('div', {
     staticClass: "ksvuefp-sections"
-  }, [_vm._t("default")], 2), _vm._v(" "), (_vm.options.preloader) ? _c('transition', {
+  }, [_vm._t("default")], 2), _vm._v(" "), (_vm.$ksvuefp.options.preloader) ? _c('transition', {
     attrs: {
-      "name": _vm.options.preloader.transitionName || 'fade-out'
+      "name": _vm.$ksvuefp.options.preloader.transitionName || 'fade-out'
     }
   }, [(!_vm.$ksvuefp.fpLoaded) ? _c('ksvuefp-preloader', {
     attrs: {
-      "backgroundColor": _vm.options.preloader.backgroundColor || '',
-      "preloaderColor": _vm.options.preloader.preloaderColor || '',
-      "preloaderText": _vm.options.preloader.preloaderText || ''
+      "backgroundColor": _vm.$ksvuefp.options.preloader.backgroundColor || '',
+      "preloaderColor": _vm.$ksvuefp.options.preloader.preloaderColor || '',
+      "preloaderText": _vm.$ksvuefp.options.preloader.preloaderText || ''
     }
-  }) : _vm._e()], 1) : _vm._e(), _vm._v(" "), (!_vm.options.hideNav) ? _c('fp-nav', {
+  }) : _vm._e()], 1) : _vm._e(), _vm._v(" "), (!_vm.$ksvuefp.options.hideNav) ? _c('fp-nav', {
     attrs: {
       "sections": _vm.sections,
       "options": _vm.options
@@ -1760,7 +1844,7 @@ if (false) {
 }
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1795,12 +1879,12 @@ if (false) {
 }
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', _vm._l((_vm.navPosList), function(pos) {
-    return (_vm.currentPos === pos && _vm.$ksvuefp.fpLoaded) ? _c('dots-anim', {
+    return (_vm.currentPos === pos && _vm.$ksvuefp.fpLoaded && !_vm.$ksvuefp.slidingActive) ? _c('dots-anim', {
       key: pos,
       class: ['ksvuefp-nav', 'is-' + _vm.currentPos],
       attrs: {
@@ -1844,7 +1928,7 @@ if (false) {
 }
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -1887,7 +1971,7 @@ if (false) {
 }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports) {
 
 var g;

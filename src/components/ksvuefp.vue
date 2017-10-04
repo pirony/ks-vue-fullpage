@@ -1,12 +1,12 @@
 <template>
-  <div :class="['ksvuefp', $ksvuefp.wWidth < options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" :style="{ height: $ksvuefp.wHeight + 'px' }">
+  <div :class="['ksvuefp', $ksvuefp.wWidth < $ksvuefp.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" :style="{ height: $ksvuefp.wHeight + 'px' }">
     <div class="ksvuefp-sections">
       <slot></slot>
     </div>
-    <transition :name="options.preloader.transitionName || 'fade-out'" v-if="options.preloader">
-      <ksvuefp-preloader v-if="!$ksvuefp.fpLoaded" :backgroundColor="options.preloader.backgroundColor || ''" :preloaderColor="options.preloader.preloaderColor || ''" :preloaderText="options.preloader.preloaderText || ''"/>
+    <transition :name="$ksvuefp.options.preloader.transitionName || 'fade-out'" v-if="$ksvuefp.options.preloader">
+      <ksvuefp-preloader v-if="!$ksvuefp.fpLoaded" :backgroundColor="$ksvuefp.options.preloader.backgroundColor || ''" :preloaderColor="$ksvuefp.options.preloader.preloaderColor || ''" :preloaderText="$ksvuefp.options.preloader.preloaderText || ''"/>
     </transition>
-    <fp-nav v-if="!options.hideNav" :sections="sections" :options="options"/>
+    <fp-nav v-if="!$ksvuefp.options.hideNav" :sections="sections" :options="options"/>
   </div>
 </template>
 <script>
@@ -31,6 +31,12 @@ export default {
   mounted () {
     const vm = this
     vm.$nextTick(() => {
+      vm.$ksvuefp.$emit('ksvuefp-options-changed', this.options)
+      /**
+       * Add default values to options
+       *
+      */
+      this.options.animDelay = this.options.animDelay || 0
       /**
        * We listen to our custom navclick event on ksvuefp bus
        * @param Event
@@ -153,6 +159,15 @@ export default {
           vm.$ksvuefp.$emit('ksvuefp-change-done')
         }, vm.options.duration ? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100)
       })
+    }
+  },
+  watch: {
+    options: {
+      deep: true,
+      handler (val) {
+        console.log(('options changed'));
+        this.$ksvuefp.$emit('ksvuefp-options-changed', val)
+      }
     }
   }
 }

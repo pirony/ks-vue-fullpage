@@ -1,6 +1,7 @@
 import ksvuefp from './components/ksvuefp.vue'
 import ksvuefpSection from './components/ksvuefp-section.vue'
 import utils from './utils'
+import options from './defaultOptions'
 
 function plugin (Vue) {
   Vue.prototype.$ksvuefp = new Vue({
@@ -11,15 +12,17 @@ function plugin (Vue) {
       sliderDirection: 'down',
       wWidth: '',
       wHeight: '',
-
+      options
     },
     created () {
       const vm = this
-
       vm.getWindowDim()
 
       vm.$on('ksvuefp-ready', () => {
         vm.fpLoaded = true
+      })
+      vm.$on('ksvuefp-options-changed', (options) => {
+        vm.options = Object.assign(vm.options, options)
       })
 
       vm.$on('ksvuefp-resized', () => {

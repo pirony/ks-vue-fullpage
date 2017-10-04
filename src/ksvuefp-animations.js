@@ -323,7 +323,7 @@ export const dotsAnim = {
           el,
           animObj,
           {
-            delay: el.dataset.index * 50,
+            delay: el.dataset.index * 30,
             complete: done
           }
         )

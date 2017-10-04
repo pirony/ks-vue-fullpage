@@ -34,7 +34,12 @@ export default {
       }
     }
   },
-  props: ['section', 'backgroundImage', 'backgroundColor', 'options']
+  data () {
+    return {
+      options: this.$ksvuefp.options || []
+    }
+  },
+  props: ['section', 'backgroundImage', 'backgroundColor']
 }
 </script>
 

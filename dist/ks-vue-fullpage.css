@@ -229,7 +229,8 @@
   left: 0;
   background-size: cover;
   padding: 0;
-  margin: 0
+  margin: 0;
+  background-position: center
 }
 .ksvuefp-section__overlay {
   display: block;

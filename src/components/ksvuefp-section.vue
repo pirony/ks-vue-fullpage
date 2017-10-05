@@ -53,6 +53,7 @@ export default {
   background-size: cover;
   padding: 0;
   margin: 0;
+  background-position: center;
   &__overlay {
     display: block;
     width: 100%;

@@ -330,7 +330,7 @@ var slideX = exports.slideX = {
           */
           var bgOffset = _utils2.default.bgOffset('enter', ctx.parent.$ksvuefp.sliderDirection, ctx.props.options.parallaxOffset);
 
-          Velocity.hook(el, 'backgroundPosition', bgOffset * ctx.parent.$ksvuefp.wWidth + 'px 50%'); // Positionate the background before triggering the animation
+          Velocity.hook(el, 'backgroundPositionX', bgOffset * ctx.parent.$ksvuefp.wWidth + 'px'); // Positionate the background before triggering the animation
 
           animObj['backgroundPosition'] = '0% 50%'; // Push bgPosition animation to our empty object animObj
         }
@@ -371,9 +371,7 @@ var slideX = exports.slideX = {
           */
           var bgOffset = _utils2.default.bgOffset('leave', ctx.parent.$ksvuefp.sliderDirection, ctx.props.options.parallaxOffset);
 
-          Velocity.hook(el, 'backgroundPosition', '0% 50%'); // Positionate the background before triggering the animation
-
-          animObj['backgroundPosition'] = bgOffset * ctx.parent.$ksvuefp.wWidth + 'px 50%'; // Push bgPosition animation to our empty object animObj
+          animObj['backgroundPositionX'] = bgOffset * ctx.parent.$ksvuefp.wWidth + 'px'; // Push bgPosition animation to our empty object animObj
         }
 
         var end = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '100%' : '-100%'; // Define the full section's translate animation starting offset
@@ -427,9 +425,9 @@ var slideX = exports.slideX = {
           */
           var bgOffset = _utils2.default.bgOffset('enter', ctx.parent.$ksvuefp.sliderDirection, ctx.props.options.parallaxOffset);
 
-          Velocity.hook(el, 'backgroundPosition', '50% ' + bgOffset * ctx.parent.$ksvuefp.wHeight + 'px');
+          Velocity.hook(el, 'backgroundPositionY', bgOffset * ctx.parent.$ksvuefp.wHeight + 'px');
 
-          animObj['backgroundPosition'] = '50% 0%';
+          animObj['backgroundPositionY'] = '0%';
         }
 
         var start = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '-100%' : '100%';
@@ -468,9 +466,7 @@ var slideX = exports.slideX = {
           */
           var bgOffset = _utils2.default.bgOffset('leave', ctx.parent.$ksvuefp.sliderDirection, ctx.props.options.parallaxOffset);
 
-          Velocity.hook(el, 'backgroundPosition', ' 50% 0%');
-
-          animObj['backgroundPosition'] = '50% ' + bgOffset * ctx.parent.$ksvuefp.wHeight + 'px';
+          animObj['backgroundPositionY'] = bgOffset * ctx.parent.$ksvuefp.wHeight + 'px';
         }
 
         var end = ctx.parent.$ksvuefp.sliderDirection === 'up' ? '100%' : '-100%';
@@ -584,7 +580,7 @@ var slideX = exports.slideX = {
             break;
         }
         Velocity(el, animObj, {
-          delay: el.dataset.index * 30,
+          delay: el.dataset.index * 40,
           complete: done
         });
       },
@@ -1784,7 +1780,7 @@ module.exports.render._withStripped = true
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', _vm._l((_vm.navPosList), function(pos) {
-    return (_vm.currentPos === pos && _vm.$ksvuefp.fpLoaded && !_vm.$ksvuefp.slidingActive) ? _c('dots-anim', {
+    return (_vm.currentPos === pos && (_vm.$ksvuefp.fpLoaded && !_vm.$ksvuefp.slidingActive)) ? _c('dots-anim', {
       key: pos,
       class: ['ksvuefp-nav', 'is-' + _vm.currentPos],
       attrs: {

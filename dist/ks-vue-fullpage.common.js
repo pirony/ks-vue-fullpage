@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.0.6
+ * ks-vue-fullpage v1.1.0
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -1735,15 +1735,15 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     style: ({
       height: _vm.$ksvuefp.wHeight + 'px'
     })
-  }, [_vm._ssrNode("<div class=\"ksvuefp-sections\">", "</div>", [_vm._t("default")], 2), _vm._ssrNode(" "), (_vm.$ksvuefp.options.preloader) ? _c('transition', {
+  }, [_vm._ssrNode("<div class=\"ksvuefp-sections\">", "</div>", [_vm._t("default")], 2), _vm._ssrNode(" "), (_vm.$ksvuefp.options.preloaderEnabled) ? _c('transition', {
     attrs: {
-      "name": _vm.$ksvuefp.options.preloader.transitionName || 'fade-out'
+      "name": _vm.$ksvuefp.options.preloaderTransitionName || 'fade-out'
     }
   }, [(!_vm.$ksvuefp.fpLoaded) ? _c('ksvuefp-preloader', {
     attrs: {
-      "backgroundColor": _vm.$ksvuefp.options.preloader.backgroundColor || '',
-      "preloaderColor": _vm.$ksvuefp.options.preloader.preloaderColor || '',
-      "preloaderText": _vm.$ksvuefp.options.preloader.preloaderText || ''
+      "backgroundColor": _vm.$ksvuefp.options.preloaderBgColor || '',
+      "preloaderColor": _vm.$ksvuefp.options.preloaderColor || '',
+      "preloaderText": _vm.$ksvuefp.options.preloaderText
     }
   }) : _vm._e()], 1) : _vm._e(), _vm._ssrNode(" "), (!_vm.$ksvuefp.options.hideNav) ? _c('fp-nav', {
     attrs: {

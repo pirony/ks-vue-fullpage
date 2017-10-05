@@ -6,7 +6,7 @@
 A simple, flexible and easy to use Vue plugin to create fullscreen scrolling websites (also known as single page websites or onepage sites).
 No jQuery needed, pure Vanilla js.
 
-Try it in this [ fiddle ](https://jsfiddle.net/romainPouchol/rf7csunm/10/).
+Try it in this [ fiddle ](https://jsfiddle.net/romainPouchol/rf7csunm/12/).
 
 ![ksvuefullpage-demo-slidey](https://user-images.githubusercontent.com/7433657/30744371-1a03b764-9fa2-11e7-8641-e05816e95854.gif)
 

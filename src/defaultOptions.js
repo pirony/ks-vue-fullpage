@@ -13,6 +13,7 @@ export default {
   */
   animationType: 'slideY',
   duration: 1000,
+  easing: 'easeInOutQuad',
   animDelay: 0,
   /**
    * Preloading params

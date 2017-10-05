@@ -138,6 +138,7 @@ vm.$ksvuefp returns the following datas object
             */
             animationType: 'slideY',
             duration: 1000,
+            easing: 'easeInOutQuad',
             animDelay: 0,
             /**
              * Preloading params

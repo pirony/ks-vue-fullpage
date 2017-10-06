@@ -31,6 +31,7 @@ export default {
   mounted () {
     const vm = this
     vm.$nextTick(() => {
+      vm.$ksvuefp.$emit('ksvuefp-resized')
       vm.$ksvuefp.$emit('ksvuefp-options-changed', this.options)
       /**
        * Add default values to options
@@ -102,7 +103,7 @@ export default {
   computed: {
     ksvuefpStyles () {
       return {
-        height: this.$ksvuefp.wHeight + 'px'     
+        height: this.$ksvuefp.wHeight + 'px'
       }
     }
   },

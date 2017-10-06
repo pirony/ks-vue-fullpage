@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.1.1
+ * ks-vue-fullpage v1.1.2
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -1092,8 +1092,8 @@ function plugin(Vue) {
       currentIndex: 0,
       slidingActive: false,
       sliderDirection: 'down',
-      wWidth: '',
-      wHeight: '',
+      wWidth: 0,
+      wHeight: 0,
       options: _defaultOptions2.default
     },
     created: function created() {

@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.1.2
+ * ks-vue-fullpage v1.1.3
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -242,7 +242,7 @@ exports.default = {
     }
   },
   getWindowDim: function getWindowDim() {
-    if (typeof window === 'undefined') global.window = {};
+    if (typeof window === 'undefined') return { wHeight: 0, wWidth: 0 };
     return {
       wHeight: window.innerHeight,
       wWidth: window.innerWidth
@@ -891,7 +891,9 @@ exports.default = {
     var _this = this;
 
     var vm = this;
+    vm.$ksvuefp.getWindowDim();
     vm.$nextTick(function () {
+      if (process.brower) vm.$ksvuefp.$emit('ksvuefp-resized');
       vm.$ksvuefp.$emit('ksvuefp-options-changed', _this.options);
       /**
        * Add default values to options
@@ -1098,7 +1100,6 @@ function plugin(Vue) {
     },
     created: function created() {
       var vm = this;
-      vm.getWindowDim();
 
       vm.$on('ksvuefp-ready', function () {
         vm.fpLoaded = true;

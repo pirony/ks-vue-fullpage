@@ -60,7 +60,7 @@ export default {
     }
   },
   getWindowDim () {
-    if (typeof window === 'undefined') global.window = {}
+    if (typeof window === 'undefined') return { wHeight: 0, wWidth: 0 }
     return {
       wHeight: window.innerHeight,
       wWidth: window.innerWidth

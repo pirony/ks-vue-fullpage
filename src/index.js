@@ -16,8 +16,7 @@ function plugin (Vue) {
     },
     created () {
       const vm = this
-      vm.getWindowDim()
-
+      
       vm.$on('ksvuefp-ready', () => {
         vm.fpLoaded = true
       })

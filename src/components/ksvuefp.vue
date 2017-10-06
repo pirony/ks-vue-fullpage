@@ -30,8 +30,9 @@ export default {
   },
   mounted () {
     const vm = this
+    vm.$ksvuefp.getWindowDim()
     vm.$nextTick(() => {
-      vm.$ksvuefp.$emit('ksvuefp-resized')
+      if (process.brower) vm.$ksvuefp.$emit('ksvuefp-resized')
       vm.$ksvuefp.$emit('ksvuefp-options-changed', this.options)
       /**
        * Add default values to options

@@ -1004,6 +1004,13 @@ exports.default = {
     });
   },
 
+  computed: {
+    ksvuefpStyles: function ksvuefpStyles() {
+      return {
+        height: this.$ksvuefp.wHeight + 'px'
+      };
+    }
+  },
   methods: {
     /** trigger the change index event
      * @param Event
@@ -1810,9 +1817,7 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     class: ['ksvuefp', _vm.$ksvuefp.wWidth < _vm.$ksvuefp.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null],
-    style: ({
-      height: _vm.$ksvuefp.wHeight + 'px'
-    })
+    style: (_vm.ksvuefpStyles)
   }, [_c('div', {
     staticClass: "ksvuefp-sections"
   }, [_vm._t("default")], 2), _vm._v(" "), (_vm.$ksvuefp.options.preloaderEnabled) ? _c('transition', {

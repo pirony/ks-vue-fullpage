@@ -1,5 +1,5 @@
 <template>
-  <div :class="['ksvuefp', $ksvuefp.wWidth < $ksvuefp.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" :style="{ height: $ksvuefp.wHeight + 'px' }">
+  <div :class="['ksvuefp', $ksvuefp.wWidth < $ksvuefp.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" :style="ksvuefpStyles">
     <div class="ksvuefp-sections">
       <slot></slot>
     </div>
@@ -98,6 +98,13 @@ export default {
         vm.changeIndex(e)
       })
     })
+  },
+  computed: {
+    ksvuefpStyles () {
+      return {
+        height: this.$ksvuefp.wHeight + 'px'     
+      }
+    }
   },
   methods: {
     /** trigger the change index event

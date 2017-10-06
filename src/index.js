@@ -10,8 +10,8 @@ function plugin (Vue) {
       currentIndex: 0,
       slidingActive: false,
       sliderDirection: 'down',
-      wWidth: '',
-      wHeight: '',
+      wWidth: 0,
+      wHeight: 0,
       options
     },
     created () {

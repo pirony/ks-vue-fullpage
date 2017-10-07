@@ -12,16 +12,16 @@ function plugin (Vue) {
       sliderDirection: 'down',
       wWidth: 0,
       wHeight: 0,
-      options
+      options: []
     },
     created () {
       const vm = this
-      
+      vm.getWindowDim()
       vm.$on('ksvuefp-ready', () => {
         vm.fpLoaded = true
       })
-      vm.$on('ksvuefp-options-changed', (options) => {
-        vm.options = Object.assign(vm.options, options)
+      vm.$on('ksvuefp-options-changed', (custom) => {
+        vm.options = Object.assign(options, custom)
       })
 
       vm.$on('ksvuefp-resized', () => {

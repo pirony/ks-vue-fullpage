@@ -4,7 +4,7 @@
       <slot></slot>
     </div>
     <transition :name="$ksvuefp.options.preloaderTransitionName || 'fade-out'" v-if="$ksvuefp.options.preloaderEnabled">
-      <ksvuefp-preloader v-if="!$ksvuefp.fpLoaded" :backgroundColor="$ksvuefp.options.preloaderBgColor || ''" :preloaderColor="$ksvuefp.options.preloaderColor || ''" :preloaderText="$ksvuefp.options.preloaderText"/>
+      <ksvuefp-preloader v-show="!$ksvuefp.fpLoaded" :backgroundColor="$ksvuefp.options.preloaderBgColor || ''" :preloaderColor="$ksvuefp.options.preloaderColor || ''" :preloaderText="$ksvuefp.options.preloaderText"/>
     </transition>
     <fp-nav v-if="!$ksvuefp.options.hideNav" :sections="sections" :options="options"/>
   </div>
@@ -33,7 +33,7 @@ export default {
     vm.$ksvuefp.getWindowDim()
     vm.$nextTick(() => {
       if (process.brower) vm.$ksvuefp.$emit('ksvuefp-resized')
-      vm.$ksvuefp.$emit('ksvuefp-options-changed', this.options)
+      vm.$ksvuefp.$emit('ksvuefp-options-changed', vm.options)
 
       /**
        * We listen to our custom navclick event on ksvuefp bus

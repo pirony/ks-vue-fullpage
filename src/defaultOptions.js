@@ -33,6 +33,9 @@ export default {
    * @property {Boolean} loopBottom - Go to first section on scroll down while watching last section
    * @property {Boolean} loopTop - Go to last section on scroll up while watching first section
   */
+  dotNavEnabled: true,
+  dotNavPosition: 'right',
+  dotNavColor: '#fff',
   loopBottom: false,
   loopTop: false,
   /**

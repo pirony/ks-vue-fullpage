@@ -2,7 +2,7 @@
   <div>
     <dots-anim tag="ul" :class="['ksvuefp-nav', 'is-' + currentPos]" appear v-for="pos in navPosList" :key="pos" v-if="currentPos === pos && $ksvuefp.fpLoaded" :currentPos="currentPos">
       <li class="ksvuefp-nav__item" v-for="(s, index) in sections" :key="index" :data-index="index"  v-show="currentPos === pos">
-        <span @click="click(index)" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']" :style="{ backgroundColor:  options.dotNav ? options.dotNav.color || null : null }"></span>
+        <span @click="click(index)" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']" :style="{ backgroundColor: options.dotNavColor }"></span>
       </li>
     </dots-anim>
   </div>
@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     currentPos () {
-      if (this.options.dotNav && this.options.dotNav.position) return this.options.dotNav.position
+      if (this.optionsdotNav && this.options.dotNavPosition) return this.options.dotNavPosition
       switch (this.options.animationType) {
         case 'slideX':
           return 'bottom'
@@ -31,9 +31,9 @@ export default {
     }
   },
   methods: {
-    click (i) {
-      if (i === this.$ksvuefp.currentIndex) return
-      this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: i })
+    click (nextIndex) {
+      if (nextIndex === this.$ksvuefp.currentIndex) return
+      this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex })
     }
   }
 }

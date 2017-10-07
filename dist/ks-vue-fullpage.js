@@ -184,7 +184,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(global) {
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -251,7 +251,7 @@ exports.default = {
     }
   },
   getWindowDim: function getWindowDim() {
-    if (typeof window === 'undefined') return { wHeight: 0, wWidth: 0 };
+    if (typeof window === 'undefined') global.window = {};
     return {
       wHeight: window.innerHeight,
       wWidth: window.innerWidth
@@ -280,6 +280,7 @@ exports.default = {
     return i;
   }
 };
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ }),
 /* 2 */
@@ -649,6 +650,9 @@ exports.default = {
    * @property {Boolean} loopBottom - Go to first section on scroll down while watching last section
    * @property {Boolean} loopTop - Go to last section on scroll up while watching first section
   */
+  dotNavEnabled: true,
+  dotNavPosition: 'right',
+  dotNavColor: '#fff',
   loopBottom: false,
   loopTop: false,
   /**
@@ -675,7 +679,7 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(8),
   /* template */
-  __webpack_require__(23),
+  __webpack_require__(22),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -719,7 +723,7 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(9),
   /* template */
-  __webpack_require__(20),
+  __webpack_require__(19),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -776,7 +780,7 @@ exports.default = {
 
   computed: {
     currentPos: function currentPos() {
-      if (this.options.dotNav && this.options.dotNav.position) return this.options.dotNav.position;
+      if (this.optionsdotNav && this.options.dotNavPosition) return this.options.dotNavPosition;
       switch (this.options.animationType) {
         case 'slideX':
           return 'bottom';
@@ -786,9 +790,9 @@ exports.default = {
     }
   },
   methods: {
-    click: function click(i) {
-      if (i === this.$ksvuefp.currentIndex) return;
-      this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: i });
+    click: function click(nextIndex) {
+      if (nextIndex === this.$ksvuefp.currentIndex) return;
+      this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: nextIndex });
     }
   }
 }; //
@@ -865,8 +869,9 @@ exports.default = {
     slideX: _ksvuefpAnimations.slideX,
     fade: _ksvuefpAnimations.fade,
     'tagger': {
+      props: ['options'],
       render: function render(h) {
-        return h(this.$ksvuefp.options.sectionTag || 'div', this.$slots.default);
+        return h(this.options.sectionTag || 'div', this.$slots.default);
       },
       mounted: function mounted() {
         var vm = this;
@@ -880,6 +885,12 @@ exports.default = {
       }
     }
   },
+  data: function data() {
+    return {
+      options: this.$ksvuefp.options || []
+    };
+  },
+
   props: ['section', 'backgroundImage', 'backgroundColor']
 };
 
@@ -888,7 +899,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -898,11 +909,11 @@ var _utils = __webpack_require__(1);
 
 var _utils2 = _interopRequireDefault(_utils);
 
-var _ksvuefpNav = __webpack_require__(18);
+var _ksvuefpNav = __webpack_require__(17);
 
 var _ksvuefpNav2 = _interopRequireDefault(_ksvuefpNav);
 
-var _ksvuefpPreloader = __webpack_require__(19);
+var _ksvuefpPreloader = __webpack_require__(18);
 
 var _ksvuefpPreloader2 = _interopRequireDefault(_ksvuefpPreloader);
 
@@ -923,15 +934,14 @@ exports.default = {
     fpNav: _ksvuefpNav2.default,
     ksvuefpPreloader: _ksvuefpPreloader2.default
   },
+  created: function created() {
+    this.$ksvuefp.$emit('ksvuefp-options-changed', this.options);
+  },
   mounted: function mounted() {
     var _this = this;
 
     var vm = this;
-    vm.$ksvuefp.getWindowDim();
     vm.$nextTick(function () {
-      if (process.brower) vm.$ksvuefp.$emit('ksvuefp-resized');
-      vm.$ksvuefp.$emit('ksvuefp-options-changed', vm.options);
-
       /**
        * We listen to our custom navclick event on ksvuefp bus
        * @param Event
@@ -1007,8 +1017,6 @@ exports.default = {
      *
     */
     changeIndex: function changeIndex(e) {
-      var _this2 = this;
-
       var vm = this;
 
       if (vm.$ksvuefp.slidingActive) return; // if last transition is not yet finished, return without doing anything
@@ -1023,7 +1031,7 @@ exports.default = {
        * @return up or down
        *
       */
-      var Direction = _utils2.default.getDirection(e, Options.animationType);
+      var Direction = _utils2.default.getDirection(e, vm.$ksvuefp.options.animationType);
 
       if (Direction === 'none' || Direction === undefined) return;
 
@@ -1056,7 +1064,7 @@ exports.default = {
          * @param {String} Direction
          *
         */
-        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, _this2.$ksvuefp.options.animDelay);
+        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, vm.$ksvuefp.options.animDelay);
 
         /**
          * Emit change-done event on bus vm when animation is finished
@@ -1064,7 +1072,7 @@ exports.default = {
         */
         setTimeout(function () {
           vm.$ksvuefp.$emit('ksvuefp-change-done');
-        }, Options.duration ? Options.duration + Options.animDelay + 100 : Options.animDelay + 1100);
+        }, vm.$ksvuefp.options.duration ? vm.$ksvuefp.options.duration + vm.$ksvuefp.options.animDelay + 100 : vm.$ksvuefp.options.animDelay + 1100);
       });
     }
   },
@@ -1072,7 +1080,6 @@ exports.default = {
     options: {
       deep: true,
       handler: function handler(val) {
-        console.log('options changed');
         this.$ksvuefp.$emit('ksvuefp-options-changed', val);
       }
     }
@@ -1088,7 +1095,6 @@ exports.default = {
 //
 //
 //
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(17)))
 
 /***/ }),
 /* 10 */
@@ -1101,6 +1107,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.version = exports.ksvuefpSection = exports.ksvuefp = undefined;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _ksvuefp = __webpack_require__(5);
 
@@ -1129,16 +1137,16 @@ function plugin(Vue) {
       sliderDirection: 'down',
       wWidth: 0,
       wHeight: 0,
-      options: _defaultOptions2.default
+      options: {}
     },
     created: function created() {
       var vm = this;
-      vm.getWindowDim();
       vm.$on('ksvuefp-ready', function () {
+        vm.$emit('ksvuefp-resized');
         vm.fpLoaded = true;
       });
-      vm.$on('ksvuefp-options-changed', function (options) {
-        vm.options = Object.assign(vm.options, options);
+      vm.$on('ksvuefp-options-changed', function (custom) {
+        vm.options = _extends({}, _defaultOptions2.default, custom);
       });
 
       vm.$on('ksvuefp-resized', function () {
@@ -1714,196 +1722,6 @@ return ImagesLoaded;
 
 /***/ }),
 /* 17 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -1915,7 +1733,7 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(6),
   /* template */
-  __webpack_require__(22),
+  __webpack_require__(21),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -1947,7 +1765,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -1959,7 +1777,7 @@ var Component = __webpack_require__(0)(
   /* script */
   __webpack_require__(7),
   /* template */
-  __webpack_require__(21),
+  __webpack_require__(20),
   /* styles */
   injectStyle,
   /* scopeId */
@@ -1991,7 +1809,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2004,22 +1822,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "name": _vm.$ksvuefp.options.preloaderTransitionName || 'fade-out'
     }
-  }, [_c('ksvuefp-preloader', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (!_vm.$ksvuefp.fpLoaded),
-      expression: "!$ksvuefp.fpLoaded"
-    }],
+  }, [(!_vm.$ksvuefp.fpLoaded) ? _c('ksvuefp-preloader', {
     attrs: {
       "backgroundColor": _vm.$ksvuefp.options.preloaderBgColor || '',
       "preloaderColor": _vm.$ksvuefp.options.preloaderColor || '',
       "preloaderText": _vm.$ksvuefp.options.preloaderText
     }
-  })], 1) : _vm._e(), _vm._v(" "), (!_vm.$ksvuefp.options.hideNav) ? _c('fp-nav', {
+  }) : _vm._e()], 1) : _vm._e(), _vm._v(" "), (!_vm.$ksvuefp.options.dotNav) ? _c('fp-nav', {
     attrs: {
       "sections": _vm.sections,
-      "options": _vm.options
+      "options": _vm.$ksvuefp.options
     }
   }) : _vm._e()], 1)
 },staticRenderFns: []}
@@ -2032,7 +1844,7 @@ if (false) {
 }
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2067,7 +1879,7 @@ if (false) {
 }
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -2096,7 +1908,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }, [_c('span', {
         class: ['ksvuefp-nav__dot', index === _vm.$ksvuefp.currentIndex ? 'active' : ''],
         style: ({
-          backgroundColor: _vm.options.dotNav ? _vm.options.dotNav.color || null : null
+          backgroundColor: _vm.options.dotNavColor
         }),
         on: {
           "click": function($event) {
@@ -2116,14 +1928,14 @@ if (false) {
 }
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c(_vm.$ksvuefp.options.animationType, {
+  return _c(_vm.options.animationType, {
     tag: "component",
     attrs: {
-      "options": _vm.$ksvuefp.options,
+      "options": _vm.options,
       "appear": false
     }
   }, [_c('tagger', {
@@ -2133,15 +1945,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.$vnode.data.key === _vm.$ksvuefp.currentIndex),
       expression: "$vnode.data.key === $ksvuefp.currentIndex"
     }],
-    class: ['ksvuefp-section', _vm.$ksvuefp.wWidth < _vm.$ksvuefp.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null],
+    class: ['ksvuefp-section'],
     style: ({
       backgroundImage: _vm.backgroundImage || '',
       backgroundColor: _vm.backgroundColor || ''
-    })
-  }, [(_vm.$ksvuefp.options.overlay) ? _c('span', {
+    }),
+    attrs: {
+      "options": _vm.options
+    }
+  }, [(_vm.options.overlay) ? _c('span', {
     staticClass: "ksvuefp-section__overlay",
     style: ({
-      background: _vm.$ksvuefp.options.overlay || null
+      background: _vm.options.overlay || 'rgba(0,0,0,0.2)'
     })
   }) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "ksvuefp-section__content"
@@ -2154,6 +1969,33 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-7096caf6", module.exports)
   }
 }
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
 
 /***/ })
 /******/ ]);

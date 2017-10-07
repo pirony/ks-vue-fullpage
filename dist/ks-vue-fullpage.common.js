@@ -242,7 +242,7 @@ exports.default = {
     }
   },
   getWindowDim: function getWindowDim() {
-    if (typeof window === 'undefined') return { wHeight: 0, wWidth: 0 };
+    if (typeof window === 'undefined') global.window = {};
     return {
       wHeight: window.innerHeight,
       wWidth: window.innerWidth
@@ -640,6 +640,9 @@ exports.default = {
    * @property {Boolean} loopBottom - Go to first section on scroll down while watching last section
    * @property {Boolean} loopTop - Go to last section on scroll up while watching first section
   */
+  dotNavEnabled: true,
+  dotNavPosition: 'right',
+  dotNavColor: '#fff',
   loopBottom: false,
   loopTop: false,
   /**
@@ -733,7 +736,7 @@ exports.default = {
 
   computed: {
     currentPos: function currentPos() {
-      if (this.options.dotNav && this.options.dotNav.position) return this.options.dotNav.position;
+      if (this.optionsdotNav && this.options.dotNavPosition) return this.options.dotNavPosition;
       switch (this.options.animationType) {
         case 'slideX':
           return 'bottom';
@@ -743,9 +746,9 @@ exports.default = {
     }
   },
   methods: {
-    click: function click(i) {
-      if (i === this.$ksvuefp.currentIndex) return;
-      this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: i });
+    click: function click(nextIndex) {
+      if (nextIndex === this.$ksvuefp.currentIndex) return;
+      this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: nextIndex });
     }
   }
 }; //
@@ -822,8 +825,9 @@ exports.default = {
     slideX: _ksvuefpAnimations.slideX,
     fade: _ksvuefpAnimations.fade,
     'tagger': {
+      props: ['options'],
       render: function render(h) {
-        return h(this.$ksvuefp.options.sectionTag || 'div', this.$slots.default);
+        return h(this.options.sectionTag || 'div', this.$slots.default);
       },
       mounted: function mounted() {
         var vm = this;
@@ -837,6 +841,12 @@ exports.default = {
       }
     }
   },
+  data: function data() {
+    return {
+      options: this.$ksvuefp.options || []
+    };
+  },
+
   props: ['section', 'backgroundImage', 'backgroundColor']
 };
 
@@ -880,15 +890,14 @@ exports.default = {
     fpNav: _ksvuefpNav2.default,
     ksvuefpPreloader: _ksvuefpPreloader2.default
   },
+  created: function created() {
+    this.$ksvuefp.$emit('ksvuefp-options-changed', this.options);
+  },
   mounted: function mounted() {
     var _this = this;
 
     var vm = this;
-    vm.$ksvuefp.getWindowDim();
     vm.$nextTick(function () {
-      if (process.brower) vm.$ksvuefp.$emit('ksvuefp-resized');
-      vm.$ksvuefp.$emit('ksvuefp-options-changed', vm.options);
-
       /**
        * We listen to our custom navclick event on ksvuefp bus
        * @param Event
@@ -964,8 +973,6 @@ exports.default = {
      *
     */
     changeIndex: function changeIndex(e) {
-      var _this2 = this;
-
       var vm = this;
 
       if (vm.$ksvuefp.slidingActive) return; // if last transition is not yet finished, return without doing anything
@@ -980,7 +987,7 @@ exports.default = {
        * @return up or down
        *
       */
-      var Direction = _utils2.default.getDirection(e, Options.animationType);
+      var Direction = _utils2.default.getDirection(e, vm.$ksvuefp.options.animationType);
 
       if (Direction === 'none' || Direction === undefined) return;
 
@@ -1013,7 +1020,7 @@ exports.default = {
          * @param {String} Direction
          *
         */
-        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, _this2.$ksvuefp.options.animDelay);
+        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, vm.$ksvuefp.options.animDelay);
 
         /**
          * Emit change-done event on bus vm when animation is finished
@@ -1021,7 +1028,7 @@ exports.default = {
         */
         setTimeout(function () {
           vm.$ksvuefp.$emit('ksvuefp-change-done');
-        }, Options.duration ? Options.duration + Options.animDelay + 100 : Options.animDelay + 1100);
+        }, vm.$ksvuefp.options.duration ? vm.$ksvuefp.options.duration + vm.$ksvuefp.options.animDelay + 100 : vm.$ksvuefp.options.animDelay + 1100);
       });
     }
   },
@@ -1029,7 +1036,6 @@ exports.default = {
     options: {
       deep: true,
       handler: function handler(val) {
-        console.log('options changed');
         this.$ksvuefp.$emit('ksvuefp-options-changed', val);
       }
     }
@@ -1058,6 +1064,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.version = exports.ksvuefpSection = exports.ksvuefp = undefined;
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _ksvuefp = __webpack_require__(5);
 
 var _ksvuefp2 = _interopRequireDefault(_ksvuefp);
@@ -1085,16 +1093,16 @@ function plugin(Vue) {
       sliderDirection: 'down',
       wWidth: 0,
       wHeight: 0,
-      options: _defaultOptions2.default
+      options: {}
     },
     created: function created() {
       var vm = this;
-      vm.getWindowDim();
       vm.$on('ksvuefp-ready', function () {
+        vm.$emit('ksvuefp-resized');
         vm.fpLoaded = true;
       });
-      vm.$on('ksvuefp-options-changed', function (options) {
-        vm.options = Object.assign(vm.options, options);
+      vm.$on('ksvuefp-options-changed', function (custom) {
+        vm.options = _extends({}, _defaultOptions2.default, custom);
       });
 
       vm.$on('ksvuefp-resized', function () {
@@ -1734,22 +1742,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "name": _vm.$ksvuefp.options.preloaderTransitionName || 'fade-out'
     }
-  }, [_c('ksvuefp-preloader', {
-    directives: [{
-      name: "show",
-      rawName: "v-show",
-      value: (!_vm.$ksvuefp.fpLoaded),
-      expression: "!$ksvuefp.fpLoaded"
-    }],
+  }, [(!_vm.$ksvuefp.fpLoaded) ? _c('ksvuefp-preloader', {
     attrs: {
       "backgroundColor": _vm.$ksvuefp.options.preloaderBgColor || '',
       "preloaderColor": _vm.$ksvuefp.options.preloaderColor || '',
       "preloaderText": _vm.$ksvuefp.options.preloaderText
     }
-  })], 1) : _vm._e(), _vm._ssrNode(" "), (!_vm.$ksvuefp.options.hideNav) ? _c('fp-nav', {
+  }) : _vm._e()], 1) : _vm._e(), _vm._ssrNode(" "), (!_vm.$ksvuefp.options.dotNav) ? _c('fp-nav', {
     attrs: {
       "sections": _vm.sections,
-      "options": _vm.options
+      "options": _vm.$ksvuefp.options
     }
   }) : _vm._e()], 2)
 },staticRenderFns: []}
@@ -1805,7 +1807,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       }, [_c('span', {
         class: ['ksvuefp-nav__dot', index === _vm.$ksvuefp.currentIndex ? 'active' : ''],
         style: ({
-          backgroundColor: _vm.options.dotNav ? _vm.options.dotNav.color || null : null
+          backgroundColor: _vm.options.dotNavColor
         }),
         on: {
           "click": function($event) {
@@ -1823,10 +1825,10 @@ module.exports.render._withStripped = true
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c(_vm.$ksvuefp.options.animationType, {
+  return _c(_vm.options.animationType, {
     tag: "component",
     attrs: {
-      "options": _vm.$ksvuefp.options,
+      "options": _vm.options,
       "appear": false
     }
   }, [_c('tagger', {
@@ -1836,15 +1838,18 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       value: (_vm.$vnode.data.key === _vm.$ksvuefp.currentIndex),
       expression: "$vnode.data.key === $ksvuefp.currentIndex"
     }],
-    class: ['ksvuefp-section', _vm.$ksvuefp.wWidth < _vm.$ksvuefp.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null],
+    class: ['ksvuefp-section'],
     style: ({
       backgroundImage: _vm.backgroundImage || '',
       backgroundColor: _vm.backgroundColor || ''
-    })
-  }, [(_vm.$ksvuefp.options.overlay) ? _c('span', {
+    }),
+    attrs: {
+      "options": _vm.options
+    }
+  }, [(_vm.options.overlay) ? _c('span', {
     staticClass: "ksvuefp-section__overlay",
     style: ({
-      background: _vm.$ksvuefp.options.overlay || null
+      background: _vm.options.overlay || 'rgba(0,0,0,0.2)'
     })
   }) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "ksvuefp-section__content"

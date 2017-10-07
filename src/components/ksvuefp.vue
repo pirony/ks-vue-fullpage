@@ -4,9 +4,9 @@
       <slot></slot>
     </div>
     <transition :name="$ksvuefp.options.preloaderTransitionName || 'fade-out'" v-if="$ksvuefp.options.preloaderEnabled">
-      <ksvuefp-preloader v-show="!$ksvuefp.fpLoaded" :backgroundColor="$ksvuefp.options.preloaderBgColor || ''" :preloaderColor="$ksvuefp.options.preloaderColor || ''" :preloaderText="$ksvuefp.options.preloaderText"/>
+      <ksvuefp-preloader v-if="!$ksvuefp.fpLoaded" :backgroundColor="$ksvuefp.options.preloaderBgColor || ''" :preloaderColor="$ksvuefp.options.preloaderColor || ''" :preloaderText="$ksvuefp.options.preloaderText"/>
     </transition>
-    <fp-nav v-if="!$ksvuefp.options.hideNav" :sections="sections" :options="options"/>
+    <fp-nav v-if="!$ksvuefp.options.dotNav" :sections="sections" :options="$ksvuefp.options"/>
   </div>
 </template>
 <script>
@@ -28,13 +28,12 @@ export default {
     fpNav,
     ksvuefpPreloader
   },
+  created () {
+    this.$ksvuefp.$emit('ksvuefp-options-changed', this.options)
+  },
   mounted () {
     const vm = this
-    vm.$ksvuefp.getWindowDim()
     vm.$nextTick(() => {
-      if (process.brower) vm.$ksvuefp.$emit('ksvuefp-resized')
-      vm.$ksvuefp.$emit('ksvuefp-options-changed', vm.options)
-
       /**
        * We listen to our custom navclick event on ksvuefp bus
        * @param Event
@@ -124,7 +123,7 @@ export default {
        * @return up or down
        *
       */
-      const Direction = utils.getDirection(e, Options.animationType)
+      const Direction = utils.getDirection(e, vm.$ksvuefp.options.animationType)
 
       if (Direction === 'none' || Direction === undefined) return
 
@@ -154,7 +153,7 @@ export default {
          * @param {String} Direction
          *
         */
-        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, this.$ksvuefp.options.animDelay)
+        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, vm.$ksvuefp.options.animDelay)
 
         /**
          * Emit change-done event on bus vm when animation is finished
@@ -162,7 +161,7 @@ export default {
         */
         setTimeout(() => {
           vm.$ksvuefp.$emit('ksvuefp-change-done')
-        }, Options.duration ? Options.duration + Options.animDelay + 100 : Options.animDelay + 1100)
+        }, vm.$ksvuefp.options.duration ? vm.$ksvuefp.options.duration + vm.$ksvuefp.options.animDelay + 100 : vm.$ksvuefp.options.animDelay + 1100)
       })
     }
   },
@@ -170,7 +169,6 @@ export default {
     options: {
       deep: true,
       handler (val) {
-        console.log(('options changed'));
         this.$ksvuefp.$emit('ksvuefp-options-changed', val)
       }
     }

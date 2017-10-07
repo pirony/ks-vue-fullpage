@@ -1,7 +1,7 @@
 <template lang="html">
-  <component :is="$ksvuefp.options.animationType" :options="$ksvuefp.options" :appear="false">
-    <tagger :class="['ksvuefp-section',  $ksvuefp.wWidth < $ksvuefp.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null]" :style="{ backgroundImage: backgroundImage || '', backgroundColor: backgroundColor || '' }" v-show="$vnode.data.key === $ksvuefp.currentIndex">
-      <span class="ksvuefp-section__overlay" :style="{ background: $ksvuefp.options.overlay || null }" v-if="$ksvuefp.options.overlay"></span>
+  <component :is="options.animationType" :options="options" :appear="false">
+    <tagger :options="options" :class="['ksvuefp-section']" :style="{ backgroundImage: backgroundImage || '', backgroundColor: backgroundColor || '' }" v-show="$vnode.data.key === $ksvuefp.currentIndex">
+      <span class="ksvuefp-section__overlay" :style="{ background: options.overlay || 'rgba(0,0,0,0.2)' }" v-if="options.overlay"></span>
       <div class="ksvuefp-section__content">
         <slot></slot>
       </div>
@@ -18,8 +18,9 @@ export default {
     slideX,
     fade,
     'tagger': {
+      props: ['options'],
       render (h) {
-        return h(this.$ksvuefp.options.sectionTag || 'div', this.$slots.default)
+        return h(this.options.sectionTag || 'div', this.$slots.default)
       },
       mounted () {
         const vm = this
@@ -31,6 +32,11 @@ export default {
           }, 300)
         })
       }
+    }
+  },
+  data () {
+    return {
+      options: this.$ksvuefp.options || []
     }
   },
   props: ['section', 'backgroundImage', 'backgroundColor']

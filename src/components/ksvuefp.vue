@@ -34,11 +34,7 @@ export default {
     vm.$nextTick(() => {
       if (process.brower) vm.$ksvuefp.$emit('ksvuefp-resized')
       vm.$ksvuefp.$emit('ksvuefp-options-changed', this.options)
-      /**
-       * Add default values to options
-       *
-      */
-      this.options.animDelay = this.options.animDelay || 0
+
       /**
        * We listen to our custom navclick event on ksvuefp bus
        * @param Event
@@ -120,7 +116,7 @@ export default {
 
       const OldIndex = vm.$ksvuefp.currentIndex
       const Length = vm.sections.length
-      const Options = vm.options
+      const Options = vm.$ksvuefp.options
 
       /**
        * We get the sliding direction using a custom func getDirection() in utils
@@ -128,7 +124,7 @@ export default {
        * @return up or down
        *
       */
-      const Direction = utils.getDirection(e, vm.options.animationType)
+      const Direction = utils.getDirection(e, Options.animationType)
 
       if (Direction === 'none' || Direction === undefined) return
 
@@ -158,7 +154,7 @@ export default {
          * @param {String} Direction
          *
         */
-        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, this.options.animDelay)
+        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, this.$ksvuefp.options.animDelay)
 
         /**
          * Emit change-done event on bus vm when animation is finished
@@ -166,7 +162,7 @@ export default {
         */
         setTimeout(() => {
           vm.$ksvuefp.$emit('ksvuefp-change-done')
-        }, vm.options.duration ? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100)
+        }, Options.duration ? Options.duration + Options.animDelay + 100 : Options.animDelay + 1100)
       })
     }
   },

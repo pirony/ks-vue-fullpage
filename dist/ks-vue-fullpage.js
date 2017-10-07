@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.1.3
+ * ks-vue-fullpage v1.1.4
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -938,11 +938,7 @@ exports.default = {
     vm.$nextTick(function () {
       if (process.brower) vm.$ksvuefp.$emit('ksvuefp-resized');
       vm.$ksvuefp.$emit('ksvuefp-options-changed', _this.options);
-      /**
-       * Add default values to options
-       *
-      */
-      _this.options.animDelay = _this.options.animDelay || 0;
+
       /**
        * We listen to our custom navclick event on ksvuefp bus
        * @param Event
@@ -1026,7 +1022,7 @@ exports.default = {
 
       var OldIndex = vm.$ksvuefp.currentIndex;
       var Length = vm.sections.length;
-      var Options = vm.options;
+      var Options = vm.$ksvuefp.options;
 
       /**
        * We get the sliding direction using a custom func getDirection() in utils
@@ -1034,7 +1030,7 @@ exports.default = {
        * @return up or down
        *
       */
-      var Direction = _utils2.default.getDirection(e, vm.options.animationType);
+      var Direction = _utils2.default.getDirection(e, Options.animationType);
 
       if (Direction === 'none' || Direction === undefined) return;
 
@@ -1067,7 +1063,7 @@ exports.default = {
          * @param {String} Direction
          *
         */
-        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, _this2.options.animDelay);
+        vm.$ksvuefp.$emit('ksvuefp-change-begin', nextIndex, OldIndex, Direction, _this2.$ksvuefp.options.animDelay);
 
         /**
          * Emit change-done event on bus vm when animation is finished
@@ -1075,7 +1071,7 @@ exports.default = {
         */
         setTimeout(function () {
           vm.$ksvuefp.$emit('ksvuefp-change-done');
-        }, vm.options.duration ? vm.options.duration + vm.options.animDelay + 100 : vm.options.animDelay + 1100);
+        }, Options.duration ? Options.duration + Options.animDelay + 100 : Options.animDelay + 1100);
       });
     }
   },
@@ -2135,8 +2131,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.$vnode.data.key === _vm.$ksvuefp.currentIndex || _vm.$ksvuefp.wWidth < _vm.options.normalScrollWidth),
-      expression: "$vnode.data.key === $ksvuefp.currentIndex || $ksvuefp.wWidth < options.normalScrollWidth"
+      value: (_vm.$vnode.data.key === _vm.$ksvuefp.currentIndex),
+      expression: "$vnode.data.key === $ksvuefp.currentIndex"
     }],
     class: ['ksvuefp-section', _vm.$ksvuefp.wWidth < _vm.options.normalScrollWidth ? 'is-ksvuefp-inactive' : null],
     style: ({

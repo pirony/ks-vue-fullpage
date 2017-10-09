@@ -51,6 +51,13 @@ function plugin (Vue) {
         vm.$nextTick(() => {
           vm.$ksvuefp.$emit('ksvuefp-change-done')
         })
+      },
+      canAnimContent (index, wait = true) {
+        if (index !== this.currentIndex) return
+        if (wait) {
+          return !this.slidingActive? true : false
+        }
+        return true
       }
     }
   })

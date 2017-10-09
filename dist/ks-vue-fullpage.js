@@ -1145,7 +1145,6 @@ function plugin(Vue) {
       });
       vm.$on('ksvuefp-options-changed', function (custom) {
         vm.options = _extends({}, _defaultOptions2.default, custom);
-        console.log(vm.options);
       });
 
       vm.$on('ksvuefp-resized', function () {
@@ -1176,6 +1175,15 @@ function plugin(Vue) {
         vm.$nextTick(function () {
           vm.$ksvuefp.$emit('ksvuefp-change-done');
         });
+      },
+      canAnimContent: function canAnimContent(index) {
+        var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+        if (index !== this.currentIndex) return;
+        if (wait) {
+          return !this.slidingActive ? true : false;
+        }
+        return true;
       }
     }
   });

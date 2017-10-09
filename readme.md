@@ -203,7 +203,7 @@ sections | array | - | sections list (cf example above)
 
 Name | Data type | Default value | Description
 ----- | ------------- | --- | ---
-section | object, string | - | the single section datas issued by v-for (cf example above)
+section | object, string | - | the single section datas issued from v-for loop (cf example above)
 key | int | - | A unique identifier for this item
 sectionIndex | int | - | must be the section's index issued from v-for loop (cf example above)
 backgroundImage | string | - | must be a valid css background rule.

@@ -845,7 +845,7 @@ exports.default = {
       }
     }
   },
-  props: ['section', 'backgroundImage', 'backgroundColor', 'sectionIndex']
+  props: ['section', 'backgroundImage', 'backgroundColor', 'sectionIndex', 'sectionOverlay']
 };
 
 /***/ }),
@@ -1854,10 +1854,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "sectionIndex": _vm.sectionIndex,
       "options": _vm.$ksvuefp.options
     }
-  }, [(_vm.$ksvuefp.options.overlay) ? _c('span', {
+  }, [(_vm.$ksvuefp.options.overlay || _vm.sectionOverlay) ? _c('span', {
     staticClass: "ksvuefp-section__overlay",
     style: ({
-      background: _vm.$ksvuefp.options.overlay || 'rgba(0,0,0,0.2)'
+      background: _vm.sectionOverlay ? _vm.sectionOverlay : _vm.$ksvuefp.options.overlay || 'rgba(0,0,0,0.2)'
     })
   }) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "ksvuefp-section__content"

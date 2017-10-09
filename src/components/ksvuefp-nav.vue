@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <dots-anim tag="ul" :class="['ksvuefp-nav', 'is-' + currentPos]" appear v-for="pos in navPosList" :key="pos" v-if="currentPos === pos && $ksvuefp.fpLoaded" :currentPos="currentPos">
+    <dots-anim tag="ul" :class="['ksvuefp-nav', 'is-' + currentPos]" appear v-for="pos in navPosList" :key="pos" v-if="currentPos === pos" :currentPos="currentPos">
       <li class="ksvuefp-nav__item" v-for="(s, index) in sections" :key="setKeys()" :data-index="index"  v-show="currentPos === pos">
         <span @click="click(index)" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']" :style="{ backgroundColor: options.dotNavColor }"></span>
       </li>

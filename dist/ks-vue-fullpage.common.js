@@ -637,6 +637,9 @@ exports.default = {
   waitForBackgrounds: true,
   /**
    * Navigation params
+   * @property {Boolean} dotNavEnabled - Add a dot navigation
+   * @property {String} dotNavPosition - Change dotNav position. Should be one of top, bottom, left or right
+   * @property {String} dotNavColor - Change dotNav color
    * @property {Boolean} loopBottom - Go to first section on scroll down while watching last section
    * @property {Boolean} loopTop - Go to last section on scroll up while watching first section
   */
@@ -753,7 +756,7 @@ exports.default = {
     },
     setKeys: function setKeys() {
       var vm = this;
-      return Math.floor(Math.random() * vm.sections.length * 100 + 1);
+      return Math.floor(Math.random() * vm.sections.length * 1000 + 1);
     }
   }
 }; //
@@ -830,7 +833,7 @@ exports.default = {
     slideX: _ksvuefpAnimations.slideX,
     fade: _ksvuefpAnimations.fade,
     'tagger': {
-      props: ['options'],
+      props: ['options', 'sectionIndex'],
       render: function render(h) {
         return h(this.options.sectionTag || 'div', this.$slots.default);
       },
@@ -839,7 +842,7 @@ exports.default = {
         vm.$nextTick(function () {
           setTimeout(function () {
             (0, _imagesloaded2.default)(vm.$el, { background: true }, function () {
-              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.sectionIndex);
+              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.sectionIndex);
             });
           }, 300);
         });
@@ -1788,7 +1791,7 @@ module.exports.render._withStripped = true
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', _vm._l((_vm.navPosList), function(pos) {
-    return (_vm.currentPos === pos && _vm.$ksvuefp.fpLoaded) ? _c('dots-anim', {
+    return (_vm.currentPos === pos) ? _c('dots-anim', {
       key: pos,
       class: ['ksvuefp-nav', 'is-' + _vm.currentPos],
       attrs: {
@@ -1849,6 +1852,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       backgroundColor: _vm.backgroundColor || ''
     }),
     attrs: {
+      "sectionIndex": _vm.sectionIndex,
       "options": _vm.options
     }
   }, [(_vm.options.overlay) ? _c('span', {

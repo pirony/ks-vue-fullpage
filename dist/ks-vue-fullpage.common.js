@@ -753,14 +753,6 @@ exports.default = {
     click: function click(nextIndex) {
       if (nextIndex === this.$ksvuefp.currentIndex) return;
       this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: nextIndex });
-    },
-    setKeys: function setKeys() {
-      var vm = this;
-      var keys = [];
-      for (var i = 0; i < this.sections.length; i++) {
-        var num = '_' + Math.random().toString(36).substr(2, 9);
-        keys.push(num);
-      }
     }
   }
 }; //
@@ -853,12 +845,6 @@ exports.default = {
       }
     }
   },
-  data: function data() {
-    return {
-      options: this.$ksvuefp.options || []
-    };
-  },
-
   props: ['section', 'backgroundImage', 'backgroundColor', 'sectionIndex']
 };
 
@@ -1115,6 +1101,7 @@ function plugin(Vue) {
       });
       vm.$on('ksvuefp-options-changed', function (custom) {
         vm.options = _extends({}, _defaultOptions2.default, custom);
+        console.log(vm.options);
       });
 
       vm.$on('ksvuefp-resized', function () {
@@ -1837,10 +1824,10 @@ module.exports.render._withStripped = true
 /***/ (function(module, exports) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c(_vm.options.animationType, {
+  return _c(_vm.$ksvuefp.options.animationType, {
     tag: "component",
     attrs: {
-      "options": _vm.options,
+      "options": _vm.$ksvuefp.options,
       "appear": false
     }
   }, [_c('tagger', {
@@ -1857,12 +1844,12 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }),
     attrs: {
       "sectionIndex": _vm.sectionIndex,
-      "options": _vm.options
+      "options": _vm.$ksvuefp.options
     }
-  }, [(_vm.options.overlay) ? _c('span', {
+  }, [(_vm.$ksvuefp.options.overlay) ? _c('span', {
     staticClass: "ksvuefp-section__overlay",
     style: ({
-      background: _vm.options.overlay || 'rgba(0,0,0,0.2)'
+      background: _vm.$ksvuefp.options.overlay || 'rgba(0,0,0,0.2)'
     })
   }) : _vm._e(), _vm._v(" "), _c('div', {
     staticClass: "ksvuefp-section__content"

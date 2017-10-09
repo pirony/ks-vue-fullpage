@@ -35,14 +35,6 @@ export default {
     click (nextIndex) {
       if (nextIndex === this.$ksvuefp.currentIndex) return
       this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex })
-    },
-    setKeys () {
-      const vm = this
-      let keys = []
-      for (var i = 0; i < this.sections.length; i++) {
-        const num = '_' + Math.random().toString(36).substr(2, 9);
-        keys.push(num)
-      }
     }
   }
 }

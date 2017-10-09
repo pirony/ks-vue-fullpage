@@ -647,6 +647,9 @@ exports.default = {
   waitForBackgrounds: true,
   /**
    * Navigation params
+   * @property {Boolean} dotNavEnabled - Add a dot navigation
+   * @property {String} dotNavPosition - Change dotNav position. Should be one of top, bottom, left or right
+   * @property {String} dotNavColor - Change dotNav color
    * @property {Boolean} loopBottom - Go to first section on scroll down while watching last section
    * @property {Boolean} loopTop - Go to last section on scroll up while watching first section
   */
@@ -797,7 +800,11 @@ exports.default = {
     },
     setKeys: function setKeys() {
       var vm = this;
-      return Math.floor(Math.random() * vm.sections.length * 100 + 1);
+      var keys = [];
+      for (var i = 0; i < this.sections.length; i++) {
+        var num = '_' + Math.random().toString(36).substr(2, 9);
+        keys.push(num);
+      }
     }
   }
 }; //
@@ -874,7 +881,7 @@ exports.default = {
     slideX: _ksvuefpAnimations.slideX,
     fade: _ksvuefpAnimations.fade,
     'tagger': {
-      props: ['options'],
+      props: ['options', 'sectionIndex'],
       render: function render(h) {
         return h(this.options.sectionTag || 'div', this.$slots.default);
       },
@@ -883,7 +890,7 @@ exports.default = {
         vm.$nextTick(function () {
           setTimeout(function () {
             (0, _imagesloaded2.default)(vm.$el, { background: true }, function () {
-              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.sectionIndex);
+              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.sectionIndex);
             });
           }, 300);
         });
@@ -1905,7 +1912,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           value: (_vm.currentPos === pos),
           expression: "currentPos === pos"
         }],
-        key: _vm.setKeys(),
+        key: index,
         staticClass: "ksvuefp-nav__item",
         attrs: {
           "data-index": index
@@ -1956,6 +1963,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       backgroundColor: _vm.backgroundColor || ''
     }),
     attrs: {
+      "sectionIndex": _vm.sectionIndex,
       "options": _vm.options
     }
   }, [(_vm.options.overlay) ? _c('span', {

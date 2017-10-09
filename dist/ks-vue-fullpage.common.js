@@ -756,7 +756,11 @@ exports.default = {
     },
     setKeys: function setKeys() {
       var vm = this;
-      return Math.floor(Math.random() * vm.sections.length * 1000 + 1);
+      var keys = [];
+      for (var i = 0; i < this.sections.length; i++) {
+        var num = '_' + Math.random().toString(36).substr(2, 9);
+        keys.push(num);
+      }
     }
   }
 }; //
@@ -1791,7 +1795,7 @@ module.exports.render._withStripped = true
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', _vm._l((_vm.navPosList), function(pos) {
-    return (_vm.currentPos === pos) ? _c('dots-anim', {
+    return (_vm.currentPos === pos && _vm.$ksvuefp.fpLoaded) ? _c('dots-anim', {
       key: pos,
       class: ['ksvuefp-nav', 'is-' + _vm.currentPos],
       attrs: {
@@ -1807,7 +1811,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           value: (_vm.currentPos === pos),
           expression: "currentPos === pos"
         }],
-        key: _vm.setKeys(),
+        key: index,
         staticClass: "ksvuefp-nav__item",
         attrs: {
           "data-index": index

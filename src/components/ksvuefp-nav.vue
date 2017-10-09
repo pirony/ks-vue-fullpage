@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
-    <dots-anim tag="ul" :class="['ksvuefp-nav', 'is-' + currentPos]" appear v-for="pos in navPosList" :key="pos" v-if="currentPos === pos" :currentPos="currentPos">
-      <li class="ksvuefp-nav__item" v-for="(s, index) in sections" :key="setKeys()" :data-index="index"  v-show="currentPos === pos">
+    <dots-anim tag="ul" :class="['ksvuefp-nav', 'is-' + currentPos]" appear v-for="pos in navPosList" :key="pos" v-if="currentPos === pos && $ksvuefp.fpLoaded" :currentPos="currentPos">
+      <li class="ksvuefp-nav__item" v-for="(s, index) in sections" :key="index" :data-index="index"  v-show="currentPos === pos">
         <span @click="click(index)" :class="['ksvuefp-nav__dot', index === $ksvuefp.currentIndex ? 'active' : '']" :style="{ backgroundColor: options.dotNavColor }"></span>
       </li>
     </dots-anim>
@@ -38,7 +38,11 @@ export default {
     },
     setKeys () {
       const vm = this
-      return Math.floor((Math.random() * vm.sections.length * 1000) + 1)
+      let keys = []
+      for (var i = 0; i < this.sections.length; i++) {
+        const num = '_' + Math.random().toString(36).substr(2, 9);
+        keys.push(num)
+      }
     }
   }
 }

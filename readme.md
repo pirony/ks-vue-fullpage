@@ -73,20 +73,66 @@ and add $ksvuefp property to every components, available at vm.$ksvuefp
 vm.$ksvuefp returns the following datas object
 ```js
 {
-  options: [], // Default options merged with your prop options
+  options: [], // Default options (see below) merged with your prop options
   fpLoaded: false, // true when the plugin and his components are totally loaded
   currentIndex: 0, // the index currently shown
   slidingActive: false, // true if sections transition is occuring
   sliderDirection: 'down', // one of 'up' or 'down'
-  wWidth: '', // Integer. current screen width
-  wHeight: '' // Integer. current screen height
+  wWidth: 0, // Integer. current screen width
+  wHeight: 0 // Integer. current screen height
 }
 ```
 
-
 ### Example code
+```html
+    ...
+      <ksvuefp :options="options" :sections="sections"> // Where options is an object of options, and sections an array containing our sections datas
 
-#### Default options
+        <ksvuefp-section
+          class="whatever"
+          v-for="(s,index) in sections"
+          :section="s"
+          :key="index"
+          :backgroundImage="'url('+ s.img_url +')'"
+          :backgroundColor="'#123456'" >
+
+          <h2> {{any_data}} </h2>
+
+        </ksvuefp-section>
+
+      </ksvuefp>
+    ...
+    <script>
+      ...
+      data(){
+        return {
+          sections: [
+            {
+              any_data: "I'm section 1",
+              img_url: './images/whatever01.jpg'
+            },
+            {
+              any_data: "I'm section 2",
+              img_url: './images/whatever02.jpg'
+            },
+            {
+              any_data: "I'm section 3",
+              img_url: './images/whatever03.jpg'
+            }
+          ],
+          // See below for a list of default options
+          options: {
+            duration: 800,
+            easing: [1, 0, 0, 1],
+            loopBottom: true
+          }
+        }
+      }
+      ...
+    </script>
+```
+
+### Default options
 
 ```js
 export default {
@@ -144,54 +190,6 @@ export default {
 }
 ```
 
-```html
-    ...
-      <ksvuefp :options="options" :sections="sections"> // Where options is an object of options, and sections an array containing our sections datas
-
-        <ksvuefp-section
-          class="whatever"
-          v-for="(s,index) in sections"
-          :section="s"
-          :key="index"
-          :backgroundImage="'url('+ s.img_url +')'"
-          :backgroundColor="'#123456'" >
-
-          <h2> {{any_data}} </h2>
-
-        </ksvuefp-section>
-
-      </ksvuefp>
-    ...
-    <script>
-      ...
-      data(){
-        return {
-          sections: [
-            {
-              any_data: "I'm section 1",
-              img_url: './images/whatever01.jpg'
-            },
-            {
-              any_data: "I'm section 2",
-              img_url: './images/whatever02.jpg'
-            },
-            {
-              any_data: "I'm section 3",
-              img_url: './images/whatever03.jpg'
-            }
-          ],
-          // Those are default options!!!! Change them to adapt to your needs
-          options: {
-            duration: 800,
-            easing: [1, 0, 0, 1],
-            loopBottom: true
-          }
-        }
-      }
-      ...
-    </script>
-```
-
 ### Available Properties
 
 #### ksvuefp component
@@ -206,7 +204,8 @@ sections | array | - | sections list (cf example above)
 Name | Data type | Default value | Description
 ----- | ------------- | --- | ---
 section | object, string | - | the single section datas issued by v-for (cf example above)
-key | int | - | must be the section's index from v-for loop (cf example above)
+key | int | - | A unique identifier for this item
+sectionIndex | int | - | must be the section's index issued from v-for loop (cf example above)
 backgroundImage | string | - | must be a valid css background rule.
 backgroundColor | string | - | must be a valid css background rule.
 

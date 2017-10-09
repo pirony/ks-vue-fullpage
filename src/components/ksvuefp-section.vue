@@ -1,6 +1,6 @@
 <template lang="html">
   <component :is="options.animationType" :options="options" :appear="false">
-    <tagger :options="options" :class="['ksvuefp-section']" :style="{ backgroundImage: backgroundImage || '', backgroundColor: backgroundColor || '' }" v-show="$vnode.data.key === $ksvuefp.currentIndex">
+    <tagger :sectionIndex="sectionIndex" :options="options" :class="['ksvuefp-section']" :style="{ backgroundImage: backgroundImage || '', backgroundColor: backgroundColor || '' }" v-show="sectionIndex === $ksvuefp.currentIndex">
       <span class="ksvuefp-section__overlay" :style="{ background: options.overlay || 'rgba(0,0,0,0.2)' }" v-if="options.overlay"></span>
       <div class="ksvuefp-section__content">
         <slot></slot>
@@ -18,7 +18,7 @@ export default {
     slideX,
     fade,
     'tagger': {
-      props: ['options'],
+      props: ['options', 'sectionIndex'],
       render (h) {
         return h(this.options.sectionTag || 'div', this.$slots.default)
       },
@@ -27,7 +27,7 @@ export default {
         vm.$nextTick(() => {
           setTimeout(() => {
             imagesLoaded(vm.$el, { background: true }, () => {
-              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.$vnode.key)
+              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.sectionIndex)
             })
           }, 300)
         })
@@ -39,7 +39,7 @@ export default {
       options: this.$ksvuefp.options || []
     }
   },
-  props: ['section', 'backgroundImage', 'backgroundColor']
+  props: ['section', 'backgroundImage', 'backgroundColor', 'sectionIndex']
 }
 </script>
 

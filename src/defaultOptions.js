@@ -30,6 +30,9 @@ export default {
   waitForBackgrounds: true,
   /**
    * Navigation params
+   * @property {Boolean} dotNavEnabled - Add a dot navigation
+   * @property {String} dotNavPosition - Change dotNav position. Should be one of top, bottom, left or right
+   * @property {String} dotNavColor - Change dotNav color
    * @property {Boolean} loopBottom - Go to first section on scroll down while watching last section
    * @property {Boolean} loopTop - Go to last section on scroll up while watching first section
   */

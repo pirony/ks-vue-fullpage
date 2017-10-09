@@ -774,7 +774,8 @@ exports.default = {
   props: ['sections', 'options'],
   data: function data() {
     return {
-      navPosList: ['top', 'left', 'right', 'bottom']
+      navPosList: ['top', 'left', 'right', 'bottom'],
+      keys: []
     };
   },
 
@@ -793,6 +794,10 @@ exports.default = {
     click: function click(nextIndex) {
       if (nextIndex === this.$ksvuefp.currentIndex) return;
       this.$ksvuefp.$emit('ksvuefp-nav-click', { nextIndex: nextIndex });
+    },
+    setKeys: function setKeys() {
+      var vm = this;
+      return Math.floor(Math.random() * vm.sections.length * 100 + 1);
     }
   }
 }; //
@@ -878,7 +883,7 @@ exports.default = {
         vm.$nextTick(function () {
           setTimeout(function () {
             (0, _imagesloaded2.default)(vm.$el, { background: true }, function () {
-              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.$vnode.key);
+              vm.$ksvuefp.$emit('ksvuefp-section-loaded', vm.$parent.sectionIndex);
             });
           }, 300);
         });
@@ -891,7 +896,7 @@ exports.default = {
     };
   },
 
-  props: ['section', 'backgroundImage', 'backgroundColor']
+  props: ['section', 'backgroundImage', 'backgroundColor', 'sectionIndex']
 };
 
 /***/ }),
@@ -1900,7 +1905,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
           value: (_vm.currentPos === pos),
           expression: "currentPos === pos"
         }],
-        key: index,
+        key: _vm.setKeys(),
         staticClass: "ksvuefp-nav__item",
         attrs: {
           "data-index": index
@@ -1942,8 +1947,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.$vnode.data.key === _vm.$ksvuefp.currentIndex),
-      expression: "$vnode.data.key === $ksvuefp.currentIndex"
+      value: (_vm.sectionIndex === _vm.$ksvuefp.currentIndex),
+      expression: "sectionIndex === $ksvuefp.currentIndex"
     }],
     class: ['ksvuefp-section'],
     style: ({

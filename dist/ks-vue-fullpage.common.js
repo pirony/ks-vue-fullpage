@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.1.4
+ * ks-vue-fullpage v1.2.0
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -201,7 +201,7 @@ exports.default = {
         var delta = (e.deltaY || -e.wheelDelta || e.detail) >> 10 || 1;
         if (delta < 0) return 'up';
         return 'down';
-      case 'keyup':
+      case 'keydown':
         switch (e.key) {
           case 'ArrowDown':
             if (animType !== 'slideY') return 'none';
@@ -892,8 +892,6 @@ exports.default = {
     this.$ksvuefp.$emit('ksvuefp-options-changed', this.options);
   },
   mounted: function mounted() {
-    var _this = this;
-
     var vm = this;
     vm.$nextTick(function () {
       /**
@@ -925,7 +923,7 @@ exports.default = {
        * @const {array}
        *
       */
-      var actions = ['wheel', 'mousewheel', 'keypress'];
+      var actions = ['wheel', 'mousewheel', 'keydown'];
       /**
        * For each action in the above array, trigger changeIndex method
        *
@@ -935,21 +933,13 @@ exports.default = {
       });
 
       /**
-       * trigger changeIndex method when a key is pressed
-       *
-      */
-      document.onkeyup = function (e) {
-        vm.changeIndex(e);
-      };
-
-      /**
        * trigger changeIndex method on swipe with HAMMER.JS if touch is detected
        *
       */
       var isTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints > 0;
       if (!isTouch) return;
 
-      var mc = new Hammer(_this.$el);
+      var mc = new Hammer(vm.$el);
       mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
       mc.on('swipeup swipedown swiperight swipeleft', function (e) {
@@ -971,6 +961,9 @@ exports.default = {
      *
     */
     changeIndex: function changeIndex(e) {
+      if (e.defaultPrevented) {
+        return; // Should do nothing if the key event was already consumed.
+      }
       var vm = this;
 
       if (vm.$ksvuefp.slidingActive) return; // if last transition is not yet finished, return without doing anything
@@ -1037,6 +1030,23 @@ exports.default = {
         this.$ksvuefp.$emit('ksvuefp-options-changed', val);
       }
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    /**
+     * We set the list of actions we want to trigger the animation with
+     * @const {array}
+     *
+    */
+    var actions = ['wheel', 'mousewheel', 'keydown'];
+    /**
+     * For each action in the above array, trigger changeIndex method
+     *
+    */
+    actions.forEach(function (a) {
+      document.removeEventListeners(a, vm.changeIndex);
+    });
+
+    this.$ksvuefp.$emit('ksvuefp-destroy');
   }
 }; //
 //
@@ -1105,6 +1115,14 @@ function plugin(Vue) {
 
       vm.$on('ksvuefp-resized', function () {
         vm.getWindowDim();
+      });
+      vm.$on('ksvuefp-destroy', function () {
+        vm.fpLoaded = false;
+        vm.currentIndex = 0;
+        vm.slidingActive = false;
+        vm.sliderDirection = 'down';
+        vm.options = {};
+        console.log('destroyed');
       });
 
       vm.$on('ksvuefp-change-begin', function (nextIndex, oldIndex, direction, delay) {

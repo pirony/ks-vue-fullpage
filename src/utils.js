@@ -19,7 +19,7 @@ export default {
         const delta = ((e.deltaY || -e.wheelDelta || e.detail) >> 10) || 1
         if (delta < 0) return 'up'
         return 'down'
-      case 'keyup':
+      case 'keydown':
         switch (e.key) {
           case 'ArrowDown':
             if (animType !== 'slideY') return 'none'

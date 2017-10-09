@@ -63,7 +63,7 @@ export default {
        * @const {array}
        *
       */
-      const actions = ['wheel', 'mousewheel', 'keypress']
+      const actions = ['wheel', 'mousewheel', 'keydown']
       /**
        * For each action in the above array, trigger changeIndex method
        *
@@ -73,22 +73,13 @@ export default {
       })
 
       /**
-       * trigger changeIndex method when a key is pressed
-       *
-      */
-      document.onkeyup = function (e) {
-        vm.changeIndex(e)
-      }
-
-
-      /**
        * trigger changeIndex method on swipe with HAMMER.JS if touch is detected
        *
       */
       var isTouch = (('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0))
       if (!isTouch) return
 
-      var mc = new Hammer(this.$el)
+      var mc = new Hammer(vm.$el)
       mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL })
 
       mc.on('swipeup swipedown swiperight swipeleft', function (e) {
@@ -109,6 +100,9 @@ export default {
      *
     */
     changeIndex (e) {
+      if (e.defaultPrevented) {
+        return; // Should do nothing if the key event was already consumed.
+      }
       const vm = this
 
       if (vm.$ksvuefp.slidingActive) return // if last transition is not yet finished, return without doing anything
@@ -172,6 +166,24 @@ export default {
         this.$ksvuefp.$emit('ksvuefp-options-changed', val)
       }
     }
+  },
+  beforeDestroy () {
+    /**
+     * We set the list of actions we want to trigger the animation with
+     * @const {array}
+     *
+    */
+    const actions = ['wheel', 'mousewheel', 'keydown']
+    /**
+     * For each action in the above array, trigger changeIndex method
+     *
+    */
+    actions.forEach((a) => {
+      document.removeEventListeners(a, vm.changeIndex)
+    })
+
+    this.$ksvuefp.$emit('ksvuefp-destroy')
+
   }
 }
 </script>

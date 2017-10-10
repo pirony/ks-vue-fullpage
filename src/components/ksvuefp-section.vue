@@ -1,6 +1,6 @@
 <template lang="html">
   <component :is="$ksvuefp.options.animationType" :options="$ksvuefp.options" :appear="false">
-    <tagger :sectionIndex="sectionIndex" :options="$ksvuefp.options" :class="['ksvuefp-section']" :style="{ backgroundImage: backgroundImage || '', backgroundColor: backgroundColor || '' }" v-show="sectionIndex === $ksvuefp.currentIndex">
+    <tagger :sectionIndex="sectionIndex" :options="$ksvuefp.options" :class="['ksvuefp-section']" :style="{ backgroundImage: backgroundImage || '', backgroundColor: backgroundColor || '' }" v-show="showSection">
       <span class="ksvuefp-section__overlay" :style="{ background: sectionOverlay ? sectionOverlay : $ksvuefp.options.overlay || 'rgba(0,0,0,0.2)' }" v-if="$ksvuefp.options.overlay || sectionOverlay"></span>
       <div class="ksvuefp-section__content">
         <slot></slot>
@@ -34,7 +34,12 @@ export default {
       }
     }
   },
-  props: ['section', 'backgroundImage', 'backgroundColor', 'sectionIndex', 'sectionOverlay']
+  props: ['section', 'backgroundImage', 'backgroundColor', 'sectionIndex', 'sectionOverlay'],
+  computed: {
+    showSection () {
+      return this.sectionIndex === this.$ksvuefp.currentIndex
+    }
+  }
 }
 </script>
 

@@ -54,9 +54,7 @@ export default {
        * We listen to resize event and then emit on $ksvuefp bus
       */
       window.addEventListener('resize', function () {
-        vm.$nextTick(() => {
-          vm.$ksvuefp.$emit('ksvuefp-resized')
-        })
+        vm.$ksvuefp.$emit('ksvuefp-resized')
       })
       /**
        * We set the list of actions we want to trigger the animation with
@@ -168,6 +166,7 @@ export default {
     }
   },
   beforeDestroy () {
+    const vm = this
     /**
      * We set the list of actions we want to trigger the animation with
      * @const {array}
@@ -179,9 +178,12 @@ export default {
      *
     */
     actions.forEach((a) => {
-      document.removeEventListeners(a, vm.changeIndex)
+      document.removeEventListener(a, vm.changeIndex)
     })
-
+    window.addEventListener('resize', function () {
+      vm.$ksvuefp.$emit('ksvuefp-resized')
+    })
+    this.$off()
     this.$ksvuefp.$emit('ksvuefp-destroy')
 
   }

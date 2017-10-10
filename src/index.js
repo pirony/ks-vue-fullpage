@@ -33,7 +33,6 @@ function plugin (Vue) {
         vm.slidingActive = false
         vm.sliderDirection = 'down'
         vm.options = {}
-        console.log('destroyed')
       })
 
       vm.$on('ksvuefp-change-begin', (nextIndex, oldIndex, direction, delay) => {

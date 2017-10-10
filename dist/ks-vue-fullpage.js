@@ -889,7 +889,12 @@ exports.default = {
       }
     }
   },
-  props: ['section', 'backgroundImage', 'backgroundColor', 'sectionIndex', 'sectionOverlay']
+  props: ['section', 'backgroundImage', 'backgroundColor', 'sectionIndex', 'sectionOverlay'],
+  computed: {
+    showSection: function showSection() {
+      return this.sectionIndex === this.$ksvuefp.currentIndex;
+    }
+  }
 };
 
 /***/ }),
@@ -958,9 +963,7 @@ exports.default = {
        * We listen to resize event and then emit on $ksvuefp bus
       */
       window.addEventListener('resize', function () {
-        vm.$nextTick(function () {
-          vm.$ksvuefp.$emit('ksvuefp-resized');
-        });
+        vm.$ksvuefp.$emit('ksvuefp-resized');
       });
       /**
        * We set the list of actions we want to trigger the animation with
@@ -1076,6 +1079,7 @@ exports.default = {
     }
   },
   beforeDestroy: function beforeDestroy() {
+    var vm = this;
     /**
      * We set the list of actions we want to trigger the animation with
      * @const {array}
@@ -1087,9 +1091,10 @@ exports.default = {
      *
     */
     actions.forEach(function (a) {
-      document.removeEventListeners(a, vm.changeIndex);
+      document.removeEventListener(a, vm.changeIndex);
     });
-
+    window.addEventListener('resize', vm.$ksvuefp.$emit('ksvuefp-resized'));
+    this.$off();
     this.$ksvuefp.$emit('ksvuefp-destroy');
   }
 }; //
@@ -1166,7 +1171,6 @@ function plugin(Vue) {
         vm.slidingActive = false;
         vm.sliderDirection = 'down';
         vm.options = {};
-        console.log('destroyed');
       });
 
       vm.$on('ksvuefp-change-begin', function (nextIndex, oldIndex, direction, delay) {
@@ -1967,8 +1971,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     directives: [{
       name: "show",
       rawName: "v-show",
-      value: (_vm.sectionIndex === _vm.$ksvuefp.currentIndex),
-      expression: "sectionIndex === $ksvuefp.currentIndex"
+      value: (_vm.showSection),
+      expression: "showSection"
     }],
     class: ['ksvuefp-section'],
     style: ({

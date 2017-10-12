@@ -54,6 +54,7 @@ export default {
   padding: 0;
   margin: 0;
   background-position: center;
+  background-repeat: no-repeat;
   &__overlay {
     display: block;
     width: 100%;

@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.2.0
+ * ks-vue-fullpage v1.2.1
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -230,7 +230,8 @@
   background-size: cover;
   padding: 0;
   margin: 0;
-  background-position: center
+  background-position: center;
+  background-repeat: no-repeat
 }
 .ksvuefp-section__overlay {
   display: block;

@@ -13,6 +13,7 @@ export default {
     return res
   },
   getDirection (e, animType) {
+    e = e || window.event
     switch (e.type) {
       case 'mousewheel':
       case 'wheel':

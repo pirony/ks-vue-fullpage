@@ -1,5 +1,5 @@
 /*!
- * ks-vue-fullpage v1.2.0
+ * ks-vue-fullpage v1.2.1
  * (c) 2017 pirony
  * Released under the MIT License.
  */
@@ -195,6 +195,7 @@ exports.default = {
     return res;
   },
   getDirection: function getDirection(e, animType) {
+    e = e || window.event;
     switch (e.type) {
       case 'mousewheel':
       case 'wheel':
@@ -1049,7 +1050,9 @@ exports.default = {
     actions.forEach(function (a) {
       document.removeEventListener(a, vm.changeIndex);
     });
-    window.addEventListener('resize', vm.$ksvuefp.$emit('ksvuefp-resized'));
+    window.addEventListener('resize', function () {
+      vm.$ksvuefp.$emit('ksvuefp-resized');
+    });
     this.$off();
     this.$ksvuefp.$emit('ksvuefp-destroy');
   }

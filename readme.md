@@ -92,8 +92,9 @@ vm.$ksvuefp returns the following datas object
           class="whatever"
           v-for="(s,index) in sections"
           :section="s"
-          :key="index"
-          :backgroundImage="'url('+ s.img_url +')'"
+          :key="s.id"
+          :section-index="index"
+          :background-image="'url('+ s.img_url +')'"
           :backgroundColor="'#123456'" >
 
           <h2> {{any_data}} </h2>
@@ -108,14 +109,17 @@ vm.$ksvuefp returns the following datas object
         return {
           sections: [
             {
+              id: 1,
               any_data: "I'm section 1",
               img_url: './images/whatever01.jpg'
             },
             {
+              id: 2,
               any_data: "I'm section 2",
               img_url: './images/whatever02.jpg'
             },
             {
+              id: 3,
               any_data: "I'm section 3",
               img_url: './images/whatever03.jpg'
             }

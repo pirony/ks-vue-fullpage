@@ -95,7 +95,7 @@ vm.$ksvuefp returns the following datas object
           :key="s.id"
           :section-index="index"
           :background-image="'url('+ s.img_url +')'"
-          :backgroundColor="'#123456'" >
+          :background-color="'#123456'" >
 
           <h2> {{any_data}} </h2>
 
@@ -209,9 +209,9 @@ Name | Data type | Default value | Description
 ----- | ------------- | --- | ---
 section | object, string | - | the single section datas issued from v-for loop (cf example above)
 key | int | - | A unique identifier for this item
-sectionIndex | int | - | must be the section's index issued from v-for loop (cf example above)
-backgroundImage | string | - | must be a valid css background rule.
-backgroundColor | string | - | must be a valid css background rule.
+section-index | int | - | must be the section's index issued from v-for loop (cf example above)
+background-image | string | - | must be a valid css background rule.
+background-color | string | - | must be a valid css background rule.
 
 
 ### Available Events

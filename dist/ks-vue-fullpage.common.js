@@ -239,15 +239,20 @@ exports.default = {
         }
       default:
         return 'none';
-
     }
   },
   getWindowDim: function getWindowDim() {
-    if (typeof window === 'undefined') global.window = {};
-    return {
-      wHeight: window.innerHeight,
-      wWidth: window.innerWidth
-    };
+    if (typeof window === 'undefined') {
+      return {
+        wHeight: 1280,
+        wWidth: 1024
+      };
+    } else {
+      return {
+        wHeight: window.innerHeight,
+        wWidth: window.innerWidth
+      };
+    }
   },
   getNextIndex: function getNextIndex(i, direction, length, options) {
     switch (direction) {
@@ -1080,8 +1085,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.version = exports.ksvuefpSection = exports.ksvuefp = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _ksvuefp = __webpack_require__(5);
 
 var _ksvuefp2 = _interopRequireDefault(_ksvuefp);
@@ -1118,7 +1121,7 @@ function plugin(Vue) {
         vm.fpLoaded = true;
       });
       vm.$on('ksvuefp-options-changed', function (custom) {
-        vm.options = _extends({}, _defaultOptions2.default, custom);
+        vm.options = Object.assign(_defaultOptions2.default, custom);
       });
 
       vm.$on('ksvuefp-resized', function () {

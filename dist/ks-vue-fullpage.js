@@ -184,7 +184,7 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(global) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -248,15 +248,20 @@ exports.default = {
         }
       default:
         return 'none';
-
     }
   },
   getWindowDim: function getWindowDim() {
-    if (typeof window === 'undefined') global.window = {};
-    return {
-      wHeight: window.innerHeight,
-      wWidth: window.innerWidth
-    };
+    if (typeof window === 'undefined') {
+      return {
+        wHeight: 1280,
+        wWidth: 1024
+      };
+    } else {
+      return {
+        wHeight: window.innerHeight,
+        wWidth: window.innerWidth
+      };
+    }
   },
   getNextIndex: function getNextIndex(i, direction, length, options) {
     switch (direction) {
@@ -281,7 +286,6 @@ exports.default = {
     return i;
   }
 };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ }),
 /* 2 */
@@ -1124,8 +1128,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.version = exports.ksvuefpSection = exports.ksvuefp = undefined;
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _ksvuefp = __webpack_require__(5);
 
 var _ksvuefp2 = _interopRequireDefault(_ksvuefp);
@@ -1162,7 +1164,7 @@ function plugin(Vue) {
         vm.fpLoaded = true;
       });
       vm.$on('ksvuefp-options-changed', function (custom) {
-        vm.options = _extends({}, _defaultOptions2.default, custom);
+        vm.options = Object.assign(_defaultOptions2.default, custom);
       });
 
       vm.$on('ksvuefp-resized', function () {
@@ -2002,33 +2004,6 @@ if (false) {
      require("vue-hot-reload-api").rerender("data-v-7096caf6", module.exports)
   }
 }
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
 
 /***/ })
 /******/ ]);

@@ -57,15 +57,20 @@ export default {
         }
       default:
         return 'none'
-
     }
   },
   getWindowDim () {
-    if (typeof window === 'undefined') global.window = {}
-    return {
+    if (typeof window === 'undefined'){
+      return {
+        wHeight: 1280,
+        wWidth: 1024
+      }
+   } else {
+     return {
       wHeight: window.innerHeight,
       wWidth: window.innerWidth
     }
+   }
   },
   getNextIndex (i, direction, length, options) {
     switch (direction) {

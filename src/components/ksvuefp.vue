@@ -13,6 +13,9 @@
 import utils from '../utils.js'
 import fpNav from './ksvuefp-nav.vue'
 import ksvuefpPreloader from './ksvuefp-preloader.vue'
+if (!process.server) {
+  var Hammer = require('hammerjs')
+}
 export default {
   props: {
     options: {
@@ -99,7 +102,7 @@ export default {
     */
     changeIndex (e) {
       if (e.defaultPrevented) {
-        return; // Should do nothing if the key event was already consumed.
+        return // Should do nothing if the key event was already consumed.
       }
       const vm = this
 
@@ -137,7 +140,7 @@ export default {
 
       if (nextIndex === 'none') return
 
-      this.$nextTick(() => {  // we wait for our computed datas to be ready
+      this.$nextTick(() => { // we wait for our computed datas to be ready
         /**
          * Emit change event on bus vm
          * @param {integer} nextIndex
@@ -185,7 +188,6 @@ export default {
     })
     this.$off()
     this.$ksvuefp.$emit('ksvuefp-destroy')
-
   }
 }
 </script>

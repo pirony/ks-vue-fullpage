@@ -1,4 +1,7 @@
 import utils from './utils.js'
+if (!process.server) {
+  var Velocity = require('velocity-animate')
+}
 
 /**
  * Get animation params and store it in a constant
@@ -24,7 +27,7 @@ export const slideX = {
   props: ['options', 'slidingActive', 'sliderDirection'],
   functional: true,
   render: function (h, ctx) {
-    if (!ctx.parent.$ksvuefp.fpLoaded) return h('transition', ctx.data, ctx.children)  // don't animate until the plugin is fully loaded
+    if (!ctx.parent.$ksvuefp.fpLoaded) return h('transition', ctx.data, ctx.children) // don't animate until the plugin is fully loaded
 
     ctx.data.on = {
       enter (el, done) {
@@ -115,7 +118,7 @@ export const slideX = {
         )
       },
       afterLeave (el) {
-          Velocity.hook(el, 'backgroundPosition', '50% 50%')
+        Velocity.hook(el, 'backgroundPosition', '50% 50%')
       }
     }
 
@@ -128,7 +131,7 @@ export const slideY = {
   props: ['options'],
   functional: true,
   render: function (h, ctx) {
-    if (!ctx.parent.$ksvuefp.fpLoaded) return h('transition', ctx.data, ctx.children)  // If the plugin is not fully loaded, don't animate and return h() directly
+    if (!ctx.parent.$ksvuefp.fpLoaded) return h('transition', ctx.data, ctx.children) // If the plugin is not fully loaded, don't animate and return h() directly
     ctx.data.on = {
       enter: function (el, done) {
         const animObj = {}
@@ -142,7 +145,7 @@ export const slideY = {
           */
           const bgOffset = utils.bgOffset('enter', ctx.parent.$ksvuefp.sliderDirection, ctx.props.options.parallaxOffset)
 
-          Velocity.hook(el, 'backgroundPositionY',  bgOffset * ctx.parent.$ksvuefp.wHeight + 'px')
+          Velocity.hook(el, 'backgroundPositionY', bgOffset * ctx.parent.$ksvuefp.wHeight + 'px')
 
           animObj['backgroundPositionY'] = '0%'
         }
@@ -218,7 +221,7 @@ export const slideY = {
         )
       },
       afterLeave (el) {
-          Velocity.hook(el, 'backgroundPosition', '50% 50%')
+        Velocity.hook(el, 'backgroundPosition', '50% 50%')
       }
     }
     return h('transition', ctx.data, ctx.children)
@@ -301,19 +304,19 @@ export const dotsAnim = {
           case 'top':
             Velocity.hook(el, 'translateY', '-200px')
             animObj['translateY'] = '0px'
-            break;
+            break
           case 'bottom':
             Velocity.hook(el, 'translateY', '200px')
             animObj['translateY'] = '0px'
-            break;
+            break
           case 'left':
             Velocity.hook(el, 'translateX', '-200px')
             animObj['translateX'] = '0px'
-            break;
+            break
           case 'right':
             Velocity.hook(el, 'translateX', '200px')
             animObj['translateX'] = '0px'
-            break;
+            break
         }
         Velocity(
           el,

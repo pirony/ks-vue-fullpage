@@ -1,9 +1,10 @@
 import ksvuefp from './components/ksvuefp.vue'
 import ksvuefpSection from './components/ksvuefp-section.vue'
 import utils from './utils'
+import Vue from 'vue'
 import options from './defaultOptions'
 
-function plugin (Vue) {
+// function plugin (Vue) {
   Vue.prototype.$ksvuefp = new Vue({
     data: {
       fpLoaded: false,
@@ -62,7 +63,8 @@ function plugin (Vue) {
       canAnimContent (index, wait = true) {
         if (index !== this.currentIndex) return
         if (wait) {
-          return !this.slidingActive? true : false
+          if (this.slidingActive) return
+          return true
         }
         return true
       }
@@ -70,18 +72,18 @@ function plugin (Vue) {
   })
   Vue.component('ksvuefp', ksvuefp)
   Vue.component('ksvuefp-section', ksvuefpSection)
-}
-
-// Install by default if using the script tag
-if (typeof window !== 'undefined' && window.Vue) {
-  window.Vue.use(plugin)
-}
-
-export default plugin
-const version = '__VERSION__'
-// Export all components too
-export {
-  ksvuefp,
-  ksvuefpSection,
-  version
-}
+// }
+//
+// // Install by default if using the script tag
+// if (typeof window !== 'undefined' && window.Vue) {
+//   window.Vue.use(plugin)
+// }
+//
+// export default plugin
+// const version = '__VERSION__'
+// // Export all components too
+// export {
+//   ksvuefp,
+//   ksvuefpSection,
+//   version
+// }

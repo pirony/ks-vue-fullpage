@@ -34,6 +34,10 @@ module.exports = {
       'src': resolve(__dirname, '../src')
     }
   },
+  externals: {
+    Velocity: 'velocity-animate',
+    Hammer: 'hammerjs'
+  },
   module: {
     rules: [
       {

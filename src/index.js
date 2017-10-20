@@ -16,10 +16,12 @@ function plugin (Vue) {
     },
     created () {
       const vm = this
+
       vm.$on('ksvuefp-ready', () => {
         vm.$emit('ksvuefp-resized')
         vm.fpLoaded = true
       })
+
       vm.$on('ksvuefp-options-changed', (custom) => {
         vm.options = Object.assign(options, custom)
       })
@@ -27,6 +29,7 @@ function plugin (Vue) {
       vm.$on('ksvuefp-resized', () => {
         vm.getWindowDim()
       })
+
       vm.$on('ksvuefp-destroy', () => {
         vm.fpLoaded = false
         vm.currentIndex = 0

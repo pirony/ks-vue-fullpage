@@ -34,10 +34,6 @@ module.exports = {
       'src': resolve(__dirname, '../src')
     }
   },
-  externals: {
-    Velocity: 'velocity-animate',
-    Hammer: 'hammerjs'
-  },
   module: {
     rules: [
       {
@@ -57,9 +53,6 @@ module.exports = {
           postcss: [require('postcss-cssnext')()]
         }
       },
-<<<<<<< HEAD
-
-=======
       {
         test: require.resolve('velocity-animate'),
         use: [{
@@ -74,7 +67,6 @@ module.exports = {
           options: 'Hammer'
         }]
       }
->>>>>>> nuxt2
     ]
   },
   plugins

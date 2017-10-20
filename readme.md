@@ -8,7 +8,7 @@ No jQuery needed, pure Vanilla js.
 
 Try it in this [ fiddle ](https://jsfiddle.net/romainPouchol/rf7csunm/14/).
 
-![ks-vue-fullpage-demo-slidey](https://user-images.githubusercontent.com/7433657/30744371-1a03b764-9fa2-11e7-8641-e05816e95854.gif)
+![ksvuefullpage-demo-slidey](https://user-images.githubusercontent.com/7433657/30744371-1a03b764-9fa2-11e7-8641-e05816e95854.gif)
 
 
 + x-axis or y-axis animations
@@ -36,7 +36,7 @@ The plugin only works with 2nd version of Vue.js. Also, you'll need to include V
 ```
 #### With Nuxt
 
-Create a ksvuefp.js file in yur plugins folder, and add it to yout nuxt.config.js file with ssr: false option
+Create a ksvuefp.js files in yur plugins folder, and add it to yout nuxt.config.js files with ssr: false option
 
 ksvuefp.js
 ```js
@@ -49,7 +49,7 @@ nuxt.config.js
 {
   ...
   plugins: [{
-    src: '~/plugins/ksvuscr',
+    src: '~/plugins/ksvuefp',
     ssr: false
   }]
   ...

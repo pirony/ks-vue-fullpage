@@ -16,20 +16,17 @@ function plugin (Vue) {
     },
     created () {
       const vm = this
-
       vm.$on('ksvuefp-ready', () => {
         vm.$emit('ksvuefp-resized')
         vm.fpLoaded = true
       })
-
       vm.$on('ksvuefp-options-changed', (custom) => {
-        vm.options = Object.assign(options, custom)
+        vm.options = { ...options, ...custom }
       })
 
       vm.$on('ksvuefp-resized', () => {
         vm.getWindowDim()
       })
-
       vm.$on('ksvuefp-destroy', () => {
         vm.fpLoaded = false
         vm.currentIndex = 0
@@ -65,8 +62,7 @@ function plugin (Vue) {
       canAnimContent (index, wait = true) {
         if (index !== this.currentIndex) return
         if (wait) {
-          if (this.slidingActive) return
-          return true
+          return !this.slidingActive? true : false
         }
         return true
       }

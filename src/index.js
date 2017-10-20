@@ -65,7 +65,8 @@ function plugin (Vue) {
       canAnimContent (index, wait = true) {
         if (index !== this.currentIndex) return
         if (wait) {
-          return !this.slidingActive? true : false
+          if (this.slidingActive) return
+          return true
         }
         return true
       }

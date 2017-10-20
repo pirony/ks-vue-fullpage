@@ -52,6 +52,20 @@ module.exports = {
           loaders: vueLoaders,
           postcss: [require('postcss-cssnext')()]
         }
+      },
+      {
+        test: require.resolve('velocity-animate'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'Velocity'
+        }]
+      },
+      {
+        test: require.resolve('hammerjs'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'Hammer'
+        }]
       }
     ]
   },

@@ -1,6 +1,6 @@
 {
   "name": "ks-vue-fullpage",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "A simple, flexible and easy to use Vue plugin to create fullscreen scrolling websites (also known as single page websites or onepage sites). No jQuery needed, pure Vanilla js.",
   "author": "pirony <romainpouchol@gmail.com>",
   "main": "dist/ks-vue-fullpage.common.js",

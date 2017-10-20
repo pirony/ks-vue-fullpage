@@ -53,7 +53,24 @@ module.exports = {
           postcss: [require('postcss-cssnext')()]
         }
       },
+<<<<<<< HEAD
 
+=======
+      {
+        test: require.resolve('velocity-animate'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'Velocity'
+        }]
+      },
+      {
+        test: require.resolve('hammerjs'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'Hammer'
+        }]
+      }
+>>>>>>> nuxt2
     ]
   },
   plugins

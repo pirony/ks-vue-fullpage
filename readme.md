@@ -237,7 +237,7 @@ For example, if you want to create a custom navigation:
 ```html
       <ul>
         <li v-for="(s,index) in sections">
-          <a href="#" @click.prevent="$ksvuefp.$emit('ksvuefp-nav-click', index)">
+          <a href="#" @click.prevent="$ksvuefp.$emit('ksvuefp-nav-click', {nextIndex: index})">
             Section {{ index + 1 }} // The first index is 0
           </a>
         </li>

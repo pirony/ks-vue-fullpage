@@ -21,7 +21,7 @@ function plugin (Vue) {
         vm.fpLoaded = true
       })
       vm.$on('ksvuefp-options-changed', (custom) => {
-        vm.options = { ...options, ...custom }
+        vm.options = Object.assign({}, options, custom)
       })
 
       vm.$on('ksvuefp-resized', () => {

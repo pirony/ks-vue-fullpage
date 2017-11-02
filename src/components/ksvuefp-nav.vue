@@ -22,7 +22,7 @@ export default {
   },
   computed: {
     currentPos () {
-      if (this.optionsdotNav && this.options.dotNavPosition) return this.options.dotNavPosition
+      if (this.options.dotNavPosition) return this.options.dotNavPosition
       switch (this.options.animationType) {
         case 'slideX':
           return 'bottom'

@@ -6,7 +6,7 @@
     <transition :name="$ksvuefp.options.preloaderTransitionName || 'fade-out'" v-if="$ksvuefp.options.preloaderEnabled">
       <ksvuefp-preloader v-if="!$ksvuefp.fpLoaded" :backgroundColor="$ksvuefp.options.preloaderBgColor || ''" :preloaderColor="$ksvuefp.options.preloaderColor || ''" :preloaderText="$ksvuefp.options.preloaderText"/>
     </transition>
-    <fp-nav v-if="!$ksvuefp.options.dotNav" :sections="sections" :options="$ksvuefp.options"/>
+    <fp-nav v-if="$ksvuefp.options.dotNavEnabled" :sections="sections" :options="$ksvuefp.options"/>
   </div>
 </template>
 <script>
@@ -17,11 +17,11 @@ export default {
   props: {
     options: {
       type: Object,
-      default: {}
+      default: () => {}
     },
     sections: {
       type: Array,
-      default: []
+      default: () => []
     }
   },
   components: {
@@ -69,6 +69,8 @@ export default {
       actions.forEach((a) => {
         document.addEventListener(a, vm.changeIndex)
       })
+
+      vm.$ksvuefp.$emit('ksvuefp-options-changed', vm.options)
 
       /**
        * trigger changeIndex method on swipe with HAMMER.JS if touch is detected

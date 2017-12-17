@@ -190,7 +190,12 @@ export default {
   */
   overlay: 'rgba(0, 0, 0, 0.2)',
   parallax: false,
-  parallaxOffset: 0.5
+  parallaxOffset: 0.5,
+    /**
+   * Touch param
+   * @property {Boolean} touchEnabled - On/off touch feature in devices with touch screen
+  */
+  touchEnabled: true
 }
 ```
 

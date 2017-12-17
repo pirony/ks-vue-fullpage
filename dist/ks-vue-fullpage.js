@@ -988,7 +988,7 @@ exports.default = {
        *
       */
       var isTouch = 'ontouchstart' in window || navigator.msMaxTouchPoints > 0;
-      if (!isTouch) return;
+      if (!isTouch || vm.$ksvuefp.options.touchEnabled === false) return;
 
       var mc = new Hammer(vm.$el);
       mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
